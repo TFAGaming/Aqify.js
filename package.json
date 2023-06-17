@@ -1,0 +1,25 @@
+{
+  "name": "aqify.js",
+  "version": "1.6.1",
+  "description": "The Utility package that takes you to a whole new level.",
+  "main": "dist/index.js",
+  "typings": "typings/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "git": "git add . && git commit -m \"Auto commit and publish\"",
+    "docs": "typedoc"
+  },
+  "keywords": [],
+  "author": "TFAGaming",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TFAGaming/Aqify.js.git"
+  },
+  "dependencies": {
+    "discord.js": "^14.11.0"
+  },
+  "devDependencies": {
+    "typedoc": "^0.24.8"
+  }
+}

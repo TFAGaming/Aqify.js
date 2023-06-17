@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "CommonJS",
+        "rootDir": "src",
+        "outDir": "dist",
+        "strict": true,
+        "declaration": false,
+        "sourceMap": true
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "dist",
+        "node_modules"
+    ],
+    "typedocOptions": {
+        "entryPoints": [
+            "src/"
+        ],
+        "out": "docs",
+        "readme": "README.md",
+        "name": "Aqify.js"
+    }
+}
