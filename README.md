@@ -132,7 +132,7 @@ import { DropdownPaginatorBuilder, SendMethod } from 'aqify.js';
 // 'interaction' is ChatInputCommandInteraction type.
 const paginator = new DropdownPaginatorBuilder(interaction, {
     placeHolder: 'Click here!',
-    filter: (u) => u.user.id === interaction.user.id,
+    time: 60000
 });
 
 paginator.addOptions(
@@ -163,6 +163,9 @@ paginator.send(SendMethod.Reply, {
     home: {
         content: 'Select something from the menu below!'
     },
+    onNotAuthor: (i) => {
+        i.reply({ content: 'You are not the author of this interaction.' });
+    },
     replyWithEphemeralMessageOnCollect: true
 });
 ```
@@ -173,9 +176,7 @@ import { ButtonStyle } from 'discord.js';
 import { ButtonsPaginatorBuilder, ButtonPaginatorID, SendMethod } from 'aqify.js';
 
 // 'interaction' is ChatInputCommandInteraction type.
-const paginator = new ButtonsPaginatorBuilder(interaction, {
-    filter: (u) => u.user.id === interaction.user.id
-});
+const paginator = new ButtonsPaginatorBuilder(interaction, { time: 60000 });
 
 paginator.addButtons(
     {
@@ -198,13 +199,16 @@ paginator.addPages(
 );
 
 paginator.send(SendMethod.Reply, {
+    onNotAuthor: (i) => {
+        i.reply({ content: 'You are not the author of this interaction.' });
+    },
     disableButtonsOnLastAndFirstPage: true,
 });
 ```
 
 ### Activity
 ```ts
-import { ActivityGameId } from 'aqify.js';
+import { Activity, ActivityGameId } from 'aqify.js';
 
 const channel = interaction.guild.members.cache.get(interaction.user.id).voice.channelId;
 

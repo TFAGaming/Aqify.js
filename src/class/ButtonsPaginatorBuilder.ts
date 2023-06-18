@@ -175,12 +175,8 @@ export class ButtonsPaginatorBuilder {
                 };
 
                 this.collector?.on('collect', async (i) => {
-                    if (i.user.id !== this.interaction.user.id) {
-                        await i.reply({
-                            content: options?.onNotAuthor?.content ? options.onNotAuthor.content : 'You are not the author of this interaction.',
-                            embeds: options?.onNotAuthor?.embeds?.map((f) => f),
-                            files: options?.onNotAuthor?.files?.map((f) => f)
-                        }).catch(() => { });
+                    if (i.user.id !== this.interaction.user.id && options?.onNotAuthor) {
+                        options.onNotAuthor(i);
 
                         return;
                     };

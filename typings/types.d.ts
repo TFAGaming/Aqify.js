@@ -1,4 +1,4 @@
-import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, Guild, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction, User, VoiceChannel } from "discord.js";
+import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CacheType, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, Guild, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction, User, VoiceChannel } from "discord.js";
 
 export declare type CommandBuilderStructure<C extends Client, T = {}> = {
     structure: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder;
@@ -31,11 +31,7 @@ export interface DropdownPaginatorStructureSendOptions {
         embeds?: EmbedBuilder[];
         files?: AttachmentBuilder[];
     };
-    onNotAuthor?: {
-        content?: string;
-        embeds?: EmbedBuilder[];
-        files?: AttachmentBuilder[];
-    };
+    onNotAuthor?: (interaction: StringSelectMenuInteraction<CacheType>) => void;
     ephemeral?: boolean;
     mentionRepliedUser?: boolean;
     deleteMessageAfterTimeout?: boolean;
@@ -73,11 +69,7 @@ export interface ButtonsPaginatorStructureSendOptions {
         embeds?: EmbedBuilder[];
         files?: AttachmentBuilder[];
     };
-    onNotAuthor?: {
-        content?: string;
-        embeds?: EmbedBuilder[];
-        files?: AttachmentBuilder[];
-    };
+    onNotAuthor?: (interaction: ButtonInteraction<CacheType>) => void;
     ephemeral?: boolean;
     mentionRepliedUser?: boolean;
     deleteMessageAfterTimeout?: boolean;

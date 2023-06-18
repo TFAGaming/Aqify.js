@@ -3,6 +3,7 @@ import {
     ButtonBuilder,
     ButtonInteraction,
     ButtonStyle,
+    CacheType,
     Client,
     CollectorFilter,
     CommandInteraction,
@@ -52,11 +53,7 @@ export interface DropdownPaginatorStructureSendOptions {
         embeds?: EmbedBuilder[];
         files?: AttachmentBuilder[];
     };
-    onNotAuthor?: {
-        content?: string;
-        embeds?: EmbedBuilder[];
-        files?: AttachmentBuilder[];
-    };
+    onNotAuthor?: (interaction: StringSelectMenuInteraction<CacheType>) => void;
     ephemeral?: boolean;
     mentionRepliedUser?: boolean;
     deleteMessageAfterTimeout?: boolean;
@@ -95,11 +92,7 @@ export interface ButtonsPaginatorStructureSendOptions {
         embeds?: EmbedBuilder[],
         files?: AttachmentBuilder[]
     },
-    onNotAuthor?: {
-        content?: string,
-        embeds?: EmbedBuilder[],
-        files?: AttachmentBuilder[],
-    },
+    onNotAuthor?: (interaction: ButtonInteraction<CacheType>) => void;
     ephemeral?: boolean,
     mentionRepliedUser?: boolean,
     deleteMessageAfterTimeout?: boolean,
