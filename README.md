@@ -202,6 +202,21 @@ paginator.send(SendMethod.Reply, {
 });
 ```
 
+### Activity
+```ts
+import { ActivityGameId } from 'aqify.js';
+
+const channel = interaction.guild.members.cache.get(interaction.user.id).voice.channelId;
+
+new Activity(config.token, config.id)
+    .create(ActivityGameId.WatchTogether, channel)
+        .then(async (invite) => {
+            console.log(`https://discord.com/invite/` + invite.code)
+        })
+        .catch((e) => console.error(e));
+
+```
+
 ### Plugins
 
 > **Note**: It's recommended to use these plugins in the event `ready` from the client. 

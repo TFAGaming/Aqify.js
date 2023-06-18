@@ -197,15 +197,15 @@ export enum ActivityGameId {
 
 export interface ActivityChannelInviteAPI {
     code: string,
-    guild?: Guild,
-    channel?: VoiceChannel,
-    inviter?: User,
-    target_type?: number,
-    target_user?: User,
-    target_application?: any,
-    approximate_presence_count?: number,
-    approximate_member_count?: number,
-    expires_at?: Date
+    guild: Guild,
+    channel: VoiceChannel,
+    inviter: User,
+    target_type: number,
+    target_user: User,
+    target_application: any,
+    approximate_presence_count: number,
+    approximate_member_count: number,
+    expires_at: string
 };
 
 // Events
