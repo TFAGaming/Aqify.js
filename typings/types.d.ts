@@ -128,6 +128,32 @@ export interface TicketPluginOptions {
     managerRoles?: string[]
 }
 
+export enum ActivityGameId {
+    YoutubeTogether = '755600276941176913',
+    WatchTogether = '880218394199220334',
+    PokerNight = '755827207812677713',
+    BetrayalIO = '773336526917861400',
+    FishingtonIO = '814288819477020702',
+    ChessInThePark = '832012774040141894',
+    SketchHeads = '902271654783242291',
+    SpellCast = '852509694341283871',
+    CheckersInThePark = '832013003968348200',
+    Blazing8s = '832025144389533716',
+    PuttParty = '945737671223947305',
+    LandIO = '903769130790969345',
+    BobbleLeague = '947957217959759964',
+    AskAway = '976052223358406656',
+    KnowWhatIMeme = '950505761862189096',
+    BashOut = '1006584476094177371',
+    GarticPhone = '1007373802981822582',
+    ColorTogether = '1039835161136746497',
+    ChefShowdown = '1037680572660727838',
+    BobbleLandScrappies = '1000100849122553977',
+    Jampspace = '1070087967294631976',
+    Guestbook = '1001529884625088563',
+    ProjectK = '1011683823555199066'
+}
+
 export declare enum SendMethod {
     Reply = 1,
     EditReply = 2,
