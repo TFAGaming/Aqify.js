@@ -9,10 +9,13 @@ import {
     ComponentEmojiResolvable,
     ContextMenuCommandBuilder,
     EmbedBuilder,
+    Guild,
     RESTOptions,
     SlashCommandBuilder,
     SlashCommandSubcommandsOnlyBuilder,
-    StringSelectMenuInteraction
+    StringSelectMenuInteraction,
+    User,
+    VoiceChannel
 } from "discord.js";
 
 // Commands Handler
@@ -190,6 +193,19 @@ export enum ActivityGameId {
     Jampspace = '1070087967294631976',
     Guestbook = '1001529884625088563',
     ProjectK = '1011683823555199066'
+};
+
+export interface ActivityChannelInviteAPI {
+    code: string,
+    guild?: Guild,
+    channel?: VoiceChannel,
+    inviter?: User,
+    target_type?: number,
+    target_user?: User,
+    target_application?: any,
+    approximate_presence_count?: number,
+    approximate_member_count?: number,
+    expires_at?: Date
 };
 
 // Events

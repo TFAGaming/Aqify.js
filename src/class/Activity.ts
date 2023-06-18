@@ -1,6 +1,11 @@
 import { REST, Routes } from "discord.js";
-import { ActivityGameId } from "../types";
+import { ActivityChannelInviteAPI, ActivityGameId } from "../types";
 
+/**
+ * Create an activity for voice channels:
+ * 
+ * **Note**: This is how the invite should looks like: `https://discord.com/invite/{INVITE_CODE}`.
+ */
 export class Activity {
     readonly token: string;
     readonly id: string;
@@ -10,28 +15,31 @@ export class Activity {
         this.id = id;
     };
 
-    public create(gameId: ActivityGameId, voiceChannelId: string): Promise<string> {
+    /**
+     * Gerenate a new invite.
+    */
+    public create(gameId: ActivityGameId, voiceChannelId: string): Promise<ActivityChannelInviteAPI> {
         return new Promise((res, rej) => {
             try {
                 const rest = new REST().setToken(this.token);
 
                 rest.post(Routes.channelInvites(voiceChannelId), {
-                    body: JSON.stringify({
+                    body: {
                         max_age: 86400,
                         max_uses: 0,
                         target_application_id: gameId,
                         target_type: 2,
                         temporary: false,
                         validate: null,
-                    })
+                    }
                 }).then((invite: any) => {
                     if (!invite.code || invite.error) return rej('Unable to create an invite.');
                     if (parseInt(invite.code) === 50013) return rej('Permissions denied by Discord API.');
 
-                    res('https://discord.com/invite/' + invite.code);
-                });
+                    res(invite);
+                }).catch((err) => rej(err));
             } catch (err) {
-                rej(err)
+                rej(err);
             };
         });
     };

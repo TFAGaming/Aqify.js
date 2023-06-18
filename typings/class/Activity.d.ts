@@ -1,4 +1,4 @@
-import { ActivityGameId } from "../types";
+import { ActivityChannelInviteAPI, ActivityGameId } from "../types";
 
 export class Activity {
     readonly token: string;
@@ -6,5 +6,5 @@ export class Activity {
 
     constructor(token: string, id: string);
 
-    public create(gameId: ActivityGameId, voiceChannelId: string): Promise<string>;
+    public create(gameId: ActivityGameId, voiceChannelId: string): Promise<ActivityChannelInviteAPI>;
 }

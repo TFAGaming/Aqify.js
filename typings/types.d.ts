@@ -1,4 +1,4 @@
-import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction } from "discord.js";
+import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, Guild, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction, User, VoiceChannel } from "discord.js";
 
 export declare type CommandBuilderStructure<C extends Client, T = {}> = {
     structure: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder;
@@ -129,7 +129,6 @@ export interface TicketPluginOptions {
 }
 
 export enum ActivityGameId {
-    YoutubeTogether = '755600276941176913',
     WatchTogether = '880218394199220334',
     PokerNight = '755827207812677713',
     BetrayalIO = '773336526917861400',
@@ -152,6 +151,19 @@ export enum ActivityGameId {
     Jampspace = '1070087967294631976',
     Guestbook = '1001529884625088563',
     ProjectK = '1011683823555199066'
+}
+
+export interface ActivityChannelInviteAPI {
+    code: string,
+    guild?: Guild,
+    channel?: VoiceChannel,
+    inviter?: User,
+    target_type?: number,
+    target_user?: User,
+    target_application?: any,
+    approximate_presence_count?: number,
+    approximate_member_count?: number,
+    expires_at?: Date
 }
 
 export declare enum SendMethod {
