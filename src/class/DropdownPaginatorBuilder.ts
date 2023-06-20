@@ -15,6 +15,9 @@ import {
     SendMethod
 } from "../types";
 
+/**
+ * Create a select menu pagination.
+ */
 export class DropdownPaginatorBuilder {
     readonly data: this = this;
     readonly collector: InteractionCollector<StringSelectMenuInteraction> | undefined;
@@ -34,6 +37,9 @@ export class DropdownPaginatorBuilder {
         this.custom_options = customoptions || {};
     };
 
+    /**
+     * Add options to the pagination.
+     */
     public addOptions(...data: DropdownPaginatorStructureOptionsBuilder[]) {
         data.forEach((options) => {
             this.options_data.push(options);
@@ -42,6 +48,9 @@ export class DropdownPaginatorBuilder {
         return this;
     };
 
+    /**
+     * Set options to the pagination.
+     */
     public setOptions(...data: DropdownPaginatorStructureOptionsBuilder[]) {
         this.options_data = [];
 
@@ -52,12 +61,18 @@ export class DropdownPaginatorBuilder {
         return this;
     };
 
+    /**
+     * Pull an option.
+     */
     public pullOption(index: number) {
         this.options_data.splice(index, 1);
 
         return this;
     };
 
+    /**
+     * Send the pagination.
+     */
     public async send(method: SendMethod, options?: DropdownPaginatorStructureSendOptions) {
         return new Promise(async (resolved, rejected) => {
             try {

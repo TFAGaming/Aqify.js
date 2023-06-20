@@ -16,6 +16,9 @@ import {
     SendMethod
 } from '../types';
 
+/**
+ * Create a buttons paginator.
+ */
 export class ButtonsPaginatorBuilder {
     readonly data: this = this;
     readonly collector: InteractionCollector<ButtonInteraction> | undefined;
@@ -36,6 +39,9 @@ export class ButtonsPaginatorBuilder {
         this.custom_options = options || {};
     };
 
+    /**
+     * Add buttons to the pagination.
+     */
     public addButtons(...data: ButtonsPaginatorStructureButtonsBuilder[]) {
         if (this.buttons_data.length > 5) throw new Error('Unable to add more than 5 buttons in single action row.');
 
@@ -48,6 +54,9 @@ export class ButtonsPaginatorBuilder {
         return this;
     };
 
+    /**
+     * Set buttons to the pagination.
+     */
     public setButtons(...data: ButtonsPaginatorStructureButtonsBuilder[]) {
         this.buttons_data = [];
 
@@ -60,12 +69,18 @@ export class ButtonsPaginatorBuilder {
         return this;
     };
 
+    /**
+     * Pull a button.
+     */
     public pullButton(index: number) {
         this.buttons_data.splice(index, 1);
 
         return this;
     };
 
+    /**
+     * Add pages to the pagination.
+     */
     public addPages(...data: ButtonsPaginatorStructurePagesBuilder[]) {
         data.forEach((æ) => {
             this.pages_data.push(æ);
@@ -74,6 +89,9 @@ export class ButtonsPaginatorBuilder {
         return this;
     };
 
+    /**
+     * Set pages to the pagination.
+     */
     public setPages(...data: ButtonsPaginatorStructurePagesBuilder[]) {
         this.pages_data = [];
 
@@ -84,12 +102,18 @@ export class ButtonsPaginatorBuilder {
         return this;
     };
 
+    /**
+     * Pull a page.
+     */
     public pullPage(index: number) {
         this.pages_data.splice(index, 1);
 
         return this;
     };
 
+    /**
+     * Send the pagination.
+     */
     public async send(method: SendMethod, options?: ButtonsPaginatorStructureSendOptions) {
         return new Promise(async (resolved, rejected) => {
             try {

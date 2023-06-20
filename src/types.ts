@@ -11,6 +11,7 @@ import {
     ContextMenuCommandBuilder,
     EmbedBuilder,
     Guild,
+    GuildMember,
     RESTOptions,
     SlashCommandBuilder,
     SlashCommandSubcommandsOnlyBuilder,
@@ -144,6 +145,10 @@ export interface TicketPluginOptions {
     managerRoles?: string[]
 };
 
+export interface BoostDetectorOptions {
+    guilds?: string[]
+};
+
 // Methods
 export enum SendMethod {
     Reply = 1,
@@ -188,7 +193,7 @@ export enum ActivityGameId {
     ProjectK = '1011683823555199066'
 };
 
-export interface ActivityChannelInviteAPI {
+export interface ActivityInviteAPI {
     code: string,
     guild: Guild,
     channel: VoiceChannel,
@@ -205,4 +210,9 @@ export interface ActivityChannelInviteAPI {
 export interface CommandHandlerEvents {
     load: [command: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder];
     skip: [command: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder];
+};
+
+export interface BoostDetectorEvents {
+    boostCreate: [member: GuildMember],
+    boostRemove: [member: GuildMember]
 };

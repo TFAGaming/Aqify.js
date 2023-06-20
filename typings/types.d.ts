@@ -1,4 +1,4 @@
-import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CacheType, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, Guild, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction, User, VoiceChannel } from "discord.js";
+import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CacheType, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, Guild, GuildMember, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction, User, VoiceChannel } from "discord.js";
 
 export declare type CommandBuilderStructure<C extends Client, T = {}> = {
     structure: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder;
@@ -120,6 +120,10 @@ export interface TicketPluginOptions {
     managerRoles?: string[]
 }
 
+export interface BoostDetectorOptions {
+    guilds?: string[]
+}
+
 export enum ActivityGameId {
     WatchTogether = '880218394199220334',
     PokerNight = '755827207812677713',
@@ -177,4 +181,9 @@ export declare enum ButtonPaginatorID {
 export interface CommandHandlerEvents {
     load: [command: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder];
     skip: [command: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder];
+}
+
+export interface BoostDetectorEvents {
+    boostCreate: [member: GuildMember],
+    boostRemove: [member: GuildMember]
 }

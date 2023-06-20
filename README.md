@@ -12,9 +12,10 @@
 
 ## Features
 - **100%** written in TypeScript.
+- Open-source.
 - Full support for TypeScript and JavaScript.
 - Simple to use & Beginner friendly.
-- Typings.
+- Promise based.
 
 ## Install
 Before installing the package, please make sure that you have the following requirements below:
@@ -212,13 +213,13 @@ import { Activity, ActivityGameId } from 'aqify.js';
 
 const channel = interaction.guild.members.cache.get(interaction.user.id).voice.channelId;
 
-new Activity(config.token, config.id)
-    .create(ActivityGameId.WatchTogether, channel)
-        .then(async (invite) => {
-            console.log(`https://discord.com/invite/` + invite.code)
-        })
-        .catch((e) => console.error(e));
+const activity = new Activity('Bot token', 'Bot ID');
 
+activity.create(ActivityGameId.WatchTogether, channel)
+    .then(async (invite) => {
+        console.log(`https://discord.com/invite/` + invite.code)
+    })
+    .catch(console.error);
 ```
 
 ### Plugins
@@ -240,6 +241,10 @@ new TicketPlugin(client, {
     },
     managerRoles: ['Staff role ID']
 });
+
+new BoostDetectorPlugin(client)
+    .on('boostCreate', (u) => console.log(u.user.tag + ' has boosted the server!'))
+    .on('boostRemove', (u) => console.log(u.user.tag + ' has unboosted the server...'));
 ```
 
 ### Functions

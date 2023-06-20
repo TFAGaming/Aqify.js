@@ -1,7 +1,11 @@
 import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, TextChannel } from "discord.js";
 import { time } from "../func";
-import { ModmailPluginOptions, TicketPluginOptions } from "../types";
+import { EventEmitter } from 'node:events';
+import { BoostDetectorOptions, ModmailPluginOptions, TicketPluginOptions } from "../types";
 
+/**
+ * Simple modmail client!
+ */
 export class ModmailPlugin {
     constructor(client: Client, options: ModmailPluginOptions) {
         client.on('messageCreate', async (message) => {
@@ -198,6 +202,9 @@ export class ModmailPlugin {
     };
 };
 
+/**
+ * Simple ticket client!
+ */
 export class TicketPlugin {
     constructor(client: Client, options: TicketPluginOptions) {
         if (options.sendPanel) {
@@ -418,6 +425,27 @@ export class TicketPlugin {
                 }).catch(() => { });
 
                 return;
+            };
+        });
+    };
+};
+
+/**
+ * Simple boost detector client!
+ */
+export class BoostDetectorPlugin extends EventEmitter {
+    constructor(client: Client, options: BoostDetectorOptions) {
+        super({ captureRejections: true });
+
+        client.on('guildMemberUpdate', (oldMember, newMember) => {
+            if (options.guilds && !options.guilds.some((g) => g === newMember.guild.id)) return;
+
+            if (!oldMember.premiumSince && newMember.premiumSince) {
+                this.emit('boostCreate', newMember);
+            };
+
+            if (oldMember.premiumSince && !newMember.premiumSince) {
+                this.emit('boostRemove', newMember);
             };
         });
     };

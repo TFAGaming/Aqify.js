@@ -10,11 +10,23 @@ export declare class DropdownPaginatorBuilder {
 
     constructor(interaction: CommandInteraction, customoptions?: DropdownPaginatorConstructorOptions);
 
-    addOptions(...data: DropdownPaginatorStructureOptionsBuilder[]): this;
+    /**
+     * Add options to the pagination.
+     */
+    public addOptions(...data: DropdownPaginatorStructureOptionsBuilder[]): this;
 
-    setOptions(...data: DropdownPaginatorStructureOptionsBuilder[]): this;
+    /**
+     * Set options to the pagination.
+     */
+    public setOptions(...data: DropdownPaginatorStructureOptionsBuilder[]): this;
 
-    pullOption(index: number): this;
+    /**
+     * Pull an option.
+     */
+    public pullOption(index: number): this;
 
-    send(method: SendMethod, options?: DropdownPaginatorStructureSendOptions): Promise<unknown>;
+    /**
+     * Send the pagination.
+     */
+    public send(method: SendMethod, options?: DropdownPaginatorStructureSendOptions): Promise<unknown>
 }

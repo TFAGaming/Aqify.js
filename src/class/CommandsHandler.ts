@@ -4,6 +4,9 @@ import { CommandBuilder } from './CommandBuilder';
 import { CommandBuilderStructure, CommandsHandlerStructureDeployOptions, CommandsHandlerConstructorOptions } from '../types';
 import { load as loadCommands } from '../func/private/load';
 
+/**
+ * Create a commands handler.
+ */
 export class CommandsHandler<C extends Client, T = { }> extends EventEmitter {
     readonly path: string;
     readonly options: CommandsHandlerConstructorOptions | undefined;
@@ -20,6 +23,9 @@ export class CommandsHandler<C extends Client, T = { }> extends EventEmitter {
         this.options = options;
     };
 
+    /**
+     * Create a new command.
+     */
     public command = class extends CommandBuilder<C, T> {
         constructor(data: CommandBuilderStructure<C, T>) {
             super({
@@ -30,6 +36,9 @@ export class CommandsHandler<C extends Client, T = { }> extends EventEmitter {
         };
     };
 
+    /**
+     * Load all the commands.
+     */
     public load(): Collection<string, CommandBuilderStructure<C, T>> {
         const res = loadCommands<C, T>(this.path, this.options?.includesDir);
 
@@ -49,6 +58,9 @@ export class CommandsHandler<C extends Client, T = { }> extends EventEmitter {
         return this.collection;
     };
 
+    /**
+     * Load the application commands to the Discord API.
+     */
     public async deploy(token: string, id: string, options?: CommandsHandlerStructureDeployOptions): Promise<CommandBuilderStructure<C, T>['structure'][] | string> {
         return new Promise(async (res, rej) => {
             try {

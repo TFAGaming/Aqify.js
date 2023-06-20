@@ -11,17 +11,38 @@ export declare class ButtonsPaginatorBuilder {
 
     constructor(interaction: CommandInteraction, options?: ButtonsPaginatorConstructorOptions);
 
+    /**
+    * Create a buttons paginator.
+    */
     addButtons(...data: ButtonsPaginatorStructureButtonsBuilder[]): this;
 
+    /**
+     * Set buttons to the pagination.
+     */
     setButtons(...data: ButtonsPaginatorStructureButtonsBuilder[]): this;
 
+    /**
+     * Pull a button.
+     */
     pullButton(index: number): this;
 
+    /**
+     * Add pages to the pagination.
+     */
     addPages(...data: ButtonsPaginatorStructurePagesBuilder[]): this;
 
+    /**
+     * Set pages to the pagination.
+     */
     setPages(...data: ButtonsPaginatorStructurePagesBuilder[]): this;
 
+    /**
+     * Pull a page.
+     */
     pullPage(index: number): this;
 
+    /**
+     * Send the pagination.
+     */
     send(method: SendMethod, options?: ButtonsPaginatorStructureSendOptions): Promise<unknown>;
 }

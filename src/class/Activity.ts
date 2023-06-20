@@ -1,5 +1,5 @@
 import { REST, Routes } from "discord.js";
-import { ActivityChannelInviteAPI, ActivityGameId } from "../types";
+import { ActivityInviteAPI, ActivityGameId } from "../types";
 
 /**
  * Create an activity for voice channels:
@@ -18,7 +18,7 @@ export class Activity {
     /**
      * Gerenate a new invite.
     */
-    public create(gameId: ActivityGameId, voiceChannelId: string): Promise<ActivityChannelInviteAPI> {
+    public create(gameId: ActivityGameId, voiceChannelId: string): Promise<ActivityInviteAPI> {
         return new Promise((res, rej) => {
             try {
                 const rest = new REST().setToken(this.token);

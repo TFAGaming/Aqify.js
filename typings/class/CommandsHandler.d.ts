@@ -3,6 +3,9 @@ import { CacheType, Client, Collection, SlashCommandBuilder, ContextMenuCommandB
 import { CommandBuilder } from './CommandBuilder';
 import { CommandBuilderStructure, CommandsHandlerStructureDeployOptions, CommandsHandlerConstructorOptions, CommandHandlerEvents } from "../types";
 
+/**
+ * Create a commands handler.
+ */
 export declare class CommandsHandler<C extends Client, T = {}> extends EventEmitter {
     readonly path: string;
     readonly options: CommandsHandlerConstructorOptions | undefined;
@@ -11,6 +14,9 @@ export declare class CommandsHandler<C extends Client, T = {}> extends EventEmit
 
     constructor(path: string, options?: CommandsHandlerConstructorOptions);
 
+    /**
+     * Create a new command.
+     */
     command: {
         new (data: CommandBuilderStructure<C, T>): {
             structure: SlashCommandBuilder | ContextMenuCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
@@ -19,8 +25,14 @@ export declare class CommandsHandler<C extends Client, T = {}> extends EventEmit
         };
     };
 
+    /**
+     * Load all the commands.
+     */
     load(): Collection<string, CommandBuilderStructure<C, T>>;
 
+    /**
+     * Load the application commands to the Discord API.
+     */
     deploy(token: string, id: string, options?: CommandsHandlerStructureDeployOptions): Promise<CommandBuilderStructure<C, T>['structure'][] | string>;
 
     on<K extends keyof CommandHandlerEvents>(event: K, listener: (...args: CommandHandlerEvents[K]) => void): this;
