@@ -405,7 +405,7 @@ export class TicketPlugin {
                 const messages = (await interaction.channel?.messages.fetch()).filter((e) => e.author.id !== client.user?.id).reverse().map((v) => `[${new Date(v.createdTimestamp).toLocaleString()}] ${v.author.tag}: ${v.content}`).join('\n');
 
                 await interaction.reply({
-                    content: 'Deleteting the ticket...',
+                    content: 'Deleting the ticket...',
                     ephemeral: true
                 });
 

@@ -1,9 +1,20 @@
 <p align = "center">
-    <img src="https://media.discordapp.net/attachments/1111644651036876822/1118343079917785178/text-1686704036265.png">
+    <img src="https://media.discordapp.net/attachments/1111644651036876822/1121038963252142112/5de55229bfa5b0013524ec65084c8812.png">
     <br>
     <h3 align="center">The Utility package that takes you to a whole new level.</h3>
     <br>
-    <p align="center"><img src="https://nodei.co/npm/aqify.js.png"></p>
+    <p align="center">
+    <img src="https://img.shields.io/npm/v/aqify.js/latest?label=Latest%20version%3A">
+    <img src="https://img.shields.io/github/stars/TFAGaming/Aqify.js?label=Stars&color=yellow">
+    <img src="https://img.shields.io/static/v1?label=100%%20written%20in:&message=TypeScript&color=007acc">
+    <br>
+    <img src="https://img.shields.io/snyk/vulnerabilities/npm/aqify.js?label=Vulnerabilities%3A">
+    <img src="https://img.shields.io/npm/dm/aqify.js?label=Downloads%3A">
+    <img src="https://img.shields.io/npm/l/aqify.js?label=License%3A">
+    <img src="https://img.shields.io/discord/918611797194465280?color=5865F2&label=Discord:">
+    <img src="https://img.shields.io/npm/collaborators/aqify.js?label=Collaborators%3A">
+    </p>
+    <!-- <p align="center"><img src="https://nodei.co/npm/aqify.js.png"></p> -->
 </p>
 
 # Aqify.js
@@ -53,10 +64,11 @@ Example bot
 └─── tsconfig.json
 ```
 
-Discord bot client example:
+Discord bot client with handler:
 ```ts
 // index.ts
 import { Client } from 'discord.js';
+import { CommandsHandler } from 'aqify.js';
 
 const config = {
     token: 'Your bot token',
@@ -67,22 +79,15 @@ const client = new Client({
     intents: ['Guilds']
 });
 
-client.on('ready', () => console.log('Logged in as: ' + client.user?.username));
-
-client.login(config.token);
-```
-
-Commands handler example:
-```ts
-// index.ts
-import { CommandsHandler } from 'aqify.js';
-
 export const handler = new CommandsHandler<Client>('./dist/commands/');
 
+client.on('ready', () => console.log('Logged in as: ' + client.user?.username));
 handler.on('load', (command) => console.log('Loaded new command: ' + command.name));
 
 const collection = handler.load();
 handler.deploy();
+
+client.login(config.token);
 ```
 
 Ping command:
@@ -225,6 +230,12 @@ activity.create(ActivityGameId.WatchTogether, channel)
 ### Plugins
 
 > **Note**: It's recommended to use these plugins in the event `ready` from the client. 
+> ```ts
+> <client>.on('ready', () => {
+>     new Plugin();
+> });
+> ```
+> ** **
 
 ```ts
 new ModmailPlugin(client, {
