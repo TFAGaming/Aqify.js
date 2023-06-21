@@ -176,6 +176,8 @@ paginator.send(SendMethod.Reply, {
 });
 ```
 
+<img src="https://media.discordapp.net/attachments/1111644651036876822/1121221808251744256/2023-06-22_00_26_48-Window-modified.png">
+
 ### Buttons paginator
 ```ts
 import { ButtonStyle } from 'discord.js'; 
@@ -212,13 +214,17 @@ paginator.send(SendMethod.Reply, {
 });
 ```
 
+<img src="https://media.discordapp.net/attachments/1111644651036876822/1121221808826368201/2023-06-22_00_25_39-Window-modified.png">
+
+<img src="https://media.discordapp.net/attachments/1111644651036876822/1121221808553730118/2023-06-22_00_25_54-Window-modified.png">
+
 ### Buttons confirm (Yes/No/Cancel)
 ```ts
 import { ButtonBuilder, ButtonStyle } from 'discord.js'; 
 import { ButtonsConfirmBuilder, ButtonConfirmID, SendMethod } from 'aqify.js';
 
 // 'interaction' is ChatInputCommandInteraction type.
-const paginator = new ButtonsConfirmBuilder(interaction, {
+const confirm = new ButtonsConfirmBuilder(interaction, {
     buttons: [
         new ButtonBuilder()
             .setLabel('Yes')
@@ -240,7 +246,7 @@ const paginator = new ButtonsConfirmBuilder(interaction, {
     time: 30000
 });
 
-paginator.send(SendMethod.Reply, {
+confirm.send(SendMethod.Reply, {
     home: {
         content: 'Click on Yes or No below!'
     },
@@ -250,6 +256,8 @@ paginator.send(SendMethod.Reply, {
     disableButtonsOnEnd: true
 });
 ```
+
+<img src="https://media.discordapp.net/attachments/1111644651036876822/1121221807991701634/2023-06-22_00_23_06-Window-modified.png">
 
 ### Activity
 ```ts
