@@ -169,8 +169,8 @@ paginator.send(SendMethod.Reply, {
     home: {
         content: 'Select something from the menu below!'
     },
-    onNotAuthor: (i) => {
-        i.reply({ content: 'You are not the author of this interaction.' });
+    onNotAuthor: async (i) => {
+        await i.reply({ content: 'You are not the author of this interaction.' });
     },
     replyWithEphemeralMessageOnCollect: true
 });
@@ -205,10 +205,49 @@ paginator.addPages(
 );
 
 paginator.send(SendMethod.Reply, {
-    onNotAuthor: (i) => {
-        i.reply({ content: 'You are not the author of this interaction.' });
+    onNotAuthor: async (i) => {
+        await i.reply({ content: 'You are not the author of this interaction.' });
     },
     disableButtonsOnLastAndFirstPage: true,
+});
+```
+
+### Buttons confirm (Yes/No/Cancel)
+```ts
+import { ButtonBuilder, ButtonStyle } from 'discord.js'; 
+import { ButtonsConfirmBuilder, ButtonConfirmID, SendMethod } from 'aqify.js';
+
+// 'interaction' is ChatInputCommandInteraction type.
+const paginator = new ButtonsConfirmBuilder(interaction, {
+    buttons: [
+        new ButtonBuilder()
+            .setLabel('Yes')
+            .setCustomId(ButtonConfirmID.Yes)
+            .setStyle(ButtonStyle.Success),
+        new ButtonBuilder()
+            .setLabel('No')
+            .setCustomId(ButtonConfirmID.No)
+            .setStyle(ButtonStyle.Danger)
+    ],
+    on: {
+        yes: async (i) => {
+            await i.reply({ content: 'Accepted!' });
+        },
+        no: async (i) => {
+            await i.reply({ content: 'Denied!' });
+        }
+    },
+    time: 30000
+});
+
+paginator.send(SendMethod.Reply, {
+    home: {
+        content: 'Click on Yes or No below!'
+    },
+    onNotAuthor: async (i) => {
+        await i.reply({ content: 'You are not the author of this interaction.' });
+    },
+    disableButtonsOnEnd: true
 });
 ```
 
@@ -235,7 +274,6 @@ activity.create(ActivityGameId.WatchTogether, channel)
 >     new Plugin();
 > });
 > ```
-> ** **
 
 ```ts
 new ModmailPlugin(client, {

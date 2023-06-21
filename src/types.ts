@@ -113,6 +113,36 @@ export interface ButtonsPaginatorStructurePagesBuilder {
     files?: AttachmentBuilder[]
 };
 
+// Buttons confirm builder
+export interface ButtonsConfirmConstructorOptions {
+    on?: {
+        yes?: (i: ButtonInteraction<CacheType>) => void,
+        no?: (i: ButtonInteraction<CacheType>) => void,
+        cancel?: (i: ButtonInteraction<CacheType>) => void
+    },
+    buttons?: ButtonBuilder[],
+    filter?: CollectorFilter<[ButtonInteraction]>,
+    time?: number
+};
+
+export interface ButtonsConfirmStructureSendOptions {
+    home?: {
+        content?: string,
+        embeds?: EmbedBuilder[],
+        files?: AttachmentBuilder[]
+    },
+    onEnd?: {
+        content?: string,
+        embeds?: EmbedBuilder[],
+        files?: AttachmentBuilder[]
+    },
+    mentionRepliedUser?: boolean,
+    ephemeral?: boolean,
+    onNotAuthor?: (interaction: ButtonInteraction<CacheType>) => void,
+    deleteMessageAfterTimeout?: boolean,
+    disableButtonsOnEnd?: boolean
+};
+
 // Plugins
 export interface ModmailPluginOptions {
     guild: string,
@@ -164,6 +194,12 @@ export enum ButtonPaginatorID {
     LastPage = 'lastpage',
     DeleteReply = 'deletereply',
     DisableAll = 'disableall'
+};
+
+export enum ButtonConfirmID {
+    Yes = 'aqifyjs-confirm_yes',
+    No = 'aqifyjs-confirm_no',
+    Cancel = 'aqifyjs-confirm_cancel'
 };
 
 // Activity
