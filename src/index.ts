@@ -7,7 +7,7 @@ export * from './class/ButtonsPaginatorButtonBuilder';
 export * from './class/ButtonsPaginatorPageBuilder';
 export * from './class/ButtonsConfirmBuilder';
 export * from './class/Plugins';
-export * from './class/Activity';
+export * from './class/ActivityManager';
 
 export * from './func/index';
 export * from './global/index';

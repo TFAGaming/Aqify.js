@@ -1,11 +1,10 @@
 <p align = "center">
     <img src="https://media.discordapp.net/attachments/1111644651036876822/1121038963252142112/5de55229bfa5b0013524ec65084c8812.png">
-    <br>
     <h3 align="center">The Utility package that takes you to a whole new level.</h3>
-    <br>
     <p align="center">
+    <br>
     <img src="https://img.shields.io/npm/v/aqify.js/latest?label=Latest%20version%3A">
-    <img src="https://img.shields.io/github/stars/TFAGaming/Aqify.js?label=Stars&color=yellow">
+    <img src="https://img.shields.io/github/stars/TFAGaming/Aqify.js?label=Repository%20stars&color=yellow">
     <img src="https://img.shields.io/static/v1?label=100%%20written%20in:&message=TypeScript&color=007acc">
     <br>
     <img src="https://img.shields.io/snyk/vulnerabilities/npm/aqify.js?label=Vulnerabilities%3A">
@@ -19,13 +18,13 @@
 
 # Aqify.js
 
-**Aqify.js** is made especially for Discord bots, it loads commands different folder, creates paginations, includes plugins, and more! It's very simple to use, and very powerful.
+**Aqify.js** is an open-source utility package made for Discord bots, it has a lot of features and they are simplified at the maximum for everyone!
 
 ## Features
 - **100%** written in TypeScript.
-- Open-source.
 - Full support for TypeScript and JavaScript.
 - Simple to use & Beginner friendly.
+- Open-source & free to use.
 - Promise based.
 
 ## Install
@@ -128,6 +127,18 @@ client.on('interactionCreate', (interaction) => {
 });
 ```
 
+If you want to define custom options for the commands, create one using the `interface` keyword and use it as the second type parameter of the class `CommandsHandler`:
+```ts
+interface Options {
+    ownerOnly?: boolean,
+    cooldown?: number
+};
+
+new CommandsHandler<Client, Options>(...);
+```
+
+<img src="https://media.discordapp.net/attachments/1111644651036876822/1121467632252620901/2023-06-22_16_45_40-ping.ts_-_npm_packages_tester_-_Visual_Studio_Code-modified.png">
+
 ## Examples
 ### Dropdown paginator
 
@@ -135,9 +146,8 @@ client.on('interactionCreate', (interaction) => {
 import { EmbedBuilder } from 'discord.js'; 
 import { DropdownPaginatorBuilder, SendMethod } from 'aqify.js';
 
-// 'interaction' is ChatInputCommandInteraction type.
 const paginator = new DropdownPaginatorBuilder(interaction, {
-    placeHolder: 'Click here!',
+    placeHolder: 'Make a selection',
     time: 60000
 });
 
@@ -153,7 +163,8 @@ paginator.addOptions(
     },
     {
         component: {
-            label: 'Option 2'
+            label: 'Option 2',
+            emoji: '✌'
         },
         message: {
             content: 'This is the option 2 message!',
@@ -183,18 +194,23 @@ paginator.send(SendMethod.Reply, {
 import { ButtonStyle } from 'discord.js'; 
 import { ButtonsPaginatorBuilder, ButtonPaginatorID, SendMethod } from 'aqify.js';
 
-// 'interaction' is ChatInputCommandInteraction type.
 const paginator = new ButtonsPaginatorBuilder(interaction, { time: 60000 });
 
 paginator.addButtons(
     {
-        label: 'Previous', id: ButtonPaginatorID.Previous, type: ButtonStyle.Secondary
+        label: 'Previous',
+        id: ButtonPaginatorID.Previous,
+        type: ButtonStyle.Secondary
     },
     {
-        label: 'Next', id: ButtonPaginatorID.Next, type: ButtonStyle.Secondary
+        label: 'Next',
+        id: ButtonPaginatorID.Next,
+        type: ButtonStyle.Secondary
     },
     {
-        label: 'Delete', id: ButtonPaginatorID.DeleteReply, type: ButtonStyle.Danger
+        label: 'Delete',
+        id: ButtonPaginatorID.DeleteReply,
+        type: ButtonStyle.Danger
     }
 );
 
@@ -223,18 +239,7 @@ paginator.send(SendMethod.Reply, {
 import { ButtonBuilder, ButtonStyle } from 'discord.js'; 
 import { ButtonsConfirmBuilder, ButtonConfirmID, SendMethod } from 'aqify.js';
 
-// 'interaction' is ChatInputCommandInteraction type.
 const confirm = new ButtonsConfirmBuilder(interaction, {
-    buttons: [
-        new ButtonBuilder()
-            .setLabel('Yes')
-            .setCustomId(ButtonConfirmID.Yes)
-            .setStyle(ButtonStyle.Success),
-        new ButtonBuilder()
-            .setLabel('No')
-            .setCustomId(ButtonConfirmID.No)
-            .setStyle(ButtonStyle.Danger)
-    ],
     on: {
         yes: async (i) => {
             await i.reply({ content: 'Accepted!' });
@@ -259,19 +264,23 @@ confirm.send(SendMethod.Reply, {
 
 <img src="https://media.discordapp.net/attachments/1111644651036876822/1121221807991701634/2023-06-22_00_23_06-Window-modified.png">
 
-### Activity
+### Activity manager
 ```ts
-import { Activity, ActivityGameId } from 'aqify.js';
+import { ActivityManager, ActivityGameId } from 'aqify.js';
 
 const channel = interaction.guild.members.cache.get(interaction.user.id).voice.channelId;
 
-const activity = new Activity('Bot token', 'Bot ID');
+const manager = new ActivityManager(client);
 
-activity.create(ActivityGameId.WatchTogether, channel)
-    .then(async (invite) => {
-        console.log(`https://discord.com/invite/` + invite.code)
-    })
-    .catch(console.error);
+manager.create(ActivityGameId.WatchTogether, channel)
+    .then((invite) => {
+        console.log(`https://discord.com/invite/` + invite.code);
+    });
+
+manager.delete('Invite code')
+    .then((guild) => {
+        console.log('Deleted the invite from ' + guild.name);
+    });
 ```
 
 ### Plugins
@@ -304,30 +313,7 @@ new BoostDetectorPlugin(client)
     .on('boostRemove', (u) => console.log(u.user.tag + ' has unboosted the server...'));
 ```
 
-### Functions
-
-```ts
-isDiscordInvite('Join my server: discord.gg/djs'); // => true
-
-isLink('Whatchu want?'); // => false
-
-censorString('I hate this', ['hate']); // => 'I **** this'
-
-reverseString('Nice'); // => 'eciN'
-
-await wait(10000); // (waits for 10 seconds) => Promise<unknown>
-
-random('Hello', 'Hi', 'Welcome', 'Goodbye'); // => 'Welcome'
-```
-
-### RegExp
-```ts
-emojiRegex.test('Im tired 🥱'); // => true
-
-linesRegex.test('aw hell nah'); // => false
-
-ipRegex.test('An ip goes here'); // => false
-```
+There are a lot of features (functions, classes... etc.) on this package, check the documentation site: [Click here!](https://tfagaming.github.io/Aqify.js/)
 
 ## License
 **GPL-3.0**; General Public License v3.0
