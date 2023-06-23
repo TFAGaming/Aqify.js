@@ -458,9 +458,9 @@ export class BoostDetectorPlugin extends EventEmitter {
 export class SuggestionPlugin {
     constructor(client: Client, channelId: string, options?: SuggestionPluginOptions) {
         client.on('messageCreate', async (message) => {            
-            if (message.channel.type !== 0 || message.channelId !== channelId) return;
+            if (message.channel.type !== 0 || message.channelId !== channelId || message.author.id === client.user?.id) return;
 
-            if (message.author.bot && message.author.id !== client.user?.id) {
+            if (message.author.bot) {
                 await message.delete();
 
                 return;
@@ -471,6 +471,7 @@ export class SuggestionPlugin {
                     ? embed.setThumbnail(options?.message?.setAuthorAvatarURLasEmbedThumbnail ? message.author.displayAvatarURL() : null)
                         .setDescription(message.content || null)
                         .setImage(message.attachments.size > 0 ? message.attachments.map((img) => img)[0].proxyURL : null)
+                        .setFooter({ text: 'Suggested by: ' + message.author.username })
                     : embed
                 )
                 : [
@@ -479,6 +480,8 @@ export class SuggestionPlugin {
                         .setThumbnail(options?.message?.setAuthorAvatarURLasEmbedThumbnail ? message.author.displayAvatarURL() : null)
                         .setDescription(message.content || null)
                         .setImage(message.attachments.size > 0 ? message.attachments.map((img) => img)[0].proxyURL : null)
+                        .setFooter({ text: 'Suggested by: ' + message.author.username })
+                        .setColor('Blurple')
                 ];
 
             await message.channel.send({

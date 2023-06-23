@@ -348,6 +348,18 @@ new TicketPlugin(client, {
 new BoostDetectorPlugin(client)
     .on('boostCreate', (u) => console.log(u.user.tag + ' has boosted the server!'))
     .on('boostRemove', (u) => console.log(u.user.tag + ' has unboosted the server...'));
+
+new SuggestionPlugin(client, 'Suggestion channel ID', {
+    message: {
+        setAuthorAvatarURLasEmbedThumbnail: true,
+        embeds: [
+            new EmbedBuilder()
+                .setTitle('New suggestion!')
+                .setTimestamp()
+                .setColor('Green')
+        ]
+    }
+});
 ```
 
 There are a lot of features (functions, classes... etc.) on this package, check the documentation site: [Click here!](https://tfagaming.github.io/Aqify.js/)
