@@ -20,12 +20,31 @@
 
 **Aqify.js** is an open-source utility package made for Discord bots, it has a lot of features and they are simplified at the maximum for everyone!
 
+> This package is **not** affiliated with **Discord** or/and **discord.js**.
+
 ## Features
 - **100%** written in TypeScript.
 - Full support for TypeScript and JavaScript.
 - Simple to use & Beginner friendly.
 - Open-source & free to use.
+- No credits required while using it!
 - Promise based.
+
+## Table of contents
+
+- [Aqify.js](#aqifyjs)
+- [Features](#features)
+- [Table of contents](#table-of-contents)
+- [Install](#install)
+- [Import](#import)
+- [Quick start](#quick-start)
+- [Examples](#examples)
+    - [Dropdown paginator](#dropdown-paginator)
+    - [Buttons paginator](#buttons-paginator)
+    - [Buttons confirm (Yes/No/Cancel)](#buttons-confirm-yesnocancel)
+    - [Activity manager](#activity-manager)
+    - [Plugins](#plugins)
+- [License](#license)
 
 ## Install
 Before installing the package, please make sure that you have the following requirements below:
@@ -61,6 +80,24 @@ Example bot
 │     └─── index.ts
 ├─── package.json
 └─── tsconfig.json
+```
+
+This is a `tsconfig.json` example, you can use it for this quick start:
+```json
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "CommonJS",
+        "outDir": "dist",
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
+}
 ```
 
 Discord bot client with handler:
@@ -316,4 +353,4 @@ new BoostDetectorPlugin(client)
 There are a lot of features (functions, classes... etc.) on this package, check the documentation site: [Click here!](https://tfagaming.github.io/Aqify.js/)
 
 ## License
-**GPL-3.0**; General Public License v3.0
+[**GPL-3.0**](https://www.gnu.org/licenses/gpl-3.0.en.html); General Public License v3.0.

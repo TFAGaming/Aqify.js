@@ -1,4 +1,4 @@
-import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CacheType, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, Guild, GuildMember, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction, User, VoiceChannel } from "discord.js";
+import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CacheType, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, Guild, GuildMember, Message, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction, User, VoiceChannel } from "discord.js";
 
 export declare type CommandBuilderStructure<C extends Client, T = {}> = {
     structure: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder;
@@ -151,6 +151,18 @@ export interface TicketPluginOptions {
 
 export interface BoostDetectorOptions {
     guilds?: string[]
+}
+
+export interface SuggestionPluginOptions {
+    on?: {
+        newSuggestion?: (message: Message) => void
+    },
+    message?: {
+        setAuthorAvatarURLasEmbedThumbnail?: boolean,
+        content?: string,
+        embeds?: EmbedBuilder[],
+        files?: AttachmentBuilder[]
+    }
 }
 
 export enum ActivityGameId {

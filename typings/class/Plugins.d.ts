@@ -1,6 +1,6 @@
 import { Client } from 'discord.js';
 import { EventEmitter } from 'node:events';
-import { ModmailPluginOptions, TicketPluginOptions, BoostDetectorOptions, BoostDetectorEvents } from '../types';
+import { ModmailPluginOptions, TicketPluginOptions, BoostDetectorOptions, BoostDetectorEvents, SuggestionPluginOptions } from '../types';
 
 /**
  * Simple modmail client!
@@ -20,7 +20,16 @@ export declare class TicketPlugin {
  * Simple boost detector client!
  */
 export declare class BoostDetectorPlugin extends EventEmitter {
-    constructor(client: Client, options: BoostDetectorOptions)
+    constructor(client: Client, options?: BoostDetectorOptions)
 
     on<K extends keyof BoostDetectorEvents>(event: K, listener: (...args: BoostDetectorEvents[K]) => void): this;
+    once<K extends keyof BoostDetectorEvents>(event: K, listener: (...args: BoostDetectorEvents[K]) => void): this;
+}
+
+/**
+ * Simple suggestion system client!
+ */
+
+export class SuggestionPlugin {
+    constructor(client: Client, channelId: string, options?: SuggestionPluginOptions);
 }

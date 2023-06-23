@@ -12,6 +12,7 @@ import {
     EmbedBuilder,
     Guild,
     GuildMember,
+    Message,
     RESTOptions,
     SlashCommandBuilder,
     SlashCommandSubcommandsOnlyBuilder,
@@ -177,6 +178,18 @@ export interface TicketPluginOptions {
 
 export interface BoostDetectorOptions {
     guilds?: string[]
+};
+
+export interface SuggestionPluginOptions {
+    on?: {
+        newSuggestion?: (message: Message) => void
+    },
+    message?: {
+        setAuthorAvatarURLasEmbedThumbnail?: boolean,
+        content?: string,
+        embeds?: EmbedBuilder[],
+        files?: AttachmentBuilder[]
+    }
 };
 
 // Methods

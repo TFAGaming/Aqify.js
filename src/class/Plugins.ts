@@ -1,7 +1,7 @@
 import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, TextChannel } from "discord.js";
 import { time } from "../func";
 import { EventEmitter } from 'node:events';
-import { BoostDetectorOptions, ModmailPluginOptions, TicketPluginOptions } from "../types";
+import { BoostDetectorOptions, ModmailPluginOptions, TicketPluginOptions, SuggestionPluginOptions } from "../types";
 
 /**
  * Simple modmail client!
@@ -434,11 +434,11 @@ export class TicketPlugin {
  * Simple boost detector client!
  */
 export class BoostDetectorPlugin extends EventEmitter {
-    constructor(client: Client, options: BoostDetectorOptions) {
+    constructor(client: Client, options?: BoostDetectorOptions) {
         super({ captureRejections: true });
 
         client.on('guildMemberUpdate', (oldMember, newMember) => {
-            if (options.guilds && !options.guilds.some((g) => g === newMember.guild.id)) return;
+            if (options?.guilds && !options.guilds.some((g) => g === newMember.guild.id)) return;
 
             if (!oldMember.premiumSince && newMember.premiumSince) {
                 this.emit('boostCreate', newMember);
@@ -447,6 +447,49 @@ export class BoostDetectorPlugin extends EventEmitter {
             if (oldMember.premiumSince && !newMember.premiumSince) {
                 this.emit('boostRemove', newMember);
             };
+        });
+    };
+};
+
+/**
+ * Simple suggestion system client!
+ */
+
+export class SuggestionPlugin {
+    constructor(client: Client, channelId: string, options?: SuggestionPluginOptions) {
+        client.on('messageCreate', async (message) => {            
+            if (message.channel.type !== 0 || message.channelId !== channelId) return;
+
+            if (message.author.bot && message.author.id !== client.user?.id) {
+                await message.delete();
+
+                return;
+            };
+
+            const embeds = options?.message?.embeds
+                ? options.message.embeds.map((embed, index) => index === 0
+                    ? embed.setThumbnail(options?.message?.setAuthorAvatarURLasEmbedThumbnail ? message.author.displayAvatarURL() : null)
+                        .setDescription(message.content || null)
+                        .setImage(message.attachments.size > 0 ? message.attachments.map((img) => img)[0].proxyURL : null)
+                    : embed
+                )
+                : [
+                    new EmbedBuilder()
+                        .setTitle('New suggestion')
+                        .setThumbnail(options?.message?.setAuthorAvatarURLasEmbedThumbnail ? message.author.displayAvatarURL() : null)
+                        .setDescription(message.content || null)
+                        .setImage(message.attachments.size > 0 ? message.attachments.map((img) => img)[0].proxyURL : null)
+                ];
+
+            await message.channel.send({
+                content: options?.message?.content,
+                embeds: embeds,
+                files: options?.message?.files ? options.message.files.map((f) => f) : []
+            });
+
+            if (options?.on?.newSuggestion) options.on.newSuggestion(message);
+
+            await message.delete();
         });
     };
 };
