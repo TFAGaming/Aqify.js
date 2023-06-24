@@ -246,7 +246,7 @@ paginator.addButtons(
     },
     {
         label: 'Delete',
-        id: ButtonPaginatorID.DeleteReply,
+        id: ButtonPaginatorID.Delete,
         type: ButtonStyle.Danger
     }
 );
@@ -350,16 +350,14 @@ new SuggestionPlugin(client, 'Suggestion channel ID', {
     message: {
         content: (message) => `<@${message.author.id}>`,
         embeds: (message) => [
-            return [
-                new EmbedBuilder()
-                    .setTitle('New suggestion!')
-                    .setAuthor({
-                        name: message.author.tag,
-                        iconURL: message.author.displayAvatarURL()
-                    })
-                    .setDescription(message.content)
-                    .setColor('Blurple')
-            ]
+            new EmbedBuilder()
+                .setTitle('New suggestion!')
+                .setAuthor({
+                    name: message.author.tag,
+                    iconURL: message.author.displayAvatarURL()
+                })
+                .setDescription(message.content)
+                .setColor('Blurple')
         ]
     }
 });
