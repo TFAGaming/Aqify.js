@@ -1,19 +1,21 @@
 import { Client } from 'discord.js';
 import { EventEmitter } from 'node:events';
-import { ModmailPluginOptions, TicketPluginOptions, BoostDetectorOptions, BoostDetectorEvents, SuggestionPluginOptions } from '../types';
+import { ModmailPluginOptions, TicketPluginOptions, BoostDetectorOptions, BoostDetectorEvents, SuggestionPluginOptions, TicketPluginCreatePanelOptions } from '../types';
 
 /**
  * Simple modmail client!
  */
 export declare class ModmailPlugin {
-    constructor(client: Client, options: ModmailPluginOptions)
+    constructor(client: Client, options: ModmailPluginOptions);
 }
 
 /**
  * Simple ticket client!
  */
 export declare class TicketPlugin {
-    constructor(client: Client, options: TicketPluginOptions)
+    constructor(client: Client, options: TicketPluginOptions);
+
+    createPanel(channelId: string, options: TicketPluginCreatePanelOptions): void;
 }
 
 /**

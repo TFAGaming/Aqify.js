@@ -24,11 +24,11 @@ export class ButtonsConfirmBuilder {
                     ? this.options.buttons
                     : [
                         new ButtonBuilder()
-                            .setCustomId('aqifyjs-confirm_yes')
+                            .setCustomId('yes')
                             .setLabel('Yes')
                             .setStyle(ButtonStyle.Success),
                         new ButtonBuilder()
-                            .setCustomId('aqifyjs-confirm_no')
+                            .setCustomId('no')
                             .setLabel('No')
                             .setStyle(ButtonStyle.Danger)
                     ];
@@ -86,19 +86,19 @@ export class ButtonsConfirmBuilder {
                         return;
                     };
 
-                    if (i.customId === 'aqifyjs-confirm_yes') {
+                    if (i.customId === 'yes') {
                         if (this.options.on?.yes) this.options.on?.yes(i);
 
                         return this.collector?.stop();
                     };
 
-                    if (i.customId === 'aqifyjs-confirm_no') {
+                    if (i.customId === 'no') {
                         if (this.options.on?.no) this.options.on?.no(i);
 
                         return this.collector?.stop();
                     };
 
-                    if (i.customId === 'aqifyjs-confirm_cancel') {
+                    if (i.customId === 'cancel') {
                         if (this.options.on?.cancel) this.options.on?.cancel(i);
 
                         return this.collector?.stop();

@@ -131,15 +131,10 @@ export interface TicketPluginOptions {
     sendPanel?: {
         channel: string
     },
-    messages?: {
-        panel?: {
-            content?: string,
-            embeds?: EmbedBuilder[]
-        },
-        ticket?: {
-            content?: string,
-            embeds?: EmbedBuilder[]
-        }
+    ticketStyle?: {
+        content?: string,
+        embeds?: EmbedBuilder[],
+        files?: AttachmentBuilder[]
     },
     buttons?: {
         createTicket?: ButtonBuilder,
@@ -149,19 +144,22 @@ export interface TicketPluginOptions {
     managerRoles?: string[]
 }
 
+export interface TicketPluginCreatePanelOptions {
+    content?: string,
+    embeds?: EmbedBuilder[]
+    files?: AttachmentBuilder[],
+    button?: ButtonBuilder
+}
+
 export interface BoostDetectorOptions {
     guilds?: string[]
 }
 
 export interface SuggestionPluginOptions {
-    on?: {
-        newSuggestion?: (message: Message) => void
-    },
     message?: {
-        setAuthorAvatarURLasEmbedThumbnail?: boolean,
-        content?: string,
-        embeds?: EmbedBuilder[],
-        files?: AttachmentBuilder[]
+        content?: (message: Message) => string,
+        embeds?: (message: Message) => EmbedBuilder[],
+        files?: (message: Message) => AttachmentBuilder[]
     }
 }
 
@@ -215,14 +213,14 @@ export declare enum ButtonPaginatorID {
     Previous = "previous",
     FirstPage = "firstpage",
     LastPage = "lastpage",
-    DeleteReply = "deletereply",
+    Delete = "delete",
     DisableAll = "disableall"
 }
 
 export enum ButtonConfirmID {
-    Yes = 'aqifyjs-confirm_yes',
-    No = 'aqifyjs-confirm_no',
-    Cancel = 'aqifyjs-confirm_cancel'
+    Yes = 'yes',
+    No = 'no',
+    Cance = 'cancel'
 }
 
 export interface CommandHandlerEvents {

@@ -164,6 +164,8 @@ export class ButtonsPaginatorBuilder {
                     }
                 };
 
+                let messageChannelSend: any;
+
                 switch (method) {
                     case 1:
                         await this.interaction.reply(replyData);
@@ -175,7 +177,7 @@ export class ButtonsPaginatorBuilder {
                         await this.interaction.followUp(replyData);
                         break;
                     case 4:
-                        await this.interaction.channel?.send(sendData);
+                        messageChannelSend = await this.interaction.channel?.send(sendData);
                         break;
                 };
 
@@ -321,8 +323,12 @@ export class ButtonsPaginatorBuilder {
                         return;
                     };
 
-                    if (i.customId === 'deletereply') {
-                        await this.interaction.deleteReply();
+                    if (i.customId === 'delete') {
+                        if (method === 4) {
+                            await messageChannelSend.delete();
+                        } else {
+                            await this.interaction.deleteReply();
+                        };
 
                         return;
                     };

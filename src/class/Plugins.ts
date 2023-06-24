@@ -1,7 +1,7 @@
 import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, TextChannel } from "discord.js";
 import { time } from "../func";
 import { EventEmitter } from 'node:events';
-import { BoostDetectorOptions, ModmailPluginOptions, TicketPluginOptions, SuggestionPluginOptions } from "../types";
+import { BoostDetectorOptions, ModmailPluginOptions, TicketPluginOptions, SuggestionPluginOptions, TicketPluginCreatePanelOptions } from "../types";
 
 /**
  * Simple modmail client!
@@ -150,7 +150,7 @@ export class ModmailPlugin {
                             new ActionRowBuilder<ButtonBuilder>()
                                 .addComponents(
                                     new ButtonBuilder()
-                                        .setCustomId('aqifyjs-modmail-close-' + message.author.id)
+                                        .setCustomId('close-' + message.author.id)
                                         .setEmoji('🗑️')
                                         .setLabel('Close')
                                         .setStyle(ButtonStyle.Danger)
@@ -171,7 +171,7 @@ export class ModmailPlugin {
         client.on('interactionCreate', async (interaction) => {
             if (!interaction.isButton()) return;
 
-            if (interaction.customId.startsWith('aqifyjs-modmail-close-')) {
+            if (interaction.customId.startsWith('close-')) {
                 const guild = client.guilds.cache.get(options.guild);
 
                 if (!guild) return;
@@ -206,37 +206,10 @@ export class ModmailPlugin {
  * Simple ticket client!
  */
 export class TicketPlugin {
+    readonly client: Client;
+
     constructor(client: Client, options: TicketPluginOptions) {
-        if (options.sendPanel) {
-            const channel = client.channels.cache.get(options.sendPanel.channel);
-
-            if (!channel || channel.type !== 0) return;
-
-            channel.send({
-                content: options.messages?.panel?.content,
-                embeds: options.messages?.panel?.embeds
-                    ? options.messages.panel.embeds
-                    :
-                    [
-                        new EmbedBuilder()
-                            .setTitle('Create a Ticket')
-                            .setDescription('To create a ticket, click on the button below.')
-                            .setColor('Blurple')
-                    ],
-                components: [
-                    new ActionRowBuilder<ButtonBuilder>()
-                        .addComponents(
-                            options.buttons?.createTicket
-                                ? options.buttons.createTicket.setCustomId('aqifyjs-ticketplugin-createticket')
-                                : new ButtonBuilder()
-                                    .setCustomId('aqifyjs-ticketplugin-createticket')
-                                    .setEmoji('🎟️')
-                                    .setLabel('Create a ticket')
-                                    .setStyle(ButtonStyle.Secondary)
-                        )
-                ]
-            });
-        };
+        this.client = client;
 
         client.on('interactionCreate', async (interaction) => {
             if (!interaction.isButton()) return;
@@ -253,7 +226,7 @@ export class TicketPlugin {
                 return;
             };
 
-            if (interaction.customId === 'aqifyjs-ticketplugin-createticket') {
+            if (interaction.customId === 'createticket') {
                 if (interaction.guild?.channels.cache.find((c) => c.name === 'ticket-' + interaction.user.id)) {
                     await interaction.reply({
                         content: 'You have created a ticket already.',
@@ -292,9 +265,9 @@ export class TicketPlugin {
                     });
 
                     await channel?.send({
-                        content: options.messages?.ticket?.content,
-                        embeds: options.messages?.ticket?.embeds
-                            ? options.messages.ticket.embeds
+                        content: options.ticketStyle?.content,
+                        embeds: options.ticketStyle?.embeds
+                            ? options.ticketStyle.embeds
                             :
                             [
                                 new EmbedBuilder()
@@ -305,20 +278,21 @@ export class TicketPlugin {
                                         text: 'To close the ticket, click on the button: 🔒 Close\nOnly staff members can delete the ticket.'
                                     })
                             ],
+                        files: options.ticketStyle?.files,
                         components: [
                             new ActionRowBuilder<ButtonBuilder>()
                                 .addComponents(
                                     options.buttons?.closeTicket
-                                        ? options.buttons?.closeTicket.setCustomId('aqifyjs-ticketplugin-closeticket_' + interaction.user.id)
+                                        ? options.buttons?.closeTicket.setCustomId('closeticket_' + interaction.user.id)
                                         : new ButtonBuilder()
-                                            .setCustomId('aqifyjs-ticketplugin-closeticket_' + interaction.user.id)
+                                            .setCustomId('closeticket_' + interaction.user.id)
                                             .setEmoji('🔒')
                                             .setLabel('Close')
                                             .setStyle(ButtonStyle.Secondary),
                                     options.buttons?.deleteTicket
-                                        ? options.buttons?.deleteTicket.setCustomId('aqifyjs-ticketplugin-deleteticket_' + interaction.user.id)
+                                        ? options.buttons?.deleteTicket.setCustomId('deleteticket_' + interaction.user.id)
                                         : new ButtonBuilder()
-                                            .setCustomId('aqifyjs-ticketplugin-deleteticket_' + interaction.user.id)
+                                            .setCustomId('deleteticket_' + interaction.user.id)
                                             .setEmoji('🗑️')
                                             .setLabel('Delete')
                                             .setStyle(ButtonStyle.Danger)
@@ -339,7 +313,7 @@ export class TicketPlugin {
                 return;
             };
 
-            if (interaction.customId.startsWith('aqifyjs-ticketplugin-closeticket_')) {
+            if (interaction.customId.startsWith('closeticket_')) {
                 if (interaction.channel?.type !== 0) return;
                 if (!interaction.guild?.roles.everyone) return;
 
@@ -353,8 +327,6 @@ export class TicketPlugin {
                 };
 
                 const split = interaction.customId.split('_').slice(1);
-
-                const user = interaction.guild?.members.cache.get(split[0]);
 
                 await interaction.deferReply({ ephemeral: true });
 
@@ -394,7 +366,7 @@ export class TicketPlugin {
                 return;
             };
 
-            if (interaction.customId.startsWith('aqifyjs-ticketplugin-deleteticket_')) {
+            if (interaction.customId.startsWith('deleteticket_')) {
                 if (interaction.channel?.type !== 0) return;
                 if (!interaction.guild?.roles.everyone) return;
 
@@ -428,6 +400,38 @@ export class TicketPlugin {
             };
         });
     };
+
+    public async createPanel(channelId: string, options?: TicketPluginCreatePanelOptions) {
+        const channel = this.client.channels.cache.get(channelId);
+
+            if (!channel || channel.type !== 0) return;
+
+            channel.send({
+                content: options?.content,
+                embeds: options?.embeds
+                    ? options.embeds
+                    :
+                    [
+                        new EmbedBuilder()
+                            .setTitle('Create a Ticket')
+                            .setDescription('To create a ticket, click on the button below.')
+                            .setColor('Blurple')
+                    ],
+                files: options?.files,
+                components: [
+                    new ActionRowBuilder<ButtonBuilder>()
+                        .addComponents(
+                            options?.button
+                                ? options.button.setCustomId('createticket')
+                                : new ButtonBuilder()
+                                    .setCustomId('createticket')
+                                    .setEmoji('🎟️')
+                                    .setLabel('Create a ticket')
+                                    .setStyle(ButtonStyle.Secondary)
+                        )
+                ]
+            });
+    };
 };
 
 /**
@@ -457,7 +461,7 @@ export class BoostDetectorPlugin extends EventEmitter {
 
 export class SuggestionPlugin {
     constructor(client: Client, channelId: string, options?: SuggestionPluginOptions) {
-        client.on('messageCreate', async (message) => {            
+        client.on('messageCreate', async (message) => {
             if (message.channel.type !== 0 || message.channelId !== channelId || message.author.id === client.user?.id) return;
 
             if (message.author.bot) {
@@ -467,17 +471,11 @@ export class SuggestionPlugin {
             };
 
             const embeds = options?.message?.embeds
-                ? options.message.embeds.map((embed, index) => index === 0
-                    ? embed.setThumbnail(options?.message?.setAuthorAvatarURLasEmbedThumbnail ? message.author.displayAvatarURL() : null)
-                        .setDescription(message.content || null)
-                        .setImage(message.attachments.size > 0 ? message.attachments.map((img) => img)[0].proxyURL : null)
-                        .setFooter({ text: 'Suggested by: ' + message.author.username })
-                    : embed
-                )
+                ? options.message.embeds(message)
                 : [
                     new EmbedBuilder()
                         .setTitle('New suggestion')
-                        .setThumbnail(options?.message?.setAuthorAvatarURLasEmbedThumbnail ? message.author.displayAvatarURL() : null)
+                        .setThumbnail(message.author.displayAvatarURL())
                         .setDescription(message.content || null)
                         .setImage(message.attachments.size > 0 ? message.attachments.map((img) => img)[0].proxyURL : null)
                         .setFooter({ text: 'Suggested by: ' + message.author.username })
@@ -485,12 +483,10 @@ export class SuggestionPlugin {
                 ];
 
             await message.channel.send({
-                content: options?.message?.content,
+                content: options?.message?.content ? options.message.content(message) : undefined,
                 embeds: embeds,
-                files: options?.message?.files ? options.message.files.map((f) => f) : []
+                files: options?.message?.files ? options.message.files(message) : []
             });
-
-            if (options?.on?.newSuggestion) options.on.newSuggestion(message);
 
             await message.delete();
         });

@@ -339,11 +339,8 @@ new ModmailPlugin(client, {
 new TicketPlugin(client, {
     guild: 'Your server ID',
     parent: 'The tickets category ID',
-    sendPanel: {
-        channel: 'The panel channel ID', // <= Remove once the panel is sent.
-    },
     managerRoles: ['Staff role ID']
-});
+}).createPanel('The panel channel ID');
 
 new BoostDetectorPlugin(client)
     .on('boostCreate', (u) => console.log(u.user.tag + ' has boosted the server!'))
@@ -351,12 +348,18 @@ new BoostDetectorPlugin(client)
 
 new SuggestionPlugin(client, 'Suggestion channel ID', {
     message: {
-        setAuthorAvatarURLasEmbedThumbnail: true,
-        embeds: [
-            new EmbedBuilder()
-                .setTitle('New suggestion!')
-                .setTimestamp()
-                .setColor('Green')
+        content: (message) => `<@${message.author.id}>`,
+        embeds: (message) => [
+            return [
+                new EmbedBuilder()
+                    .setTitle('New suggestion!')
+                    .setAuthor({
+                        name: message.author.tag,
+                        iconURL: message.author.displayAvatarURL()
+                    })
+                    .setDescription(message.content)
+                    .setColor('Blurple')
+            ]
         ]
     }
 });
