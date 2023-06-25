@@ -273,7 +273,46 @@ export class Calculator {
                             components: actionrows
                         });
                     } else if (i.customId === "exit") {
-                        this.collector?.stop();
+                        for (let i = 0; i < 5; i++) {
+                            for (let j = 0; j < 5; j++) {
+                                buttons[i][j].setDisabled(true);
+                            };
+                        };
+
+                        await i.update({
+                            embeds: options?.home?.embeds
+                                ? options.home.embeds.map((e, i) => i === 0 ? e.setDescription(codeBlock(data)) : e)
+                                : [
+                                    new EmbedBuilder()
+                                        .setTitle('Calculator')
+                                        .setDescription(codeBlock(data))
+                                        .setColor('Blurple')
+                                ],
+                            components: [
+                                new ActionRowBuilder<ButtonBuilder>()
+                                    .addComponents(
+                                        buttons[0]
+                                    ),
+                                new ActionRowBuilder<ButtonBuilder>()
+                                    .addComponents(
+                                        buttons[1]
+                                    ),
+                                new ActionRowBuilder<ButtonBuilder>()
+                                    .addComponents(
+                                        buttons[2]
+                                    ),
+                                new ActionRowBuilder<ButtonBuilder>()
+                                    .addComponents(
+                                        buttons[3]
+                                    ),
+                                new ActionRowBuilder<ButtonBuilder>()
+                                    .addComponents(
+                                        buttons[4]
+                                    )
+                            ]
+                        });
+
+                        this.collector?.stop('user');
                     } else {
                         const id = i.customId;
 
@@ -301,7 +340,8 @@ export class Calculator {
 
                 this.collector?.on('end', async () => {
                     if (!this.collector?.ended) return;
-
+                    if (this.collector.endReason === 'user') return;
+ 
                     if (options?.deleteMessageAfterTimeout) {
                         await this.interaction.deleteReply();
                     } else {
