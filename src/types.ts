@@ -10,6 +10,7 @@ import {
     ComponentEmojiResolvable,
     ContextMenuCommandBuilder,
     EmbedBuilder,
+    EmojiIdentifierResolvable,
     Guild,
     GuildMember,
     Message,
@@ -144,6 +145,29 @@ export interface ButtonsConfirmStructureSendOptions {
     disableButtonsOnEnd?: boolean
 };
 
+
+// Calculator
+export interface CalculatorConstructorOptions {
+    filter?: CollectorFilter<[ButtonInteraction]>,
+    time?: number
+};
+
+export interface CalculatorStructureSendOptions {
+    home?: {
+        content?: string,
+        embeds?: EmbedBuilder[]
+    },
+    onEnd?: {
+        content?: string,
+        embeds?: EmbedBuilder[]
+    },
+    mentionRepliedUser?: boolean,
+    ephemeral?: boolean,
+    onNotAuthor?: (interaction: ButtonInteraction<CacheType>) => void,
+    deleteMessageAfterTimeout?: boolean,
+    disableButtonsOnEnd?: boolean
+};
+
 // Plugins
 export interface ModmailPluginOptions {
     guild: string,
@@ -187,7 +211,8 @@ export interface SuggestionPluginOptions {
         content?: (message: Message) => string,
         embeds?: (message: Message) => EmbedBuilder[],
         files?: (message: Message) => AttachmentBuilder[]
-    }
+    },
+    reactions?: EmojiIdentifierResolvable[]
 };
 
 // Methods

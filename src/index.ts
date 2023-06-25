@@ -8,6 +8,7 @@ export * from './class/ButtonsPaginatorPageBuilder';
 export * from './class/ButtonsConfirmBuilder';
 export * from './class/Plugins';
 export * from './class/ActivityManager';
+export * from './class/Calculator';
 
 export * from './func/index';
 export * from './global/index';

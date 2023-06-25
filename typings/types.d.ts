@@ -1,4 +1,4 @@
-import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CacheType, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, Guild, GuildMember, Message, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction, User, VoiceChannel } from "discord.js";
+import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CacheType, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, EmojiIdentifierResolvable, Guild, GuildMember, Message, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction, User, VoiceChannel } from "discord.js";
 
 export declare type CommandBuilderStructure<C extends Client, T = {}> = {
     structure: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder;
@@ -118,6 +118,27 @@ export interface ButtonsConfirmStructureSendOptions {
     disableButtonsOnEnd?: boolean
 }
 
+export interface CalculatorConstructorOptions {
+    filter?: CollectorFilter<[ButtonInteraction]>,
+    time?: number
+}
+
+export interface CalculatorStructureSendOptions {
+    home?: {
+        content?: string,
+        embeds?: EmbedBuilder[]
+    },
+    onEnd?: {
+        content?: string,
+        embeds?: EmbedBuilder[]
+    },
+    mentionRepliedUser?: boolean,
+    ephemeral?: boolean,
+    onNotAuthor?: (interaction: ButtonInteraction<CacheType>) => void,
+    deleteMessageAfterTimeout?: boolean,
+    disableButtonsOnEnd?: boolean
+}
+
 export interface ModmailPluginOptions {
     guild: string,
     parent: string,
@@ -160,7 +181,8 @@ export interface SuggestionPluginOptions {
         content?: (message: Message) => string,
         embeds?: (message: Message) => EmbedBuilder[],
         files?: (message: Message) => AttachmentBuilder[]
-    }
+    },
+    reactions?: EmojiIdentifierResolvable[]
 }
 
 export enum ActivityGameId {

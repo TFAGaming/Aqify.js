@@ -32,6 +32,6 @@ export declare class BoostDetectorPlugin extends EventEmitter {
  * Simple suggestion system client!
  */
 
-export class SuggestionPlugin {
+export declare class SuggestionPlugin {
     constructor(client: Client, channelId: string, options?: SuggestionPluginOptions);
 }

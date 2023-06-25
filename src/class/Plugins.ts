@@ -404,33 +404,33 @@ export class TicketPlugin {
     public async createPanel(channelId: string, options?: TicketPluginCreatePanelOptions) {
         const channel = this.client.channels.cache.get(channelId);
 
-            if (!channel || channel.type !== 0) return;
+        if (!channel || channel.type !== 0) return;
 
-            channel.send({
-                content: options?.content,
-                embeds: options?.embeds
-                    ? options.embeds
-                    :
-                    [
-                        new EmbedBuilder()
-                            .setTitle('Create a Ticket')
-                            .setDescription('To create a ticket, click on the button below.')
-                            .setColor('Blurple')
-                    ],
-                files: options?.files,
-                components: [
-                    new ActionRowBuilder<ButtonBuilder>()
-                        .addComponents(
-                            options?.button
-                                ? options.button.setCustomId('createticket')
-                                : new ButtonBuilder()
-                                    .setCustomId('createticket')
-                                    .setEmoji('🎟️')
-                                    .setLabel('Create a ticket')
-                                    .setStyle(ButtonStyle.Secondary)
-                        )
-                ]
-            });
+        channel.send({
+            content: options?.content,
+            embeds: options?.embeds
+                ? options.embeds
+                :
+                [
+                    new EmbedBuilder()
+                        .setTitle('Create a Ticket')
+                        .setDescription('To create a ticket, click on the button below.')
+                        .setColor('Blurple')
+                ],
+            files: options?.files,
+            components: [
+                new ActionRowBuilder<ButtonBuilder>()
+                    .addComponents(
+                        options?.button
+                            ? options.button.setCustomId('createticket')
+                            : new ButtonBuilder()
+                                .setCustomId('createticket')
+                                .setEmoji('🎟️')
+                                .setLabel('Create a ticket')
+                                .setStyle(ButtonStyle.Secondary)
+                    )
+            ]
+        });
     };
 };
 
@@ -486,6 +486,10 @@ export class SuggestionPlugin {
                 content: options?.message?.content ? options.message.content(message) : undefined,
                 embeds: embeds,
                 files: options?.message?.files ? options.message.files(message) : []
+            }).then((sent) => {
+                if (options?.reactions && options.reactions.length > 0) options.reactions.forEach(async (r) => {
+                    await sent.react(r);
+                });
             });
 
             await message.delete();

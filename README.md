@@ -1,6 +1,6 @@
 <p align = "center">
     <img src="https://media.discordapp.net/attachments/1111644651036876822/1121038963252142112/5de55229bfa5b0013524ec65084c8812.png">
-    <h3 align="center">The Utility package that takes you to a whole new level.</h3>
+    <h3 align="center">The Utility & Fun package that takes you to a whole new level.</h3>
     <p align="center">
     <br>
     <img src="https://img.shields.io/npm/v/aqify.js/latest?label=Latest%20version%3A">
@@ -363,7 +363,7 @@ new SuggestionPlugin(client, 'Suggestion channel ID', {
 });
 ```
 
-There are a lot of features (functions, classes... etc.) on this package, check the documentation site: [Click here!](https://tfagaming.github.io/Aqify.js/)
+There are a lot of features that are not on this preview, check the documentation site to view them all: [Click here!](https://tfagaming.github.io/Aqify.js/)
 
 ## License
 [**GPL-3.0**](https://www.gnu.org/licenses/gpl-3.0.en.html); General Public License v3.0.

@@ -6,7 +6,7 @@ import { ActivityChannelInviteAPI, ActivityGameId } from "../types";
  * 
  * **Note**: This is how the invite should looks like: `https://discord.com/invite/{INVITE_CODE}`.
  */
-export class ActivityManager {
+export declare class ActivityManager {
     readonly client: Client;
     readonly token: string | null;
     readonly id: string | undefined;

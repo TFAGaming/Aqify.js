@@ -4,23 +4,23 @@ import { ButtonsConfirmConstructorOptions, ButtonsConfirmStructureSendOptions, S
 export class ButtonsConfirmBuilder {
     readonly interaction: CommandInteraction;
     readonly collector: InteractionCollector<ButtonInteraction> | undefined;
-    readonly options: ButtonsConfirmConstructorOptions;
+    readonly options: ButtonsConfirmConstructorOptions | undefined;
 
-    constructor(interaction: CommandInteraction, options: ButtonsConfirmConstructorOptions) {
+    constructor(interaction: CommandInteraction, options?: ButtonsConfirmConstructorOptions) {
         this.collector = interaction.channel?.createMessageComponentCollector({
             componentType: ComponentType.Button,
-            filter: options.filter,
-            time: options.time || 30000
+            filter: options?.filter,
+            time: options?.time || 30000
         });
 
         this.interaction = interaction;
         this.options = options;
     };
 
-    public send(method: SendMethod, options?: ButtonsConfirmStructureSendOptions) {
+    public send(method: SendMethod, options?: ButtonsConfirmStructureSendOptions): Promise<CommandInteraction | unknown> {
         return new Promise(async (res, rej) => {
             try {
-                let components = this.options.buttons
+                let components = this.options?.buttons
                     ? this.options.buttons
                     : [
                         new ButtonBuilder()
@@ -87,19 +87,19 @@ export class ButtonsConfirmBuilder {
                     };
 
                     if (i.customId === 'yes') {
-                        if (this.options.on?.yes) this.options.on?.yes(i);
+                        if (this.options?.on?.yes) this.options.on?.yes(i);
 
                         return this.collector?.stop();
                     };
 
                     if (i.customId === 'no') {
-                        if (this.options.on?.no) this.options.on?.no(i);
+                        if (this.options?.on?.no) this.options.on?.no(i);
 
                         return this.collector?.stop();
                     };
 
                     if (i.customId === 'cancel') {
-                        if (this.options.on?.cancel) this.options.on?.cancel(i);
+                        if (this.options?.on?.cancel) this.options.on?.cancel(i);
 
                         return this.collector?.stop();
                     };
@@ -126,8 +126,10 @@ export class ButtonsConfirmBuilder {
 
                     return;
                 });
-            } catch (e) {
 
+                res(this.interaction);
+            } catch (e) {
+                rej(e);
             };
         });
     };

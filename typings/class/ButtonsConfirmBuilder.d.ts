@@ -1,7 +1,7 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CommandInteraction, ComponentType, InteractionCollector, InteractionReplyOptions, MessageCreateOptions } from "discord.js";
+import { ButtonInteraction, CommandInteraction, InteractionCollector } from "discord.js";
 import { ButtonsConfirmConstructorOptions, ButtonsConfirmStructureSendOptions, SendMethod } from "../types";
 
-export class ButtonsConfirmBuilder {
+export declare class ButtonsConfirmBuilder {
     readonly interaction: CommandInteraction;
     readonly collector: InteractionCollector<ButtonInteraction> | undefined;
     readonly options: ButtonsConfirmConstructorOptions;
