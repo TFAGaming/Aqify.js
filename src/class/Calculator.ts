@@ -24,71 +24,119 @@ export class Calculator {
     public send(method: SendMethod, options?: CalculatorStructureSendOptions): Promise<CommandInteraction | unknown> {
         return new Promise(async (res, rej) => {
             try {
-                const buttonsText = [
+
+                const buttons = [
                     [
-                        { label: 'AC', style: 4 },
-                        { label: 'Del', style: 4 },
-                        { label: 'Exit', style: 4 },
-                        { label: '(', style: 1 },
-                        { label: ')', style: 1 }
+                        new ButtonBuilder()
+                            .setLabel("AC")
+                            .setCustomId("ac")
+                            .setStyle(ButtonStyle.Danger),
+                        new ButtonBuilder()
+                            .setLabel("Del")
+                            .setCustomId("del")
+                            .setStyle(ButtonStyle.Danger),
+                        new ButtonBuilder()
+                            .setLabel("Exit")
+                            .setCustomId("exit")
+                            .setStyle(ButtonStyle.Danger),
+                        new ButtonBuilder()
+                            .setLabel("(")
+                            .setCustomId("(")
+                            .setStyle(ButtonStyle.Primary),
+                        new ButtonBuilder()
+                            .setLabel(")")
+                            .setCustomId(")")
+                            .setStyle(ButtonStyle.Primary),
                     ],
                     [
-                        '1',
-                        '2',
-                        '3',
-                        { label: '+', style: 1 },
-                        { label: '/', style: 1 }
+                        new ButtonBuilder()
+                            .setLabel("1")
+                            .setCustomId("1")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("2")
+                            .setCustomId("2")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("3")
+                            .setCustomId("3")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("+")
+                            .setCustomId("+")
+                            .setStyle(ButtonStyle.Primary),
+                        new ButtonBuilder()
+                            .setLabel("/")
+                            .setCustomId("/")
+                            .setStyle(ButtonStyle.Primary),
                     ],
                     [
-                        '4',
-                        '5',
-                        '6',
-                        { label: '-', style: 1 },
-                        { label: '%', style: 1 }
+                        new ButtonBuilder()
+                            .setLabel("4")
+                            .setCustomId("4")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("5")
+                            .setCustomId("5")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("6")
+                            .setCustomId("6")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("-")
+                            .setCustomId("-")
+                            .setStyle(ButtonStyle.Primary),
+                        new ButtonBuilder()
+                            .setLabel("%")
+                            .setCustomId("%")
+                            .setStyle(ButtonStyle.Primary),
                     ],
                     [
-                        '7',
-                        '8',
-                        '9',
-                        { label: '*', style: 1 },
-                        { label: '', style: 1 }
+                        new ButtonBuilder()
+                            .setLabel("7")
+                            .setCustomId("7")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("8")
+                            .setCustomId("8")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("9")
+                            .setCustomId("9")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("*")
+                            .setCustomId("*")
+                            .setStyle(ButtonStyle.Primary),
+                        new ButtonBuilder()
+                            .setLabel("π")
+                            .setCustomId("3.14")
+                            .setStyle(ButtonStyle.Secondary),
                     ],
                     [
-                        '.',
-                        '0',
-                        '00',
-                        { label: '=', style: 3 },
-                        'Ans'
-                    ]
+                        new ButtonBuilder()
+                            .setLabel(".")
+                            .setCustomId(".")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("0")
+                            .setCustomId("0")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("00")
+                            .setCustomId("00")
+                            .setStyle(ButtonStyle.Secondary),
+                        new ButtonBuilder()
+                            .setLabel("=")
+                            .setCustomId("=")
+                            .setStyle(ButtonStyle.Success),
+                        new ButtonBuilder()
+                            .setLabel("Ans")
+                            .setCustomId("ans")
+                            .setStyle(ButtonStyle.Secondary),
+                    ],
                 ];
-
-                const buttons: ButtonBuilder[][] = [
-                    [],
-                    [],
-                    [],
-                    [],
-                    []
-                ];
-
-                for (let row = 0; row < 5; row++) {
-                    for (let i = 0; i < 5; i++) {
-                        for (let j = 0; j < 5; j++) {
-                            const button = buttonsText[i][j];
-
-                            buttons[row].push(
-                                typeof button === 'string'
-                                    ? new ButtonBuilder()
-                                        .setCustomId(button.toLowerCase())
-                                        .setLabel(button)
-                                        .setStyle(ButtonStyle.Secondary)
-                                    : new ButtonBuilder()
-                                        .setCustomId(button.label.toLowerCase())
-                                        .setLabel(button.label)
-                                        .setStyle(button.style)
-                            );
-                        };
-                    };
-                };
 
                 const actionrows = [
                     new ActionRowBuilder<ButtonBuilder>()
