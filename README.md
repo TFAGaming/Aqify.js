@@ -4,7 +4,7 @@
     <p align="center">
     <br>
     <img src="https://img.shields.io/npm/v/aqify.js/latest?label=Latest%20version%3A">
-    <img src="https://img.shields.io/github/stars/TFAGaming/Aqify.js?label=Repository%20stars&color=yellow">
+    <img src="https://img.shields.io/github/stars/TFAGaming/Aqify.js?label=Repository%20stars:&color=yellow">
     <img src="https://img.shields.io/static/v1?label=100%%20written%20in:&message=TypeScript&color=007acc">
     <br>
     <img src="https://img.shields.io/snyk/vulnerabilities/npm/aqify.js?label=Vulnerabilities%3A">
@@ -359,7 +359,8 @@ new SuggestionPlugin(client, 'Suggestion channel ID', {
                 .setDescription(message.content)
                 .setColor('Blurple')
         ]
-    }
+    },
+    reactions: ['👍', '👎']
 });
 ```
 
