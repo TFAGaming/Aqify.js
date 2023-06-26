@@ -1,10 +1,54 @@
-import { AttachmentBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CacheType, Client, CollectorFilter, CommandInteraction, ComponentEmojiResolvable, ContextMenuCommandBuilder, EmbedBuilder, EmojiIdentifierResolvable, Guild, GuildMember, Message, RESTOptions, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder, StringSelectMenuInteraction, User, VoiceChannel } from "discord.js";
+import {
+    AttachmentBuilder,
+    ButtonBuilder,
+    ButtonInteraction,
+    ButtonStyle,
+    CacheType,
+    ChatInputCommandInteraction,
+    Client,
+    CollectorFilter,
+    ComponentEmojiResolvable,
+    ContextMenuCommandBuilder,
+    EmbedBuilder,
+    EmojiIdentifierResolvable,
+    Guild,
+    GuildMember,
+    Message,
+    MessageContextMenuCommandInteraction,
+    RESTOptions,
+    SlashCommandBuilder, 
+    SlashCommandSubcommandsOnlyBuilder, 
+    StringSelectMenuInteraction,
+    User,
+    UserContextMenuCommandInteraction,
+    VoiceChannel
+} from "discord.js";
 
-export declare type CommandBuilderStructure<C extends Client, T = {}> = {
-    structure: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder;
+export interface CommandBuilderStructureChatInputCommand<C extends Client, T = {}> {
+    type: 1,
+    structure: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
     options?: T;
-    run: (client: C, interaction: CommandInteraction) => void;
-};
+    run: (client: C, interaction: ChatInputCommandInteraction) => void;
+}
+
+export interface CommandBuilderStructureUserContextCommand<C extends Client, T = {}> {
+    type: 2,
+    structure: ContextMenuCommandBuilder;
+    options?: T;
+    run: (client: C, interaction: UserContextMenuCommandInteraction) => void;
+}
+
+export interface CommandBuilderStructureMessageContextCommand<C extends Client, T = {}> {
+    type: 3,
+    structure: ContextMenuCommandBuilder;
+    options?: T;
+    run: (client: C, interaction: MessageContextMenuCommandInteraction) => void;
+}
+
+export declare type CommandBuilderStructure<C extends Client, T = {}> =
+    CommandBuilderStructureChatInputCommand<C, T> |
+    CommandBuilderStructureUserContextCommand<C, T> |
+    CommandBuilderStructureMessageContextCommand<C, T>;
 
 export interface CommandsHandlerConstructorOptions {
     includesDir?: boolean;
@@ -135,8 +179,7 @@ export interface CalculatorStructureSendOptions {
     mentionRepliedUser?: boolean,
     ephemeral?: boolean,
     onNotAuthor?: (interaction: ButtonInteraction<CacheType>) => void,
-    deleteMessageAfterTimeout?: boolean,
-    disableButtonsOnEnd?: boolean
+    deleteMessageAfterTimeout?: boolean
 }
 
 export interface ModmailPluginOptions {

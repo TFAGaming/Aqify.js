@@ -18,11 +18,7 @@ export declare class CommandsHandler<C extends Client, T = {}> extends EventEmit
      * Create a new command.
      */
     command: {
-        new (data: CommandBuilderStructure<C, T>): {
-            structure: SlashCommandBuilder | ContextMenuCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
-            options: T | undefined;
-            run: (client: C, interaction: CommandInteraction<CacheType>) => void;
-        };
+        new (data: CommandBuilderStructure<C, T>): CommandBuilderStructure<C, T>;
     };
 
     /**

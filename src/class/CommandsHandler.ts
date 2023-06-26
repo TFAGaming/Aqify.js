@@ -1,5 +1,5 @@
 import { EventEmitter } from 'node:events';
-import { Client, Collection, REST, Routes } from 'discord.js';
+import { Client, Collection, ContextMenuCommandBuilder, REST, Routes } from 'discord.js';
 import { CommandBuilder } from './CommandBuilder';
 import { CommandBuilderStructure, CommandsHandlerStructureDeployOptions, CommandsHandlerConstructorOptions } from '../types';
 import { load as loadCommands } from '../func/private/load';
@@ -28,11 +28,7 @@ export class CommandsHandler<C extends Client, T = { }> extends EventEmitter {
      */
     public command = class extends CommandBuilder<C, T> {
         constructor(data: CommandBuilderStructure<C, T>) {
-            super({
-                structure: data.structure,
-                options: data.options,
-                run: data.run
-            });
+            super(data);
         };
     };
 
@@ -83,3 +79,13 @@ export class CommandsHandler<C extends Client, T = { }> extends EventEmitter {
         });
     };
 };
+
+const e = new CommandsHandler('');
+
+new e.command({
+    type: 3,
+    structure: new ContextMenuCommandBuilder(),
+    run(client, interaction) {
+        
+    },
+})

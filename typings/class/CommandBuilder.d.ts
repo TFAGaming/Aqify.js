@@ -10,7 +10,8 @@ import { Client } from 'discord.js';
  * export default new CommandBuilder(...);
  * ```
  */
-export declare class CommandBuilder<C extends Client, T = {}> implements CommandBuilderStructure<C, T> {
+export declare class CommandBuilder<C extends Client, T = {}> {
+    type: CommandBuilderStructure<C, T>['type'];
     structure: CommandBuilderStructure<C, T>['structure'];
     options: CommandBuilderStructure<C, T>['options'];
     run: CommandBuilderStructure<C, T>['run'];

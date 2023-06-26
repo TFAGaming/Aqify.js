@@ -100,7 +100,7 @@ This is a `tsconfig.json` example, you can use it for this quick start:
 }
 ```
 
-Discord bot client with handler:
+Discord bot client with commands handler:
 ```ts
 // index.ts
 import { Client } from 'discord.js';
@@ -126,18 +126,17 @@ handler.deploy();
 client.login(config.token);
 ```
 
-Ping command:
+Slash command /ping:
 ```ts
 // ping.ts
+import { SlashCommandBuilder } from 'discord.js';
 import { handler } from '../index';
 
 export default new handler.command({
-    structure: {
-        name: 'ping',
-        description: 'Replies with Pong!',
-        type: 1,
-        options: []
-    },
+    type: 1, // <= Chat Input command type
+    structure: new SlashCommandBuilder()
+        .setName('ping')
+        .setDescription('Replies with pong!'),
     run: async (client, interaction) => {
         await interaction.reply({
             content: 'Pong!'
@@ -164,11 +163,10 @@ client.on('interactionCreate', (interaction) => {
 });
 ```
 
-If you want to define custom options for the commands, create one using the `interface` keyword and use it as the second type parameter of the class `CommandsHandler`:
+If you want to define custom options for the commands, create one using the `interface` keyword and use it as the second type parameter of the class `CommandsHandler`, as the example below:
 ```ts
 interface Options {
-    ownerOnly?: boolean,
-    cooldown?: number
+    cooldown?: string
 };
 
 new CommandsHandler<Client, Options>(...);
@@ -263,7 +261,7 @@ paginator.send(SendMethod.Reply, {
     onNotAuthor: async (i) => {
         await i.reply({ content: 'You are not the author of this interaction.' });
     },
-    disableButtonsOnLastAndFirstPage: true,
+    disableButtonsOnLastAndFirstPage: true
 });
 ```
 
@@ -322,12 +320,13 @@ manager.delete('Invite code')
 
 ### Plugins
 
-> **Note**: It's recommended to use these plugins in the event `ready` from the client. 
+> **1st Note**: It's recommended to use these plugins in the event `ready` from the client. 
 > ```ts
 > <client>.on('ready', () => {
 >     new Plugin();
 > });
 > ```
+> **2nd Note**: If you want to edit the messages from the plugins, go to `node_modules/aqify.js/class/plugins.js`, and then find the class which you want to edit.
 
 ```ts
 new ModmailPlugin(client, {
@@ -343,8 +342,8 @@ new TicketPlugin(client, {
 }).createPanel('The panel channel ID');
 
 new BoostDetectorPlugin(client)
-    .on('boostCreate', (u) => console.log(u.user.tag + ' has boosted the server!'))
-    .on('boostRemove', (u) => console.log(u.user.tag + ' has unboosted the server...'));
+    .on('boostCreate', (member) => console.log(member.user.tag + ' has boosted the server!'))
+    .on('boostRemove', (member) => console.log(member.user.tag + ' has unboosted the server...'));
 
 new SuggestionPlugin(client, 'Suggestion channel ID', {
     message: {
