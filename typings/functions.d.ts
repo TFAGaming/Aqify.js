@@ -64,4 +64,4 @@ export declare const snowflake: (snowflake: number) => Date;
 /**
  * Random element from the paramater.
  */
-export const random: (...args: any[]) => any;
+export const random: <T extends any>(...args: T[]) => T;

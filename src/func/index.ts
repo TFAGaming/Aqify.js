@@ -102,12 +102,14 @@ export const randomInteger = (min: number, max: number) => {
  * Get a snowflake date.
  */
 export const snowflake = (snowflake: number) => {
-    return new Date((snowflake * Math.pow(2, -22)) + 1420070400000);
+    return new Date(~~(snowflake * Math.pow(2, -22)) + 1420070400000);
 };
 
 /**
  * Random element from the paramater.
  */
-export const random = (...args: any[]) => {
-    return args[Math.floor(Math.random() * args.length)];
+export const random = <T = any>(...args: T[]): T => {
+    if (Array.isArray(args[0])) {
+        return args[0][Math.floor(Math.random() * args[0].length)];
+    } else return args[Math.floor(Math.random() * args.length)];
 };

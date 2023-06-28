@@ -1,3 +1,4 @@
+import { AxiosResponse, Method } from "axios";
 import {
     AttachmentBuilder,
     ButtonBuilder,
@@ -296,4 +297,88 @@ export interface CommandHandlerEvents {
 export interface BoostDetectorEvents {
     boostCreate: [member: GuildMember],
     boostRemove: [member: GuildMember]
+}
+
+export declare const YouTubeAPIURL = "https://www.googleapis.com/youtube/v3";
+
+export declare const YouTubeAPIFetch: (route: string, method?: Method) => Promise<AxiosResponse<any, any>>;
+
+export declare const YouTubeAPIRoutes: {
+    search: (key: string, query: string, type: 'video' | 'channel', options?: YouTubeAPISearchOptions) => string;
+    channels: (key: string, channelId: string) => string;
+    videos: (key: string, videoId: string) => string;
+};
+
+export interface YouTubeAPISearchOptions {
+    maxResults?: number;
+    channelId?: string;
+}
+
+export interface YouTubeAPIVideoStructure {
+    kind: 'youtube#searchResult';
+    etag: string;
+    id: {
+        kind: 'youtube#video';
+        videoId: string;
+    };
+    snippet: {
+        publishedAt: string;
+        channelId: string;
+        title: string;
+        description: string;
+        thumbnails: {
+            url: string;
+            width: number;
+            height: number;
+        };
+        channelTitle: string;
+        liveBroadcastContent: string;
+        publishTime: string;
+    };
+    status?: {
+        uploadStatus?: string;
+        privacyStatus?: 'public' | 'private' | 'unlisted';
+        license?: string;
+        embeddable?: boolean;
+        publicStatsViewable?: boolean;
+        madeForKids?: boolean;
+    };
+    statistics?: {
+        viewCount?: string;
+        likeCount?: string;
+        favoriteCount?: boolean;
+        commentCount?: string;
+    };
+    player?: {
+        embedHtml?: string;
+    };
+}
+
+export interface YouTubeAPIChannelStructure {
+    kind: 'youtube#searchResult';
+    etag: string;
+    id: {
+        kind: 'youtube#channel';
+        channelId: string;
+    };
+    snippet: {
+        publishedAt: string;
+        channelId: string;
+        title: string;
+        description: string;
+        thumbnails: {
+            url: string;
+            width: number;
+            height: number;
+        };
+        channelTitle: string;
+        liveBroadcastContent: string;
+        publishTime: string;
+    };
+    statistics?: {
+        viewCount?: string;
+        subscriberCount?: string;
+        hiddenSubscriberCount?: boolean;
+        videoCount?: string;
+    };
 }

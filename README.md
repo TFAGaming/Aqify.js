@@ -30,7 +30,7 @@
 - No credits required while using it!
 - Promise based.
 
-## Table of contents
+## Table of Contents
 
 - [Aqify.js](#aqifyjs)
 - [Features](#features)
@@ -44,6 +44,7 @@
     - [Buttons confirm (Yes/No/Cancel)](#buttons-confirm-yesnocancel)
     - [Activity manager](#activity-manager)
     - [Plugins](#plugins)
+    - [YouTube API Manager](#youtube-api-manager)
 - [License](#license)
 
 ## Install
@@ -67,6 +68,8 @@ JavaScript (CommonJS):
 ```js
 const { } = require('aqify.js');
 ```
+
+[↑ Table of Contents](#table-of-contents)
 
 ## Quick start
 
@@ -153,7 +156,7 @@ client.on('interactionCreate', (interaction) => {
 
     const command = collection.get(interaction.commandName);
 
-    if (!command) return;
+    if (!command || command.type !== 1) return;
 
     try {
         command.run(client, interaction);
@@ -173,6 +176,8 @@ new CommandsHandler<Client, Options>(...);
 ```
 
 <img src="https://media.discordapp.net/attachments/1111644651036876822/1121467632252620901/2023-06-22_16_45_40-ping.ts_-_npm_packages_tester_-_Visual_Studio_Code-modified.png">
+
+[↑ Table of Contents](#table-of-contents)
 
 ## Examples
 ### Dropdown paginator
@@ -224,6 +229,8 @@ paginator.send(SendMethod.Reply, {
 
 <img src="https://media.discordapp.net/attachments/1111644651036876822/1121221808251744256/2023-06-22_00_26_48-Window-modified.png">
 
+[↑ Table of Contents](#table-of-contents)
+
 ### Buttons paginator
 ```ts
 import { ButtonStyle } from 'discord.js'; 
@@ -269,6 +276,8 @@ paginator.send(SendMethod.Reply, {
 
 <img src="https://media.discordapp.net/attachments/1111644651036876822/1121221808553730118/2023-06-22_00_25_54-Window-modified.png">
 
+[↑ Table of Contents](#table-of-contents)
+
 ### Buttons confirm (Yes/No/Cancel)
 ```ts
 import { ButtonBuilder, ButtonStyle } from 'discord.js'; 
@@ -298,6 +307,8 @@ confirm.send(SendMethod.Reply, {
 ```
 
 <img src="https://media.discordapp.net/attachments/1111644651036876822/1121221807991701634/2023-06-22_00_23_06-Window-modified.png">
+
+[↑ Table of Contents](#table-of-contents)
 
 ### Activity manager
 ```ts
@@ -363,7 +374,82 @@ new SuggestionPlugin(client, 'Suggestion channel ID', {
 });
 ```
 
-There are a lot of features that are not on this preview, check the documentation site to view them all: [Click here!](https://tfagaming.github.io/Aqify.js/)
+[↑ Table of Contents](#table-of-contents)
+
+### YouTube API Manager
+
+> **Warning**: This is a simple manager made for Discord bot commands such as YouTube video/channel statistics command, and not for advanced ones like playlists, watermarks... etc.
+
+```ts
+import { YouTubeAPIManager } from 'aqify.js';
+
+const manager = new YouTubeAPIManager('Your YouTube API key');
+
+// Search some videos using query:
+manager.searchVideos('How to make a Discord bot', { maxResults: 3 });
+
+// Search some channels using query:
+manager.searchChannels('T.F.A 7524');
+
+// Get a video details using an ID:
+manager.getVideo('A YouTube video ID');
+
+// Get a channel details using an ID:
+manager.getChannel('A YouTube channel ID');
+```
+
+Example JSON output by searching a sing YouTube video using ID (replaced values by it's types):
+
+```ts
+{
+    kind: 'youtube#searchResult',
+    etag: string,
+    id: {
+        kind: 'youtube#video',
+        videoId: string
+    },
+    snippet: {
+        publishedAt: string,
+        channelId: string,
+        title: string,
+        description: string,
+        thumbnails: {
+            url: string,
+            width: number,
+            height: number
+        },
+        channelTitle: string,
+        liveBroadcastContent: string,
+        publishTime: string
+    },
+    status?: {
+        uploadStatus?: string,
+        privacyStatus?: 'public' | 'private' | 'unlisted',
+        license?: string,
+        embeddable?: boolean,
+        publicStatsViewable?: boolean,
+        madeForKids?: boolean
+    },
+    statistics?: {
+        viewCount?: string,
+        likeCount?: string,
+        favoriteCount?: boolean,
+        commentCount?: string
+    },
+    player?: {
+        embedHtml?: string
+    }
+};
+```
+
+Read the docs to get all the information about other classes/functions/variables! [Click here](https://tfagaming.github.io/Aqify.js/)
+
+[↑ Table of Contents](#table-of-contents)
+
+## Developers
+- [TFAGaming](https://github.com/TFAGaming)
 
 ## License
 [**GPL-3.0**](https://www.gnu.org/licenses/gpl-3.0.en.html); General Public License v3.0.
+
+© 2023, Aqify.js

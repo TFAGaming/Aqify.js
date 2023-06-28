@@ -1,3 +1,4 @@
+import axios, { Method } from "axios";
 import {
     AttachmentBuilder,
     ButtonBuilder,
@@ -308,4 +309,91 @@ export interface CommandHandlerEvents {
 export interface BoostDetectorEvents {
     boostCreate: [member: GuildMember],
     boostRemove: [member: GuildMember]
+};
+
+// YouTube API
+export const YouTubeAPIURL = 'https://www.googleapis.com/youtube/v3';
+
+export const YouTubeAPIFetch = (route: string, method?: Method) => axios(YouTubeAPIURL + route, {
+    method: method || 'GET'
+});
+
+export const YouTubeAPIRoutes = {
+    search: (key: string, query: string, type: 'video' | 'channel', options?: YouTubeAPISearchOptions) => `/search?key=${key}&type=${type}&part=snippet&q=${query}&maxResults=${options?.maxResults || 5}${options?.channelId ? `&channelId=${options.channelId}` : ''}`,
+    channels: (key: string, channelId: string) => `/channels?key=${key}&part=snippet,statistics&id=${channelId}`,
+    videos: (key: string, videoId: string) => `/videos?key=${key}&part=snippet,statistics,player,status&id=${videoId}`,
+};
+
+export interface YouTubeAPISearchOptions {
+    maxResults?: number,
+    channelId?: string
+};
+
+export interface YouTubeAPIVideoStructure {
+    kind: 'youtube#searchResult',
+    etag: string,
+    id: {
+        kind: 'youtube#video',
+        videoId: string
+    },
+    snippet: {
+        publishedAt: string,
+        channelId: string,
+        title: string,
+        description: string,
+        thumbnails: {
+            url: string,
+            width: number,
+            height: number
+        },
+        channelTitle: string,
+        liveBroadcastContent: string,
+        publishTime: string
+    },
+    status?: {
+        uploadStatus?: string,
+        privacyStatus?: 'public' | 'private' | 'unlisted',
+        license?: string,
+        embeddable?: boolean,
+        publicStatsViewable?: boolean,
+        madeForKids?: boolean
+    },
+    statistics?: {
+        viewCount?: string,
+        likeCount?: string,
+        favoriteCount?: boolean,
+        commentCount?: string
+    },
+    player?: {
+        embedHtml?: string
+    }
+};
+
+export interface YouTubeAPIChannelStructure {
+    kind: 'youtube#searchResult',
+    etag: string,
+    id: {
+        kind: 'youtube#channel',
+        channelId: string
+    },
+    snippet: {
+        publishedAt: string,
+        channelId: string,
+        title: string,
+        description: string,
+        thumbnails: {
+            url: string,
+            width: number,
+            height: number
+        },
+        channelTitle: string,
+        liveBroadcastContent: string,
+        publishTime: string
+    },
+    statistics?: {
+        viewCount?: string,
+        subscriberCount?: string,
+        hiddenSubscriberCount?: boolean,
+        videoCount?: string
+    },
 };

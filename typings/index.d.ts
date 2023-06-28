@@ -11,6 +11,7 @@ export * from './class/ButtonsConfirmBuilder';
 export * from './class/Plugins';
 export * from './class/ActivityManager';
 export * from './class/Calculator';
+export * from './class/YouTubeAPIManager'
 
 export * from './functions';
 export * from './global';
