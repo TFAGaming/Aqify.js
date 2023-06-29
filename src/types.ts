@@ -342,9 +342,21 @@ export interface YouTubeAPIVideoStructure {
         title: string,
         description: string,
         thumbnails: {
-            url: string,
-            width: number,
-            height: number
+            default: {
+                url: string,
+                width: 88,
+                height: 88
+            },
+            medium: {
+                url: string,
+                width: 240,
+                height: 240
+            },
+            high: {
+                url: string,
+                width: 800,
+                height: 800
+            }
         },
         channelTitle: string,
         liveBroadcastContent: string,
@@ -382,9 +394,21 @@ export interface YouTubeAPIChannelStructure {
         title: string,
         description: string,
         thumbnails: {
-            url: string,
-            width: number,
-            height: number
+            default: {
+                url: string,
+                width: 88,
+                height: 88
+            },
+            medium: {
+                url: string,
+                width: 240,
+                height: 240
+            },
+            high: {
+                url: string,
+                width: 800,
+                height: 800
+            }
         },
         channelTitle: string,
         liveBroadcastContent: string,
