@@ -13,12 +13,12 @@ export declare class DropdownPaginatorBuilder {
     /**
      * Add options to the pagination.
      */
-    public addOptions(...data: DropdownPaginatorStructureOptionsBuilder[]): this;
+    public addOptions(data: DropdownPaginatorStructureOptionsBuilder[]): this;
 
     /**
      * Set options to the pagination.
      */
-    public setOptions(...data: DropdownPaginatorStructureOptionsBuilder[]): this;
+    public setOptions(data: DropdownPaginatorStructureOptionsBuilder[]): this;
 
     /**
      * Pull an option.

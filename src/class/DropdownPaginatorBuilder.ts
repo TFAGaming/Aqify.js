@@ -40,7 +40,7 @@ export class DropdownPaginatorBuilder {
     /**
      * Add options to the pagination.
      */
-    public addOptions(...data: DropdownPaginatorStructureOptionsBuilder[]) {
+    public addOptions(data: DropdownPaginatorStructureOptionsBuilder[]) {
         data.forEach((options) => {
             this.options_data.push(options);
         });
@@ -51,7 +51,7 @@ export class DropdownPaginatorBuilder {
     /**
      * Set options to the pagination.
      */
-    public setOptions(...data: DropdownPaginatorStructureOptionsBuilder[]) {
+    public setOptions(data: DropdownPaginatorStructureOptionsBuilder[]) {
         this.options_data = [];
 
         data.forEach((options) => {
@@ -82,7 +82,7 @@ export class DropdownPaginatorBuilder {
                     .addOptions(
                         this.options_data.map((item, index) => {
                             return {
-                                label: item.component.label,
+                                label: item.component.label || '[Undefined label]',
                                 value: `${index}`,
                                 emoji: item.component.emoji,
                                 description: item.component.description
