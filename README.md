@@ -398,50 +398,6 @@ manager.getVideo('A YouTube video ID');
 manager.getChannel('A YouTube channel ID');
 ```
 
-Example JSON output by searching a sing YouTube video using ID (replaced values by it's types):
-
-```ts
-{
-    kind: 'youtube#searchResult',
-    etag: string,
-    id: {
-        kind: 'youtube#video',
-        videoId: string
-    },
-    snippet: {
-        publishedAt: string,
-        channelId: string,
-        title: string,
-        description: string,
-        thumbnails: {
-            url: string,
-            width: number,
-            height: number
-        },
-        channelTitle: string,
-        liveBroadcastContent: string,
-        publishTime: string
-    },
-    status?: {
-        uploadStatus?: string,
-        privacyStatus?: 'public' | 'private' | 'unlisted',
-        license?: string,
-        embeddable?: boolean,
-        publicStatsViewable?: boolean,
-        madeForKids?: boolean
-    },
-    statistics?: {
-        viewCount?: string,
-        likeCount?: string,
-        favoriteCount?: boolean,
-        commentCount?: string
-    },
-    player?: {
-        embedHtml?: string
-    }
-};
-```
-
 Read the docs to get all the information about other classes/functions/variables! [Click here](https://tfagaming.github.io/Aqify.js/)
 
 [↑ Table of Contents](#table-of-contents)

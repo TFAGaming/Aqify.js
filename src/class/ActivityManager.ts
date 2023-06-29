@@ -1,5 +1,5 @@
 import { Client, REST, Routes } from "discord.js";
-import { ActivityInviteAPI, ActivityGameId } from "../types";
+import { ActivityInviteAPI, ActivityGameID } from "../types";
 
 /**
  * Create an activity for voice channels:
@@ -20,7 +20,7 @@ export class ActivityManager {
     /**
      * Gerenate a new invite.
     */
-    public create(gameId: ActivityGameId, voiceChannelId: string): Promise<ActivityInviteAPI> {
+    public create(gameId: ActivityGameID, voiceChannelId: string): Promise<ActivityInviteAPI> {
         return new Promise((res, rej) => {
             try {
                 if (!this.token || !this.id) return rej('No token or ID was provided.');

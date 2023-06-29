@@ -229,7 +229,7 @@ export interface SuggestionPluginOptions {
     reactions?: EmojiIdentifierResolvable[]
 }
 
-export enum ActivityGameId {
+export enum ActivityGameID {
     WatchTogether = '880218394199220334',
     PokerNight = '755827207812677713',
     BetrayalIO = '773336526917861400',

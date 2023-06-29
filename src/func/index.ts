@@ -80,7 +80,7 @@ export const wait = (ms: number) => {
 /**
  * Genereate a unique ID.
  */
-export const idGenerator = () => {
+export const id = () => {
     return (Date.now() + Math.floor(Math.random() * 999999999999));
 };
 
@@ -108,8 +108,18 @@ export const snowflake = (snowflake: number) => {
 /**
  * Random element from the paramater.
  */
-export const random = <T = any>(...args: T[]): T => {
+export const random = <T extends any>(...args: T[]): T => {
     if (Array.isArray(args[0])) {
         return args[0][Math.floor(Math.random() * args[0].length)];
     } else return args[Math.floor(Math.random() * args.length)];
 };
+
+/**
+ * Random element index from the paramater.
+ */
+export const randomIndex = <T extends any>(...args: T[]): number => {
+    if (Array.isArray(args[0])) {
+        return Math.floor(Math.random() * args[0].length);
+    } else return Math.floor(Math.random() * args.length);
+};
+

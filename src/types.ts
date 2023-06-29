@@ -261,7 +261,7 @@ export enum ButtonConfirmID {
 };
 
 // Activity
-export enum ActivityGameId {
+export enum ActivityGameID {
     YoutubeTogether = '755600276941176913',
     WatchTogether = '880218394199220334',
     PokerNight = '755827207812677713',

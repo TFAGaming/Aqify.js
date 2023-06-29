@@ -1,5 +1,5 @@
 import { Client, Guild } from "discord.js";
-import { ActivityChannelInviteAPI, ActivityGameId } from "../types";
+import { ActivityChannelInviteAPI, ActivityGameID } from "../types";
 
 /**
  * Create an activity for voice channels:
@@ -16,7 +16,7 @@ export declare class ActivityManager {
     /**
      * Gerenate a new invite.
     */
-    public create(gameId: ActivityGameId, voiceChannelId: string): Promise<ActivityChannelInviteAPI>;
+    public create(gameId: ActivityGameID, voiceChannelId: string): Promise<ActivityChannelInviteAPI>;
 
     /**
      * Delete an invite.

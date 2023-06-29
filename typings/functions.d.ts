@@ -44,7 +44,7 @@ export declare const wait: (ms: number) => Promise<unknown>;
 /**
  * Genereate a unique ID.
  */
-export declare const idGenerator: () => number;
+export declare const id: () => number;
 
 /**
  * Similar to `time` function from discord.js, but it automatically converts the milliseconds into seconds.
@@ -65,3 +65,8 @@ export declare const snowflake: (snowflake: number) => Date;
  * Random element from the paramater.
  */
 export const random: <T extends any>(...args: T[]) => T;
+
+/**
+ * Random element index from the paramater.
+ */
+export const randomIndex: <T extends any>(...args: T[]) => number;
