@@ -49,6 +49,7 @@
 
 ## Install
 Before installing the package, please make sure that you have the following requirements below:
+- [axios](https://npmjs.com/package/axios) v^latest.
 - [discord.js](https://npmjs.com/package/discord.js) v^14.11.0.
 - [Node.js](https://nodejs.org/en/download) v^16.9.0.
 

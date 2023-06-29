@@ -35,7 +35,7 @@ export class YouTubeAPIManager {
         });
     };
 
-    public getVideo(videoId: string): Promise<YouTubeAPIChannelStructure> {
+    public getVideo(videoId: string): Promise<YouTubeAPIVideoStructure> {
         return new Promise(async (res, rej) => {
             try {
                 const fetched = await YouTubeAPIFetch(YouTubeAPIRoutes.videos(this.apikey, videoId));

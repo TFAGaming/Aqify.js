@@ -9,7 +9,7 @@ export declare class YouTubeAPIManager {
 
     public searchChannels(query: string, options?: YouTubeAPISearchOptions): Promise<YouTubeAPIChannelStructure[]>;
 
-    public getVideo(videoId: string): Promise<YouTubeAPIChannelStructure>;
+    public getVideo(videoId: string): Promise<YouTubeAPIVideoStructure>;
 
     public getChannel(channelId: string): Promise<YouTubeAPIChannelStructure>;
 }
