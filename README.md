@@ -86,7 +86,7 @@ Example bot
 └─── tsconfig.json
 ```
 
-This is a `tsconfig.json` example, you can use it for this quick start:
+Example of `tsconfig.json` file:
 ```json
 {
     "compilerOptions": {
@@ -104,9 +104,8 @@ This is a `tsconfig.json` example, you can use it for this quick start:
 }
 ```
 
-Discord bot client with commands handler:
+`index.ts` file:
 ```ts
-// index.ts
 import { Client } from 'discord.js';
 import { CommandsHandler } from 'aqify.js';
 
@@ -119,20 +118,37 @@ const client = new Client({
     intents: ['Guilds']
 });
 
+// Define a new commands handler:
 export const handler = new CommandsHandler<Client>('./dist/commands/');
 
 client.on('ready', () => console.log('Logged in as: ' + client.user?.username));
 handler.on('load', (command) => console.log('Loaded new command: ' + command.name));
 
+// Load and create a collection for commands:
 const collection = handler.load();
 handler.deploy();
 
+// Listening and responding to commands:
+client.on('interactionCreate', (interaction) => {
+    if (!interaction.isChatInputCommand()) return;
+
+    const command = collection.get(interaction.commandName);
+
+    if (!command || command.type !== 1) return;
+
+    try {
+        command.run(client, interaction);
+    } catch (e) {
+        console.error(e);
+    };
+});
+
+// Login to the bot client:
 client.login(config.token);
 ```
 
-Slash command /ping:
+`ping.ts` file:
 ```ts
-// ping.ts
 import { SlashCommandBuilder } from 'discord.js';
 import { handler } from '../index';
 
@@ -146,24 +162,6 @@ export default new handler.command({
             content: 'Pong!'
         });
     }
-});
-```
-
-Listening and responding to the commands:
-```ts
-// index.ts
-client.on('interactionCreate', (interaction) => {
-    if (!interaction.isChatInputCommand()) return;
-
-    const command = collection.get(interaction.commandName);
-
-    if (!command || command.type !== 1) return;
-
-    try {
-        command.run(client, interaction);
-    } catch (e) {
-        console.error(e);
-    };
 });
 ```
 
@@ -188,6 +186,7 @@ import { EmbedBuilder } from 'discord.js';
 import { DropdownPaginatorBuilder, SendMethod } from 'aqify.js';
 
 const paginator = new DropdownPaginatorBuilder(interaction, {
+    customId: interaction.id,
     placeHolder: 'Make a selection',
     time: 60000
 });
@@ -200,7 +199,7 @@ paginator.addOptions(
         },
         message: {
             content: 'This is the option 1 message!'
-        }
+            }
     },
     {
         component: {
@@ -237,7 +236,9 @@ paginator.send(SendMethod.Reply, {
 import { ButtonStyle } from 'discord.js'; 
 import { ButtonsPaginatorBuilder, ButtonPaginatorID, SendMethod } from 'aqify.js';
 
-const paginator = new ButtonsPaginatorBuilder(interaction, { time: 60000 });
+const paginator = new ButtonsPaginatorBuilder(interaction, {
+    time: 60000
+});
 
 paginator.addButtons(
     {
@@ -259,9 +260,9 @@ paginator.addButtons(
 
 paginator.addPages(
     { content: 'Page 1' },
-    { content: 'Page 2' },
+    { content: 'Page 2', embeds: [] },
     { content: 'Page 3' },
-    { content: 'Page 4' },
+    { content: 'Page 4', files: [] },
     { content: 'Page 5' }
 );
 

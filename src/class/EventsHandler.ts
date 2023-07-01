@@ -7,14 +7,16 @@ import { Client, ClientEvents } from 'discord.js';
  * Create an events handler.
  */
 export class EventsHandler<C extends Client = Client> extends EventEmitter {
+    readonly client: C;
     readonly path: string;
     readonly options: EventsHandlerConstructorOptions | undefined;
 
-    constructor(path: string, options?: EventsHandlerConstructorOptions) {
+    constructor(client: C, path: string, options?: EventsHandlerConstructorOptions) {
         super({
             captureRejections: true
         });
 
+        this.client = client;
         this.path = path;
         this.options = options;
     };
@@ -25,7 +27,7 @@ export class EventsHandler<C extends Client = Client> extends EventEmitter {
     public event = class <K extends keyof ClientEvents = keyof ClientEvents> {
         public event: keyof ClientEvents;
         public once: boolean | undefined;
-        public run: Function;
+        public run: (client: C, ...args: ClientEvents[K]) => void;
 
         constructor(event: K, run: (client: C, ...args: ClientEvents[K]) => void, once?: boolean) {
             this.event = event;
@@ -38,7 +40,11 @@ export class EventsHandler<C extends Client = Client> extends EventEmitter {
      * Load all the events.
      */
     public load(): this {
-        const res = loadEvents(this.path, this.options?.includesDir);
+        const res: {
+            event: keyof ClientEvents;
+            once: boolean | undefined;
+            run: Function;
+        }[] = loadEvents(this.path, this.options?.includesDir);
 
         for (const module of res) {
             if (!module || !module?.event || !module?.run) {
@@ -47,8 +53,10 @@ export class EventsHandler<C extends Client = Client> extends EventEmitter {
                 continue;
             };
 
-            if (module.event) {
-
+            if (module.once) {
+                this.once(module.event, (...args) => module.run(this.client, ...args));
+            } else {
+                this.on(module.event, (...args) => module.run(this.client, ...args));
             };
 
             this.emit('load', module.event);

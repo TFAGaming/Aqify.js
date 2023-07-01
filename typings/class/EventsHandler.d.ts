@@ -18,7 +18,7 @@ export class EventsHandler <C extends Client = Client> extends EventEmitter {
         new <K extends keyof ClientEvents = keyof ClientEvents>(event: K, run: (client: C, ...args: ClientEvents[K]) => void, once?: boolean): {
             event: keyof ClientEvents;
             once: boolean | undefined;
-            run: Function;
+            run: (client: C, ...args: ClientEvents[K]) => void;
         };
     };
 
