@@ -12,6 +12,8 @@ export * from './class/Plugins';
 export * from './class/ActivityManager';
 export * from './class/Calculator';
 export * from './class/YouTubeAPIManager'
+export * from './class/EventBuilder';
+export * from './class/EventsHandler';
 
 export * from './functions';
 export * from './global';

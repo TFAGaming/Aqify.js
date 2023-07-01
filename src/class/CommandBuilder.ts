@@ -1,7 +1,7 @@
 import { CommandBuilderStructure } from "../types";
-import { Client } from 'discord.js';
+import { Client } from "discord.js";
 
-export class CommandBuilder<C extends Client, T = {}> {
+export class CommandBuilder <C extends Client = Client, T = {}> {
     public type: CommandBuilderStructure<C, T>['type'];
     public structure: CommandBuilderStructure<C, T>['structure'];
     public options: CommandBuilderStructure<C, T>['options'];

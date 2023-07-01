@@ -54,7 +54,7 @@ Before installing the package, please make sure that you have the following requ
 - [Node.js](https://nodejs.org/en/download) v^16.9.0.
 
 If you meet the requirements above, you can install the package safely with no problems:
-```
+```sh-session
 npm install aqify.js
 yarn add aqify.js
 ```

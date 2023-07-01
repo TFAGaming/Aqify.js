@@ -1,10 +1,9 @@
-import { AttachmentBuilder, TimestampStylesString } from "discord.js";
-import { FileOptions } from "./types";
+import { AttachmentBuilder, AttachmentData, TimestampStylesString } from "discord.js";
 
 /**
  * Create a new file for Discord.
  */
-export declare const file: (content: string, options?: FileOptions) => AttachmentBuilder;
+export declare const file: (content: string, options?: AttachmentData) => AttachmentBuilder;
 
 /**
  * Whenever the provided string includes a Discord invite.

@@ -7,6 +7,7 @@ import {
     CacheType,
     ChatInputCommandInteraction,
     Client,
+    ClientEvents,
     CollectorFilter,
     ComponentEmojiResolvable,
     ContextMenuCommandBuilder,
@@ -61,10 +62,9 @@ export interface CommandsHandlerStructureDeployOptions {
     guildId?: string;
 };
 
-// Functions
-export interface FileOptions {
-    name?: string | undefined;
-    description?: string | undefined;
+// Events handler
+export interface EventsHandlerConstructorOptions {
+    includesDir?: boolean;
 };
 
 // Dropdown Paginator Builder

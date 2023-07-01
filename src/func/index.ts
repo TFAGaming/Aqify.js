@@ -1,10 +1,8 @@
-import { AttachmentBuilder, TimestampStylesString } from "discord.js";
-import { FileOptions } from "../types";
-
+import { AttachmentBuilder, AttachmentData, TimestampStylesString } from "discord.js";
 /**
  * Create a new file for Discord.
  */
-export const file = (content: string, options?: FileOptions) => {
+export const file = (content: string, options?: AttachmentData) => {
     return new AttachmentBuilder(Buffer.from(content, 'utf-8'), { name: options?.name, description: options?.description })
 };
 
