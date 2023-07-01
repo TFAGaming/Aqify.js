@@ -6,10 +6,11 @@ import { Client, ClientEvents } from 'discord.js';
  * Create an events handler.
  */
 export class EventsHandler <C extends Client = Client> extends EventEmitter {
+    readonly client: C;
     readonly path: string;
     readonly options: EventsHandlerConstructorOptions | undefined;
 
-    constructor(path: string, options?: EventsHandlerConstructorOptions);
+    constructor(client: C, path: string, options?: EventsHandlerConstructorOptions);
 
     /**
      * Create a new event.
