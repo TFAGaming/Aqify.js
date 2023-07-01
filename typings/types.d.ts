@@ -294,6 +294,11 @@ export interface CommandHandlerEvents {
     skip: [command: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | ContextMenuCommandBuilder];
 }
 
+export interface EventHandlerEvents {
+    load: [eventName: string],
+    skip: [eventName: string]
+}
+
 export interface BoostDetectorEvents {
     boostCreate: [member: GuildMember],
     boostRemove: [member: GuildMember]

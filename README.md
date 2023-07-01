@@ -7,13 +7,13 @@
     <img src="https://img.shields.io/github/stars/TFAGaming/Aqify.js?label=Repository%20stars:&color=yellow">
     <img src="https://img.shields.io/static/v1?label=100%%20written%20in:&message=TypeScript&color=007acc">
     <br>
-    <img src="https://img.shields.io/snyk/vulnerabilities/npm/aqify.js?label=Vulnerabilities%3A">
+    <!--<img src="https://img.shields.io/snyk/vulnerabilities/npm/aqify.js?label=Vulnerabilities%3A">-->
     <img src="https://img.shields.io/npm/dm/aqify.js?label=Downloads%3A">
     <img src="https://img.shields.io/npm/l/aqify.js?label=License%3A">
     <img src="https://img.shields.io/discord/918611797194465280?color=5865F2&label=Discord:">
     <img src="https://img.shields.io/npm/collaborators/aqify.js?label=Collaborators%3A">
     </p>
-    <!-- <p align="center"><img src="https://nodei.co/npm/aqify.js.png"></p> -->
+    <p align="center"><img src="https://nodei.co/npm/aqify.js.png"></p>
 </p>
 
 # Aqify.js
@@ -24,7 +24,7 @@
 
 ## Features
 - **100%** written in TypeScript.
-- Full support for TypeScript and JavaScript.
+- Full support for TypeScript and JavaScript.K
 - Simple to use & Beginner friendly.
 - Open-source & free to use.
 - No credits required while using it!

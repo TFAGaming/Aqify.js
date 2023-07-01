@@ -1,5 +1,5 @@
 import { EventEmitter } from 'node:events';
-import { EventsHandlerConstructorOptions } from '../types';
+import { EventsHandlerConstructorOptions, EventHandlerEvents } from '../types';
 import { Client, ClientEvents } from 'discord.js';
 
 /**
@@ -27,4 +27,7 @@ export class EventsHandler <C extends Client = Client> extends EventEmitter {
      * Load all the events.
      */
     load(): this;
+
+    on<K extends keyof EventHandlerEvents>(event: K, listener: (...args: EventHandlerEvents[K]) => void): this;
+    once<K extends keyof EventHandlerEvents>(event: K, listener: (...args: EventHandlerEvents[K]) => void): this;
 }

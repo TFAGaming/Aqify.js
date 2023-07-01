@@ -53,13 +53,13 @@ export class EventsHandler<C extends Client = Client> extends EventEmitter {
                 continue;
             };
 
-            if (module.once) {
-                this.once(module.event, (...args) => module.run(this.client, ...args));
-            } else {
-                this.on(module.event, (...args) => module.run(this.client, ...args));
-            };
-
             this.emit('load', module.event);
+
+            if (module.once) {
+                this.client.once(module.event, (...args) => module.run(this.client, ...args));
+            } else {
+                this.client.on(module.event, (...args) => module.run(this.client, ...args));
+            };
         };
 
         return this;
