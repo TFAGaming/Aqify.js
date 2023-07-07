@@ -106,18 +106,25 @@ export const snowflake = (snowflake: number) => {
 /**
  * Random element from the paramater.
  */
-export const random = <T extends any>(...args: T[]): T => {
-    if (Array.isArray(args[0])) {
-        return args[0][Math.floor(Math.random() * args[0].length)];
-    } else return args[Math.floor(Math.random() * args.length)];
+export const random = <T extends any[]>(args: T): any => {
+    return args[Math.floor(Math.random() * args.length)];
 };
 
 /**
  * Random element index from the paramater.
  */
-export const randomIndex = <T extends any>(...args: T[]): number => {
-    if (Array.isArray(args[0])) {
-        return Math.floor(Math.random() * args[0].length);
-    } else return Math.floor(Math.random() * args.length);
+export const randomIndex = <T extends any[]>(args: T): number => {
+    return Math.floor(Math.random() * args.length);
 };
 
+/**
+ * Get a codeblock from a message (on Discord).
+ */
+export const getCodeBlock = (content: string) => {
+    const match = /^```(\S*)\n?([^]*)\n?```$/.exec(content);
+
+    if (!match) return { lang: null, code: content };
+    if (match[1] && !match[2]) return { lang: null, code: match[1] };
+
+    return { lang: match[1].length <= 0 ? null : match[1], code: match[2] };
+};

@@ -63,9 +63,17 @@ export declare const snowflake: (snowflake: number) => Date;
 /**
  * Random element from the paramater.
  */
-export const random: <T extends any>(...args: T[]) => T;
+export const random: <T extends any[]>(args: T) => any;
 
 /**
  * Random element index from the paramater.
  */
-export const randomIndex: <T extends any>(...args: T[]) => number;
+export const randomIndex: <T extends any[]>(args: T[]) => number;
+
+/**
+ * Get a codeblock from a message (on Discord).
+ */
+export declare const getCodeBlock: (content: string) => {
+    lang: string | null;
+    code: string;
+};
