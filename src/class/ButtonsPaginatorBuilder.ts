@@ -240,7 +240,7 @@ export class ButtonsPaginatorBuilder {
                                         components
                                     )
                             ]
-                        });
+                        }).catch(null);
 
                         return;
                     };
@@ -278,7 +278,7 @@ export class ButtonsPaginatorBuilder {
                                         components
                                     )
                             ]
-                        });
+                        }).catch(null);
 
                         return;
                     };
@@ -297,7 +297,7 @@ export class ButtonsPaginatorBuilder {
                                         components
                                     )
                             ],
-                        });
+                        }).catch(null);
 
                         return;
                     };
@@ -318,16 +318,16 @@ export class ButtonsPaginatorBuilder {
                                         components
                                     )
                             ],
-                        });
+                        }).catch(null);
 
                         return;
                     };
 
                     if (i.customId === 'delete') {
                         if (method === 4) {
-                            await messageChannelSend.delete();
+                            await messageChannelSend.delete().catch(null);
                         } else {
-                            await this.interaction.deleteReply();
+                            await this.interaction.deleteReply().catch(null);
                         };
 
                         return;
@@ -341,7 +341,7 @@ export class ButtonsPaginatorBuilder {
                                         components.map((btn) => btn.setDisabled(true))
                                     )
                             ]
-                        })
+                        }).catch(null);
 
                         return;
                     };
@@ -351,7 +351,7 @@ export class ButtonsPaginatorBuilder {
                     if (!this.collector?.ended) return;
 
                     if (options?.deleteMessageAfterTimeout) {
-                        await this.interaction.deleteReply();
+                        await this.interaction.deleteReply().catch(null);
                     } else {
                         await this.interaction.editReply({
                             content: options?.onEnd?.content ? options.onEnd.content : undefined,
@@ -370,7 +370,7 @@ export class ButtonsPaginatorBuilder {
                                         })
                                     )
                             ]
-                        });
+                        }).catch(null);
                     };
 
                     return;

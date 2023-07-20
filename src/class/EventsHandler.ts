@@ -29,10 +29,10 @@ export class EventsHandler<C extends Client = Client> extends EventEmitter {
         public once: boolean | undefined;
         public run: (client: C, ...args: ClientEvents[K]) => void;
 
-        constructor(event: K, run: (client: C, ...args: ClientEvents[K]) => void, once?: boolean) {
-            this.event = event;
-            this.run = run;
-            this.once = once;
+        constructor(data: { event: K, run: (client: C, ...args: ClientEvents[K]) => void, once?: boolean }) {
+            this.event = data.event;
+            this.run = data.run;
+            this.once = data.once;
         };
     };
 

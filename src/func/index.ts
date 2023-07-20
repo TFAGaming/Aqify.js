@@ -3,7 +3,9 @@ import { AttachmentBuilder, AttachmentData, TimestampStylesString } from "discor
  * Create a new file for Discord.
  */
 export const file = (content: string, options?: AttachmentData) => {
-    return new AttachmentBuilder(Buffer.from(content, 'utf-8'), { name: options?.name, description: options?.description })
+    return new AttachmentBuilder(
+        Buffer.from(content, 'utf-8'), { name: options?.name, description: options?.description }
+    );
 };
 
 /**
@@ -106,7 +108,7 @@ export const snowflake = (snowflake: number) => {
 /**
  * Random element from the paramater.
  */
-export const random = <T extends any[]>(args: T): any => {
+export const random = <T>(args: T[]): T => {
     return args[Math.floor(Math.random() * args.length)];
 };
 

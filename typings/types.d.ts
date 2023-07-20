@@ -286,7 +286,7 @@ export declare enum ButtonPaginatorID {
 export enum ButtonConfirmID {
     Yes = 'yes',
     No = 'no',
-    Cance = 'cancel'
+    Cancel = 'cancel'
 }
 
 export interface CommandHandlerEvents {

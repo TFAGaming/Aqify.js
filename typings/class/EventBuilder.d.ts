@@ -5,5 +5,5 @@ export declare class EventBuilder<C extends Client = Client, K extends keyof Cli
     public once: boolean | undefined;
     public run: (client: C, ...args: ClientEvents[K]) => void;
 
-    constructor(event: K, run: (client: C, ...args: ClientEvents[K]) => void, once?: boolean);
+    constructor(data: { event: K, run: (client: C, ...args: ClientEvents[K]) => void, once?: boolean });
 }

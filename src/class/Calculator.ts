@@ -241,7 +241,7 @@ export class Calculator {
                                         .setColor('Blurple')
                                 ],
                             components: actionrows
-                        });
+                        }).catch(null);
 
                         data = "";
                     } else if (i.customId === "ac") {
@@ -257,7 +257,7 @@ export class Calculator {
                                         .setColor('Blurple')
                                 ],
                             components: actionrows
-                        });
+                        }).catch(null);
                     } else if (i.customId === "del") {
                         data = data.slice(0, data.length - 1);
 
@@ -271,7 +271,7 @@ export class Calculator {
                                         .setColor('Blurple')
                                 ],
                             components: actionrows
-                        });
+                        }).catch(null);
                     } else if (i.customId === "exit") {
                         for (let i = 0; i < 5; i++) {
                             for (let j = 0; j < 5; j++) {
@@ -310,7 +310,7 @@ export class Calculator {
                                         buttons[4]
                                     )
                             ]
-                        });
+                        }).catch(null);
 
                         this.collector?.stop('user');
                     } else {
@@ -332,7 +332,7 @@ export class Calculator {
                                         .setColor('Blurple')
                                 ],
                             components: actionrows
-                        });
+                        }).catch(null);
                     }
 
                     return;
@@ -343,7 +343,7 @@ export class Calculator {
                     if (this.collector.endReason === 'user') return;
  
                     if (options?.deleteMessageAfterTimeout) {
-                        await this.interaction.deleteReply();
+                        await this.interaction.deleteReply().catch(null);
                     } else {
                         for (let i = 0; i < 5; i++) {
                             for (let j = 0; j < 5; j++) {
@@ -376,7 +376,7 @@ export class Calculator {
                                         buttons[4]
                                     )
                             ]
-                        });
+                        }).catch(null);
                     };
 
                     return;

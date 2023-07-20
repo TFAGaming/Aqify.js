@@ -151,7 +151,7 @@ export class DropdownPaginatorBuilder {
                             embeds: this.options_data[value].message.embeds?.map((e) => e) || [],
                             files: this.options_data[value].message.files?.map((f) => f) || [],
                             ephemeral: true
-                        });
+                        }).catch(null);
 
                         return;
                     } else {
@@ -165,7 +165,7 @@ export class DropdownPaginatorBuilder {
                                         menu
                                     )
                             ]
-                        });
+                        }).catch(null);
 
                         return;
                     };
@@ -175,7 +175,7 @@ export class DropdownPaginatorBuilder {
                     if (!this.collector?.ended) return;
 
                     if (options?.deleteMessageAfterTimeout) {
-                        await this.interaction.deleteReply();
+                        await this.interaction.deleteReply().catch(null);
                     } else {
                         await this.interaction.editReply({
                             content: options?.onEnd?.content ? options.onEnd.content : '** **',
@@ -187,7 +187,7 @@ export class DropdownPaginatorBuilder {
                                         menu.setDisabled(true)
                                     )
                             ]
-                        });
+                        }).catch(null);
                     };
 
                     return;

@@ -32,7 +32,7 @@ export class ModmailPlugin {
                                 .setDescription('It seems like the member doesn\'t exists anymore on this server.')
                                 .setColor('Red')
                         ]
-                    });
+                    }).catch(null);
 
                     return;
                 };
@@ -47,12 +47,12 @@ export class ModmailPlugin {
                                 .setDescription('It seems like the member doesn\'t accept DMs anymore.')
                                 .setColor('Red')
                         ]
-                    });
+                    }).catch(null);
 
                     return;
                 });
 
-                message.react('📨').catch(() => { });
+                message.react('📨').catch(null);
             } else {
                 const guild = client.guilds.cache.get(options.guild);
                 const category = guild?.channels.cache.get(options.parent);
@@ -64,7 +64,7 @@ export class ModmailPlugin {
                                 .setDescription('The ModMail system is not ready yet, please try again later.')
                                 .setColor('Red')
                         ]
-                    });
+                    }).catch(null);
 
                     return;
                 };
@@ -75,7 +75,7 @@ export class ModmailPlugin {
                     await (channel as TextChannel).send({
                         content: `[**${message.author.tag}**] ${message.content}`,
                         files: message.attachments.size > 0 ? [message.attachments.map((img) => img)[0].proxyURL] : undefined
-                    });
+                    }).catch(null);
                 } else {
                     const ban_check = options.bans?.some((u) => u.includes(message.author.id));
 
@@ -86,7 +86,7 @@ export class ModmailPlugin {
                                     .setDescription('You are banned from using the ModMail system.')
                                     .setColor('Red')
                             ]
-                        });
+                        }).catch(null);
 
                         return;
                     };
@@ -118,22 +118,22 @@ export class ModmailPlugin {
                                     .setDescription('Failed to create a mail, please try again later.')
                                     .setColor('Red')
                             ]
-                        });
+                        }).catch(null);
 
                         return;
                     }) || undefined;
 
                     if (!channel || channel.type !== 0) return;
 
-                    message.channel.send({
+                    await message.channel.send({
                         embeds: [
                             new EmbedBuilder()
                                 .setDescription(`Your mail has been successfully created.\n**Guild:** ${guild.name}\n**Since:** ${time(Date.now(), 'f')}`)
                                 .setColor('Green')
                         ]
-                    });
+                    }).catch(null);
 
-                    channel.send({
+                    await channel.send({
                         embeds: [
                             new EmbedBuilder()
                                 .setAuthor({
@@ -161,9 +161,9 @@ export class ModmailPlugin {
                     channel.send({
                         content: `[**${message.author.tag}**] ${message.content}`,
                         files: message.attachments.size > 0 ? [message.attachments.map((img) => img)[0].proxyURL] : undefined
-                    });
+                    }).catch(null);
 
-                    message.react('📨').catch(() => { });
+                    message.react('📨').catch(null);
                 };
             };
         });
@@ -187,14 +187,14 @@ export class ModmailPlugin {
 
                 if (!user) return;
 
-                await interaction.channel.delete().catch(() => { });
+                await interaction.channel.delete().catch(null);
 
                 await user.send({
                     embeds: [
                         new EmbedBuilder()
                             .setDescription('Your mail has been deleted. Please do not send any message now to avoid of creating a new mail for no reason.')
                     ]
-                }).catch(() => { });
+                }).catch(null);
 
                 return;
             };
@@ -221,7 +221,7 @@ export class TicketPlugin {
                 await interaction.reply({
                     content: 'Unable to create a ticket. The category ID of the tickets doesn\'t exist, please contact the server administrators to fix this error.',
                     ephemeral: true
-                });
+                }).catch(null);
 
                 return;
             };
@@ -298,16 +298,16 @@ export class TicketPlugin {
                                             .setStyle(ButtonStyle.Danger)
                                 )
                         ]
-                    });
+                    }).catch(null);
 
                     await interaction.followUp({
                         content: `Here is your new ticket: <#${channel?.id}>`
-                    });
+                    }).catch(null);
                 } catch {
                     await interaction.reply({
                         content: 'Unable to create a ticket, please contact the server administrators to fix this error.',
                         ephemeral: true
-                    });
+                    }).catch(null);
                 };
 
                 return;
@@ -321,7 +321,7 @@ export class TicketPlugin {
                     await interaction.reply({
                         content: 'This ticket has been already closed.',
                         ephemeral: true
-                    });
+                    }).catch(null);
 
                     return;
                 };
@@ -352,11 +352,11 @@ export class TicketPlugin {
                 await interaction.channel?.edit({
                     name: 'closed-' + split[0],
                     permissionOverwrites: roles
-                });
+                }).catch(null);
 
                 await interaction.channel?.send({
                     content: `<@${interaction.user.id}> has closed the ticket.`
-                });
+                }).catch(null);
 
                 await interaction.followUp({
                     content: 'You have sucessfully closed the ticket.',
@@ -386,7 +386,7 @@ export class TicketPlugin {
                 });
 
                 setTimeout(async () => {
-                    await interaction.channel?.delete().catch(() => { });
+                    await interaction.channel?.delete().catch(null);
                 }, 5000);
 
                 await user?.send({
@@ -394,7 +394,7 @@ export class TicketPlugin {
                     files: [
                         new AttachmentBuilder(Buffer.from(`${messages.length > 0 ? messages : '[No messages were fetched]'}`, 'utf-8'), { name: 'message history.txt' })
                     ]
-                }).catch(() => { });
+                }).catch(null);
 
                 return;
             };
@@ -430,7 +430,7 @@ export class TicketPlugin {
                                 .setStyle(ButtonStyle.Secondary)
                     )
             ]
-        });
+        }).catch(null);
     };
 };
 
@@ -465,7 +465,7 @@ export class SuggestionPlugin {
             if (message.channel.type !== 0 || message.channelId !== channelId || message.author.id === client.user?.id) return;
 
             if (message.author.bot) {
-                await message.delete();
+                await message.delete().catch(null);
 
                 return;
             };
@@ -488,9 +488,9 @@ export class SuggestionPlugin {
                 files: options?.message?.files ? options.message.files(message) : []
             }).then((sent) => {
                 if (options?.reactions && options.reactions.length > 0) options.reactions.forEach(async (r) => {
-                    await sent.react(r);
+                    await sent.react(r).catch(null);
                 });
-            });
+            }).catch(null);
 
             await message.delete();
         });

@@ -168,7 +168,12 @@ export default new handler.command({
 If you want to define custom options for the commands, create one using the `interface` keyword and use it as the second type parameter of the class `CommandsHandler`, as the example below:
 ```ts
 interface Options {
-    cooldown?: string
+    option1?: string,
+    option2?: number,
+    option3?: boolean,
+    option4?: any[],
+    option5?: (string | number)[],
+    option6?: () => void,
 };
 
 new CommandsHandler<Client, Options>(...);
@@ -410,4 +415,10 @@ Read the docs to get all the information about other classes/functions/variables
 ## License
 [**GPL-3.0**](https://www.gnu.org/licenses/gpl-3.0.en.html); General Public License v3.0.
 
-© 2023, Aqify.js
+Join our Discord server if you need any help!
+
+<a href="https://discord.gg/v8m9cRRjqC">
+ <img src="https://i.imgur.com/fFfU9aF.png">
+</a>
+
+#### © 2023, Aqify.js
