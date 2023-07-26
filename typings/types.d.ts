@@ -1,5 +1,6 @@
 import { AxiosResponse, Method } from "axios";
 import {
+    APIMessageComponentEmoji,
     AttachmentBuilder,
     ButtonBuilder,
     ButtonInteraction,
@@ -18,6 +19,7 @@ import {
     Message,
     MessageContextMenuCommandInteraction,
     RESTOptions,
+    Role,
     SlashCommandBuilder, 
     SlashCommandSubcommandsOnlyBuilder, 
     StringSelectMenuInteraction,
@@ -181,6 +183,40 @@ export interface CalculatorStructureSendOptions {
     ephemeral?: boolean,
     onNotAuthor?: (interaction: ButtonInteraction<CacheType>) => void,
     deleteMessageAfterTimeout?: boolean
+}
+
+export interface DropdownRolesBuilderConstructorOptions {
+    message?: {
+        content?: string,
+        embeds?: EmbedBuilder[],
+        files?: AttachmentBuilder[]
+    },
+    onRoleAdded?: {
+        content?: (role: Role) => string,
+        embeds?: (role: Role) => EmbedBuilder[],
+        files?: (role: Role) => AttachmentBuilder[]
+    },
+    onRoleRemoved?: {
+        content?: (role: Role) => string,
+        embeds?: (role: Role) => EmbedBuilder[],
+        files?: (role: Role) => AttachmentBuilder[]
+    },
+    onInvalidRole?: {
+        content?: (role: Role | undefined) => string,
+        embeds?: (role: Role | undefined) => EmbedBuilder[],
+        files?: (role: Role | undefined) => AttachmentBuilder[]
+    },
+    ifUserHasRoleAlready?: (interaction: StringSelectMenuInteraction) => void,
+    ifUserDoesntHaveRole?: (interaction: StringSelectMenuInteraction) => void,
+}
+
+export interface DropdownRolesBuilderRolesDataStruc {
+    roleId: string,
+    component: {
+        label: string,
+        description?: string,
+        emoji?: APIMessageComponentEmoji
+    }
 }
 
 export interface ModmailPluginOptions {

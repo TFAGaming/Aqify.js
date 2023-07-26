@@ -59,6 +59,11 @@ npm install aqify.js
 yarn add aqify.js
 ```
 
+### Other packages:
+- `@tfagaming/discord.js-docs`: Fetch discord.js docs by query, no API key required.
+- `@tfagaming/wandbox-api`: Compile codes using Wandbox API.
+- `@tfagaming/jsondb`: Create a simple JSON database.
+
 ## Import
 Typescript:
 ```ts
@@ -338,13 +343,13 @@ manager.delete('Invite code')
 
 ### Plugins
 
-> **1st Note**: It's recommended to use these plugins in the event `ready` from the client. 
+> **1st Note**: It's recommended to use these plugins in the event `ready` from the client to make sure that the bot is on and ready to use.
 > ```ts
 > <client>.on('ready', () => {
 >     new Plugin();
 > });
 > ```
-> **2nd Note**: If you want to edit the messages from the plugins, go to `node_modules/aqify.js/class/plugins.js`, and then find the class which you want to edit.
+> **2nd Note**: If you want to edit the messages from one of the plugins, go to `node_modules/aqify.js/class/plugins.js`, and then find the class which you want to edit.
 
 ```ts
 new ModmailPlugin(client, {

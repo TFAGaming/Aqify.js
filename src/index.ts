@@ -12,6 +12,7 @@ export * from './class/Calculator';
 export * from './class/YouTubeAPIManager';
 export * from './class/EventBuilder';
 export * from './class/EventsHandler';
+export * from './class/DropdownRolesBuilder';
 
 export * from './func/index';
 export * from './global/index';
