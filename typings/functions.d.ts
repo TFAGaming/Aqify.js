@@ -1,4 +1,4 @@
-import { AttachmentBuilder, AttachmentData, TimestampStylesString } from "discord.js";
+import { Attachment, AttachmentBuilder, AttachmentData, TimestampStylesString, VoiceChannel } from "discord.js";
 
 /**
  * Create a new file for Discord.
@@ -77,3 +77,8 @@ export declare const getCodeBlock: (content: string) => {
     lang: string | null;
     code: string;
 };
+
+/**
+ * Play a video/audio from an attachment in a voice channel.
+ */
+export const playMedia: (attachment: Attachment, voiceChannel: VoiceChannel) => void;

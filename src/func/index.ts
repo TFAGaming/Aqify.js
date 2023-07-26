@@ -1,4 +1,6 @@
-import { AttachmentBuilder, AttachmentData, TimestampStylesString } from "discord.js";
+import { Attachment, AttachmentBuilder, AttachmentData, TimestampStylesString, VoiceChannel } from "discord.js";
+import { VoiceConnection, joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType, AudioPlayerStatus } from '@discordjs/voice';
+
 /**
  * Create a new file for Discord.
  */
@@ -129,4 +131,30 @@ export const getCodeBlock = (content: string) => {
     if (match[1] && !match[2]) return { lang: null, code: match[1] };
 
     return { lang: match[1].length <= 0 ? null : match[1], code: match[2] };
+};
+
+/**
+ * Play a video/audio from an attachment in a voice channel.
+ */
+export const playMedia = (attachment: Attachment, voiceChannel: VoiceChannel) => {
+    const connection: VoiceConnection = joinVoiceChannel({
+        channelId: voiceChannel.id,
+        guildId: voiceChannel.guild.id,
+        adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+    });
+
+    if (!attachment.contentType?.startsWith('video') || !attachment.contentType?.startsWith('audio')) throw new Error('Input is not an audio, nor a video.');
+
+    const resource = createAudioResource(attachment.url, {
+        inputType: StreamType.Arbitrary,
+    });
+
+    const player = createAudioPlayer();
+
+    player.play(resource);
+    connection.subscribe(player);
+
+    player.on(AudioPlayerStatus.Idle, () => {
+        connection.destroy();
+    });
 };

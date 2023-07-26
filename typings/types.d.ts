@@ -205,9 +205,7 @@ export interface DropdownRolesBuilderConstructorOptions {
         content?: (role: Role | undefined) => string,
         embeds?: (role: Role | undefined) => EmbedBuilder[],
         files?: (role: Role | undefined) => AttachmentBuilder[]
-    },
-    ifUserHasRoleAlready?: (interaction: StringSelectMenuInteraction) => void,
-    ifUserDoesntHaveRole?: (interaction: StringSelectMenuInteraction) => void,
+    }
 }
 
 export interface DropdownRolesBuilderRolesDataStruc {

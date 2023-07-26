@@ -42,15 +42,16 @@
     - [Dropdown paginator](#dropdown-paginator)
     - [Buttons paginator](#buttons-paginator)
     - [Buttons confirm (Yes/No/Cancel)](#buttons-confirm-yesnocancel)
-    - [Activity manager](#activity-manager)
-    - [Plugins](#plugins)
+    - [Dropdown roles](#dropdown-roles)
     - [YouTube API Manager](#youtube-api-manager)
+    - [Plugins](#plugins)
 - [License](#license)
 
 ## Install
 Before installing the package, please make sure that you have the following requirements below:
 - [axios](https://npmjs.com/package/axios) v^latest.
 - [discord.js](https://npmjs.com/package/discord.js) v^14.11.0.
+- [@discordjs/voice](https://npmjs.com/package/@discordjs/voice) v^latest.
 - [Node.js](https://nodejs.org/en/download) v^16.9.0.
 
 If you meet the requirements above, you can install the package safely with no problems:
@@ -322,24 +323,69 @@ confirm.send(SendMethod.Reply, {
 
 [↑ Table of Contents](#table-of-contents)
 
-### Activity manager
+### Dropdown roles
 ```ts
-import { ActivityManager, ActivityGameId } from 'aqify.js';
+const menu = new DropdownRolesBuilder(client, [
+    {
+        roleId: '123456789012345',
+        component: {
+            label: 'Role 1'
+        }
+    },
+    {
+        roleId: '123456789012345',
+        component: {
+            label: 'Role 2'
+        }
+    }
+], {
+    onRoleAdded: {
+        content: (role) => `You have got the role **${role.name}**!`
+    },
+    onRoleRemoved: {
+        content: (role) => `I have removed the role **${role.name}** from you!`
+    },
+    message: {
+        content: 'Select a role here by clicking on the menu below!'
+    }
+});
 
-const channel = interaction.guild.members.cache.get(interaction.user.id).voice.channelId;
-
-const manager = new ActivityManager(client);
-
-manager.create(ActivityGameId.WatchTogether, channel)
-    .then((invite) => {
-        console.log(`https://discord.com/invite/` + invite.code);
-    });
-
-manager.delete('Invite code')
-    .then((guild) => {
-        console.log('Deleted the invite from ' + guild.name);
-    });
+menu.create(interaction.channelId,
+    new StringSelectMenuBuilder()
+        .setCustomId('dropdown_role_menu')
+        .setPlaceholder('Select a role')
+);     
 ```
+
+<img src="https://cdn.discordapp.com/attachments/1111644651036876822/1133720042396205056/2023-07-26_12_17_16-Window-modified.png">
+
+[↑ Table of Contents](#table-of-contents)
+
+### YouTube API Manager
+
+> **Warning**: This is a simple manager made for Discord bot commands such as YouTube video/channel statistics command, and not for advanced ones like playlists, watermarks... etc.
+
+```ts
+import { YouTubeAPIManager } from 'aqify.js';
+
+const manager = new YouTubeAPIManager('Your YouTube API key');
+
+// Search some videos using query:
+manager.searchVideos('How to make a Discord bot', { maxResults: 3 });
+
+// Search some channels using query:
+manager.searchChannels('T.F.A 7524');
+
+// Get a video details using an ID:
+manager.getVideo('A YouTube video ID');
+
+// Get a channel details using an ID:
+manager.getChannel('A YouTube channel ID');
+```
+
+Read the docs to get all the information about other classes/functions/variables! [Click here](https://tfagaming.github.io/Aqify.js/)
+
+[↑ Table of Contents](#table-of-contents)
 
 ### Plugins
 
@@ -385,32 +431,6 @@ new SuggestionPlugin(client, 'Suggestion channel ID', {
     reactions: ['👍', '👎']
 });
 ```
-
-[↑ Table of Contents](#table-of-contents)
-
-### YouTube API Manager
-
-> **Warning**: This is a simple manager made for Discord bot commands such as YouTube video/channel statistics command, and not for advanced ones like playlists, watermarks... etc.
-
-```ts
-import { YouTubeAPIManager } from 'aqify.js';
-
-const manager = new YouTubeAPIManager('Your YouTube API key');
-
-// Search some videos using query:
-manager.searchVideos('How to make a Discord bot', { maxResults: 3 });
-
-// Search some channels using query:
-manager.searchChannels('T.F.A 7524');
-
-// Get a video details using an ID:
-manager.getVideo('A YouTube video ID');
-
-// Get a channel details using an ID:
-manager.getChannel('A YouTube channel ID');
-```
-
-Read the docs to get all the information about other classes/functions/variables! [Click here](https://tfagaming.github.io/Aqify.js/)
 
 [↑ Table of Contents](#table-of-contents)
 

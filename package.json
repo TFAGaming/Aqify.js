@@ -1,6 +1,6 @@
 {
   "name": "aqify.js",
-  "version": "2.4.0-pre-1",
+  "version": "2.4.0-pre-2",
   "description": "The Utility & Fun package that takes you to a whole new level.",
   "main": "dist/index.js",
   "typings": "typings/index.d.ts",
@@ -57,6 +57,7 @@
     "url": "https://github.com/TFAGaming/Aqify.js.git"
   },
   "dependencies": {
+    "@discordjs/voice": "^0.16.0",
     "axios": "^1.4.0",
     "discord.js": "^14.11.0"
   },

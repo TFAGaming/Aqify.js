@@ -62,8 +62,8 @@ export class DropdownRolesBuilder {
 
                 return;
             };
-
-            const add = async () => {
+            
+            if (member.roles.cache.has(role.id)) {
                 await member.roles.add(role.id);
 
                 await interaction.followUp({
@@ -71,9 +71,7 @@ export class DropdownRolesBuilder {
                     embeds: this.options?.onRoleAdded?.embeds ? this.options?.onRoleAdded?.embeds(role) : undefined,
                     files: this.options?.onRoleAdded?.files ? this.options?.onRoleAdded?.files(role) : undefined,
                 }).catch(null);
-            };
-
-            const remove = async () => {
+            } else {
                 await member.roles.remove(role.id);
 
                 await interaction.followUp({
@@ -81,24 +79,6 @@ export class DropdownRolesBuilder {
                     embeds: this.options?.onRoleRemoved?.embeds ? this.options?.onRoleRemoved?.embeds(role) : undefined,
                     files: this.options?.onRoleRemoved?.files ? this.options?.onRoleRemoved?.files(role) : undefined,
                 }).catch(null);
-            };
-
-            if (member.roles.cache.has(role.id)) {
-                if (this.options?.ifUserDoesntHaveRole) {
-                    this.options.ifUserDoesntHaveRole(interaction);
-
-                    return;
-                };
-
-                remove();
-            } else {
-                if (this.options?.ifUserHasRoleAlready) {
-                    this.options.ifUserHasRoleAlready(interaction);
-
-                    return;
-                };
-
-                add();
             };
         });
     };
