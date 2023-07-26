@@ -11,7 +11,7 @@ export class CooldownManager {
 
         if (!data) return false;
 
-        return data.includes({ command: commandName });
+        return data.filter((v) => v.command === commandName).length > 0 ? true : false;
     };
 
     public start(userId: string, commandName: string, cooldown?: number) {
