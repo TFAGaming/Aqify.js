@@ -10,6 +10,11 @@ export class Calculator {
     readonly collector: InteractionCollector<ButtonInteraction> | undefined;
     readonly options: CalculatorConstructorOptions | undefined;
 
+    /**
+     * Create a simple calculator.
+     * @param interaction The interaction.
+     * @param options Options of the calculator.
+     */
     constructor(interaction: CommandInteraction, options?: CalculatorConstructorOptions) {
         this.interaction = interaction;
         this.options = options;
@@ -21,6 +26,12 @@ export class Calculator {
         });
     };
 
+    /**
+     * Send the calculator.
+     * @param method The method to send.
+     * @param options The options.
+     * @returns 
+     */
     public send(method: SendMethod, options?: CalculatorStructureSendOptions): Promise<CommandInteraction | unknown> {
         return new Promise(async (res, rej) => {
             try {

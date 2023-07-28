@@ -7,6 +7,12 @@ export class YouTubeAPIManager {
         this.apikey = key;
     };
 
+    /**
+     * Seach videos by query.
+     * @param query The query.
+     * @param options Options of the search.
+     * @returns 
+     */
     public searchVideos(query: string, options?: YouTubeAPISearchOptions): Promise<YouTubeAPIVideoStructure[]> {
         return new Promise(async (res, rej) => {
             try {
@@ -21,6 +27,12 @@ export class YouTubeAPIManager {
         });
     };
 
+    /**
+     * Search channels by query.
+     * @param query The query.
+     * @param options Options of the search.
+     * @returns 
+     */
     public searchChannels(query: string, options?: YouTubeAPISearchOptions): Promise<YouTubeAPIChannelStructure[]> {
         return new Promise(async (res, rej) => {
             try {
@@ -35,6 +47,11 @@ export class YouTubeAPIManager {
         });
     };
 
+    /**
+     * Get a video's details by ID.
+     * @param videoId The video ID.
+     * @returns 
+     */
     public getVideo(videoId: string): Promise<YouTubeAPIVideoStructure> {
         return new Promise(async (res, rej) => {
             try {
@@ -49,6 +66,11 @@ export class YouTubeAPIManager {
         });
     };
 
+    /**
+     * Get a channels's details by ID.
+     * @param channelId The channel ID.
+     * @returns 
+     */
     public getChannel(channelId: string): Promise<YouTubeAPIChannelStructure> {
         return new Promise(async (res, rej) => {
             try {

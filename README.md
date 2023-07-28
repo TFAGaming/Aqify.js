@@ -383,8 +383,6 @@ manager.getVideo('A YouTube video ID');
 manager.getChannel('A YouTube channel ID');
 ```
 
-Read the docs to get all the information about other classes/functions/variables! [Click here](https://tfagaming.github.io/Aqify.js/)
-
 [↑ Table of Contents](#table-of-contents)
 
 ### Plugins
@@ -433,6 +431,8 @@ new SuggestionPlugin(client, 'Suggestion channel ID', {
 ```
 
 [↑ Table of Contents](#table-of-contents)
+
+Read the docs to get all the information about other classes/functions/variables! [Click here](https://tfagaming.github.io/Aqify.js/)
 
 ## Developers
 - [TFAGaming](https://github.com/TFAGaming)

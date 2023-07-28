@@ -1,4 +1,4 @@
-import { Attachment, AttachmentBuilder, AttachmentData, TimestampStylesString, VoiceChannel } from "discord.js";
+import { Attachment, AttachmentBuilder, AttachmentData, Message, TimestampStylesString, VoiceChannel } from "discord.js";
 
 /**
  * Create a new file for Discord.
@@ -82,3 +82,29 @@ export declare const getCodeBlock: (content: string) => {
  * Play a video/audio from an attachment in a voice channel.
  */
 export const playMedia: (attachment: Attachment, voiceChannel: VoiceChannel) => void;
+
+/**
+ * Generate a UUID (v4).
+ * 
+ * You can use `crypto.randomUUID()` instead.
+ */
+export const UUIDv4: () => `${string}-${string}-${string}-${string}-${string}`
+
+/**
+ * Format a number to a formatted balance number. Examples: `100000` => `100k`, `16516551` => `16M`
+ * @param {number} num
+ * @param {number} precision
+ */
+export const formatNumber: (num: number, precision: number) => string;
+
+/**
+ * Format a bytes number.
+ * @param {number} bytes
+ */
+export const formatBytes: (bytes: number) => string;
+
+/**
+ * Mention a message using message URL.
+ * @param {Message} message
+ */
+export const messageMentionURL: (message: Message) => `https://discord.com/channels/${string}/${string}/${string}`;

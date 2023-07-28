@@ -56,6 +56,9 @@ export class CommandsHandler<C extends Client = Client, T = { }> extends EventEm
 
     /**
      * Load the application commands to the Discord API.
+     * @param token Your bot token.
+     * @param id Your bot ID.
+     * @param options Deploy options.
      */
     public async deploy(token: string, id: string, options?: CommandsHandlerStructureDeployOptions): Promise<CommandBuilderStructure<C, T>['structure'][] | string> {
         return new Promise(async (res, rej) => {

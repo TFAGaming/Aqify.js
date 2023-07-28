@@ -39,6 +39,7 @@ export class DropdownPaginatorBuilder {
 
     /**
      * Add options to the pagination.
+     * @param data The data of the options.
      */
     public addOptions(data: DropdownPaginatorStructureOptionsBuilder[]) {
         data.forEach((options) => {
@@ -50,6 +51,7 @@ export class DropdownPaginatorBuilder {
 
     /**
      * Set options to the pagination.
+     * @param data The data of the options.
      */
     public setOptions(data: DropdownPaginatorStructureOptionsBuilder[]) {
         this.options_data = [];
@@ -63,6 +65,7 @@ export class DropdownPaginatorBuilder {
 
     /**
      * Pull an option.
+     * @param index Pull an option by index from the options.
      */
     public pullOption(index: number) {
         this.options_data.splice(index, 1);
@@ -72,6 +75,8 @@ export class DropdownPaginatorBuilder {
 
     /**
      * Send the pagination.
+     * @param method The method to send the paginator.
+     * @param options The options.
      */
     public async send(method: SendMethod, options?: DropdownPaginatorStructureSendOptions) {
         return new Promise(async (resolved, rejected) => {

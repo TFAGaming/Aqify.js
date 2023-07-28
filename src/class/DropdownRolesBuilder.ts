@@ -12,6 +12,11 @@ export class DropdownRolesBuilder {
         this.options = options;
     };
 
+    /**
+     * Create a new select menu of the dropdown role menu.
+     * @param channelId The channel ID to send.
+     * @param dropdownmenu The menu.
+     */
     public async create(channelId: string, dropdownmenu: StringSelectMenuBuilder) {
         const channel = this.client.channels.cache.get(channelId);
 

@@ -33,7 +33,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">CooldownManager</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/1b7725b/src/class/CooldownManager.ts#L1">src/class/CooldownManager.ts:1</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/81f359d/src/class/CooldownManager.ts#L1">src/class/CooldownManager.ts:1</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -68,19 +68,19 @@
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">defaultSlowmode</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="CooldownManager.html" class="tsd-signature-type tsd-kind-class">CooldownManager</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/1b7725b/src/class/CooldownManager.ts#L5">src/class/CooldownManager.ts:5</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/81f359d/src/class/CooldownManager.ts#L5">src/class/CooldownManager.ts:5</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member"><a id="default" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>default</span><a href="#default" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">default</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">default</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1000</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/1b7725b/src/class/CooldownManager.ts#L3">src/class/CooldownManager.ts:3</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/81f359d/src/class/CooldownManager.ts#L3">src/class/CooldownManager.ts:3</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="map" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>map</span><a href="#map" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">map</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">command</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">cooldown</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/1b7725b/src/class/CooldownManager.ts#L2">src/class/CooldownManager.ts:2</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/81f359d/src/class/CooldownManager.ts#L2">src/class/CooldownManager.ts:2</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member"><a id="check" class="tsd-anchor"></a>
@@ -88,48 +88,78 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="check.check-1"><span class="tsd-kind-call-signature">check</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">commandName</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#check.check-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Check whenever a user has used the command or not.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The user ID.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">commandName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">commandName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The command name.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/1b7725b/src/class/CooldownManager.ts#L9">src/class/CooldownManager.ts:9</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/81f359d/src/class/CooldownManager.ts#L15">src/class/CooldownManager.ts:15</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="start" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>start</span><a href="#start" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="start.start-1"><span class="tsd-kind-call-signature">start</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">commandName</span>, <span class="tsd-kind-parameter">cooldown</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="CooldownManager.html" class="tsd-signature-type tsd-kind-class">CooldownManager</a><a href="#start.start-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Start a new cooldown of a command for a user.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The user ID.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">commandName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">commandName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The command name.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">cooldown</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="CooldownManager.html" class="tsd-signature-type tsd-kind-class">CooldownManager</a></h4><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">cooldown</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The duration of the cooldown.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="CooldownManager.html" class="tsd-signature-type tsd-kind-class">CooldownManager</a></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/1b7725b/src/class/CooldownManager.ts#L17">src/class/CooldownManager.ts:17</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/81f359d/src/class/CooldownManager.ts#L30">src/class/CooldownManager.ts:30</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="stop" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>stop</span><a href="#stop" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="stop.stop-1"><span class="tsd-kind-call-signature">stop</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">commandName</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><a href="CooldownManager.html" class="tsd-signature-type tsd-kind-class">CooldownManager</a><a href="#stop.stop-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Stop a cooldown command from a user.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The user ID.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">commandName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><a href="CooldownManager.html" class="tsd-signature-type tsd-kind-class">CooldownManager</a></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">commandName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The command name.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><a href="CooldownManager.html" class="tsd-signature-type tsd-kind-class">CooldownManager</a></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/1b7725b/src/class/CooldownManager.ts#L42">src/class/CooldownManager.ts:42</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/TFAGaming/Aqify.js/blob/81f359d/src/class/CooldownManager.ts#L61">src/class/CooldownManager.ts:61</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary">
@@ -203,15 +233,24 @@
 <div>lines<wbr/>Regex</div></a></li>
 <li><a href="../variables/linkRegex.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>link<wbr/>Regex</div></a></li>
-<li><a href="../functions/censorString.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg>
+<li><a href="../functions/UUIDv4.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg>
+<div>UUIDv4
+<div class="menu-item-desc">Generate a UUID (v4).</div></div></a></li>
+<li><a href="../functions/censorString.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>censor<wbr/>String
 <div class="menu-item-desc">Censor a string; Replace specific words with `*` or custom replacer.</div></div></a></li>
 <li><a href="../functions/file.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>file
 <div class="menu-item-desc">Create a new file for Discord.</div></div></a></li>
+<li><a href="../functions/formatBytes.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>format<wbr/>Bytes
+<div class="menu-item-desc">Format a bytes number.</div></div></a></li>
+<li><a href="../functions/formatNumber.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>format<wbr/>Number
+<div class="menu-item-desc">Format a number to a formatted balance number. Examples: `100000` =&gt; `100k`, `16516551` =&gt; `16M`</div></div></a></li>
 <li><a href="../functions/getCodeBlock.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Code<wbr/>Block
-<div class="menu-item-desc">Get a codeblock from a message (on Discord).</div></div></a></li>
+<div class="menu-item-desc">Get a codeblock from a string.</div></div></a></li>
 <li><a href="../functions/id.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>id
 <div class="menu-item-desc">Genereate a unique ID.</div></div></a></li>
@@ -221,6 +260,9 @@
 <li><a href="../functions/isLink.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>is<wbr/>Link
 <div class="menu-item-desc">Whenever the provided string includes any link.</div></div></a></li>
+<li><a href="../functions/messageMentionURL.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>message<wbr/>MentionURL
+<div class="menu-item-desc">Mention a message using message URL.</div></div></a></li>
 <li><a href="../functions/playMedia.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>play<wbr/>Media
 <div class="menu-item-desc">Play a video/audio from an attachment in a voice channel.</div></div></a></li>
