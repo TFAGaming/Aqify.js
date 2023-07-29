@@ -2,6 +2,10 @@ export class CooldownManager {
     public readonly map: Map<string, { command: string, cooldown?: number }[]> = new Map();
     public readonly default?: number = 1000;
 
+    /**
+     * Make a cooldown system for application commands.
+     * @param defaultSlowmode The default slowmode. If `undefined`, always the default is `1000`.
+     */
     constructor(defaultSlowmode?: number) {
         this.default = defaultSlowmode;
     };

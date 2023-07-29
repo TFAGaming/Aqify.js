@@ -13,7 +13,7 @@
     <img src="https://img.shields.io/discord/918611797194465280?color=5865F2&label=Discord:">
     <img src="https://img.shields.io/npm/collaborators/aqify.js?label=Collaborators%3A">
     </p>
-    <p align="center"><img src="https://nodei.co/npm/aqify.js.png"></p>
+    <!--<p align="center"><img src="https://nodei.co/npm/aqify.js.png"></p>-->
 </p>
 
 # Aqify.js
@@ -24,10 +24,11 @@
 
 ## Features
 - **100%** written in TypeScript.
-- Full support for TypeScript and JavaScript.K
+- Full support for TypeScript and JavaScript.
 - Simple to use & Beginner friendly.
 - Open-source & free to use.
 - No credits required while using it!
+- All possible bugs eliminated from the code.
 - Promise based.
 
 ## Table of Contents
@@ -58,10 +59,11 @@ If you meet the requirements above, you can install the package safely with no p
 ```sh-session
 npm install aqify.js
 yarn add aqify.js
+pnpm install aqify.js
 ```
 
 ### Other packages:
-- `@tfagaming/discord.js-docs`: Fetch discord.js docs by query, no API key required.
+- `@tfagaming/discord.js-docs`: Easy method to fetch discord.js docs.
 - `@tfagaming/wandbox-api`: Compile codes using Wandbox API.
 - `@tfagaming/jsondb`: Create a simple JSON database.
 
@@ -124,17 +126,14 @@ const client = new Client({
     intents: ['Guilds']
 });
 
-// Define a new commands handler:
 export const handler = new CommandsHandler<Client>('./dist/commands/');
 
 client.on('ready', () => console.log('Logged in as: ' + client.user?.username));
 handler.on('load', (command) => console.log('Loaded new command: ' + command.name));
 
-// Load and create a collection for commands:
 const collection = handler.load();
 handler.deploy();
 
-// Listening and responding to commands:
 client.on('interactionCreate', (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
@@ -149,7 +148,6 @@ client.on('interactionCreate', (interaction) => {
     };
 });
 
-// Login to the bot client:
 client.login(config.token);
 ```
 
@@ -159,7 +157,7 @@ import { SlashCommandBuilder } from 'discord.js';
 import { handler } from '../index';
 
 export default new handler.command({
-    type: 1, // <= Chat Input command type
+    type: 1, // => Chat Input command type
     structure: new SlashCommandBuilder()
         .setName('ping')
         .setDescription('Replies with pong!'),
@@ -185,7 +183,9 @@ interface Options {
 new CommandsHandler<Client, Options>(...);
 ```
 
+<!--
 <img src="https://media.discordapp.net/attachments/1111644651036876822/1121467632252620901/2023-06-22_16_45_40-ping.ts_-_npm_packages_tester_-_Visual_Studio_Code-modified.png">
+-->
 
 [↑ Table of Contents](#table-of-contents)
 
@@ -193,14 +193,10 @@ new CommandsHandler<Client, Options>(...);
 ### Dropdown paginator
 
 ```ts
-import { EmbedBuilder } from 'discord.js'; 
+import { EmbedBuilder, StringSelectMenuBuilder } from 'discord.js'; 
 import { DropdownPaginatorBuilder, SendMethod } from 'aqify.js';
 
-const paginator = new DropdownPaginatorBuilder(interaction, {
-    customId: interaction.id,
-    placeHolder: 'Make a selection',
-    time: 60000
-});
+const paginator = new DropdownPaginatorBuilder(interaction, { time: 60000 });
 
 paginator.addOptions(
     {
@@ -210,7 +206,7 @@ paginator.addOptions(
         },
         message: {
             content: 'This is the option 1 message!'
-            }
+        }
     },
     {
         component: {
@@ -227,12 +223,18 @@ paginator.addOptions(
     }
 );
 
-paginator.send(SendMethod.Reply, {
+await paginator.send(SendMethod.Reply,
+    new StringSelectMenuBuilder()
+        .setCustomId('your_epic_custom_id')
+        .setPlaceHolder('Make a selection'), {
     home: {
         content: 'Select something from the menu below!'
     },
     onNotAuthor: async (i) => {
-        await i.reply({ content: 'You are not the author of this interaction.' });
+        await i.reply({
+            content: 'You are not the author of this interaction.',
+            ephemeral: true
+        });
     },
     replyWithEphemeralMessageOnCollect: true
 });
@@ -277,9 +279,12 @@ paginator.addPages(
     { content: 'Page 5' }
 );
 
-paginator.send(SendMethod.Reply, {
+await paginator.send(SendMethod.Reply, {
     onNotAuthor: async (i) => {
-        await i.reply({ content: 'You are not the author of this interaction.' });
+        await i.reply({
+            content: 'You are not the author of this interaction.',
+            ephemeral: true
+        });
     },
     disableButtonsOnLastAndFirstPage: true
 });
@@ -308,12 +313,15 @@ const confirm = new ButtonsConfirmBuilder(interaction, {
     time: 30000
 });
 
-confirm.send(SendMethod.Reply, {
+await confirm.send(SendMethod.Reply, {
     home: {
         content: 'Click on Yes or No below!'
     },
     onNotAuthor: async (i) => {
-        await i.reply({ content: 'You are not the author of this interaction.' });
+        await i.reply({
+            content: 'You are not the author of this interaction.',
+            ephemeral: true
+        });
     },
     disableButtonsOnEnd: true
 });
@@ -325,6 +333,9 @@ confirm.send(SendMethod.Reply, {
 
 ### Dropdown roles
 ```ts
+import { DropdownRolesBuilder } from 'aqify.js';
+import { StringSelectMenuBuilder } from 'discord.js';
+
 const menu = new DropdownRolesBuilder(client, [
     {
         roleId: '123456789012345',
@@ -350,9 +361,9 @@ const menu = new DropdownRolesBuilder(client, [
     }
 });
 
-menu.create(interaction.channelId,
+await menu.create(interaction.channelId,
     new StringSelectMenuBuilder()
-        .setCustomId('dropdown_role_menu')
+        .setCustomId('your_epic_custom_id')
         .setPlaceholder('Select a role')
 );     
 ```
@@ -370,17 +381,11 @@ import { YouTubeAPIManager } from 'aqify.js';
 
 const manager = new YouTubeAPIManager('Your YouTube API key');
 
-// Search some videos using query:
-manager.searchVideos('How to make a Discord bot', { maxResults: 3 });
+await manager.searchVideos('How to make a Discord bot', { maxResults: 3 });
+await manager.searchChannels('T.F.A 7524');
 
-// Search some channels using query:
-manager.searchChannels('T.F.A 7524');
-
-// Get a video details using an ID:
-manager.getVideo('A YouTube video ID');
-
-// Get a channel details using an ID:
-manager.getChannel('A YouTube channel ID');
+await manager.getVideo('A YouTube video ID');
+await manager.getChannel('A YouTube channel ID');
 ```
 
 [↑ Table of Contents](#table-of-contents)
@@ -396,23 +401,25 @@ manager.getChannel('A YouTube channel ID');
 > **2nd Note**: If you want to edit the messages from one of the plugins, go to `node_modules/aqify.js/class/plugins.js`, and then find the class which you want to edit.
 
 ```ts
-new ModmailPlugin(client, {
+import * as AqifyJS from 'aqify.js';
+
+new AqifyJS.ModmailPlugin(client, {
     guild: 'Your server ID',
     parent: 'The mails category ID',
     managerRoles: ['Staff role ID']
 });
 
-new TicketPlugin(client, {
+new AqifyJS.TicketPlugin(client, {
     guild: 'Your server ID',
     parent: 'The tickets category ID',
     managerRoles: ['Staff role ID']
 }).createPanel('The panel channel ID');
 
-new BoostDetectorPlugin(client)
+new AqifyJS.BoostDetectorPlugin(client)
     .on('boostCreate', (member) => console.log(member.user.tag + ' has boosted the server!'))
     .on('boostRemove', (member) => console.log(member.user.tag + ' has unboosted the server...'));
 
-new SuggestionPlugin(client, 'Suggestion channel ID', {
+new AqifyJS.SuggestionPlugin(client, 'Suggestion channel ID', {
     message: {
         content: (message) => `<@${message.author.id}>`,
         embeds: (message) => [

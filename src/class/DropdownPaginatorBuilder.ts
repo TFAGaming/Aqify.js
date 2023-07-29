@@ -78,22 +78,19 @@ export class DropdownPaginatorBuilder {
      * @param method The method to send the paginator.
      * @param options The options.
      */
-    public async send(method: SendMethod, options?: DropdownPaginatorStructureSendOptions) {
+    public async send(method: SendMethod, menu: StringSelectMenuBuilder, options?: DropdownPaginatorStructureSendOptions) {
         return new Promise(async (resolved, rejected) => {
             try {
-                const menu = new StringSelectMenuBuilder()
-                    .setCustomId('aqifyjs-menu' ?? this.custom_options.customId)
-                    .setPlaceholder(this.custom_options.placeHolder ?? 'Select here')
-                    .addOptions(
-                        this.options_data.map((item, index) => {
-                            return {
-                                label: item.component.label || '[Undefined label]',
-                                value: `${index}`,
-                                emoji: item.component.emoji,
-                                description: item.component.description
-                            }
-                        })
-                    );
+                menu.setOptions(
+                    this.options_data.map((item, index) => {
+                        return {
+                            label: item.component.label || '[Undefined label]',
+                            value: `${index}`,
+                            emoji: item.component.emoji,
+                            description: item.component.description
+                        }
+                    })
+                );
 
                 const sendData: MessageCreateOptions = {
                     content: options?.home?.content ? options.home.content : undefined,

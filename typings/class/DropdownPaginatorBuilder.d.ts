@@ -1,32 +1,35 @@
-import { CommandInteraction, InteractionCollector, StringSelectMenuInteraction } from "discord.js";
+import { CommandInteraction, InteractionCollector, StringSelectMenuBuilder, StringSelectMenuInteraction } from "discord.js";
 import { DropdownPaginatorConstructorOptions, DropdownPaginatorStructureOptionsBuilder, DropdownPaginatorStructureSendOptions, SendMethod } from "../types";
 
+/**
+ * Create a select menu pagination.
+ */
 export declare class DropdownPaginatorBuilder {
     readonly data: this;
     readonly collector: InteractionCollector<StringSelectMenuInteraction> | undefined;
     readonly custom_options: DropdownPaginatorConstructorOptions;
     readonly interaction: CommandInteraction;
     options_data: DropdownPaginatorStructureOptionsBuilder[];
-
     constructor(interaction: CommandInteraction, customoptions?: DropdownPaginatorConstructorOptions);
-
     /**
      * Add options to the pagination.
+     * @param data The data of the options.
      */
-    public addOptions(data: DropdownPaginatorStructureOptionsBuilder[]): this;
-
+    addOptions(data: DropdownPaginatorStructureOptionsBuilder[]): this;
     /**
      * Set options to the pagination.
+     * @param data The data of the options.
      */
-    public setOptions(data: DropdownPaginatorStructureOptionsBuilder[]): this;
-
+    setOptions(data: DropdownPaginatorStructureOptionsBuilder[]): this;
     /**
      * Pull an option.
+     * @param index Pull an option by index from the options.
      */
-    public pullOption(index: number): this;
-
+    pullOption(index: number): this;
     /**
      * Send the pagination.
+     * @param method The method to send the paginator.
+     * @param options The options.
      */
-    public send(method: SendMethod, options?: DropdownPaginatorStructureSendOptions): Promise<unknown>
+    send(method: SendMethod, menu: StringSelectMenuBuilder, options?: DropdownPaginatorStructureSendOptions): Promise<unknown>;
 }

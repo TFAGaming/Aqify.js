@@ -99,10 +99,8 @@ export interface DropdownPaginatorStructureOptionsBuilder {
 }
 
 export interface DropdownPaginatorConstructorOptions {
-    placeHolder?: string;
     filter?: CollectorFilter<[StringSelectMenuInteraction]>;
     time?: number | undefined;
-    customId?: string;
 }
 
 export interface ButtonsPaginatorConstructorOptions {
@@ -286,6 +284,19 @@ export enum ActivityGameID {
     Jampspace = '1070087967294631976',
     Guestbook = '1001529884625088563',
     ProjectK = '1011683823555199066'
+}
+
+export interface ActivityInviteAPI {
+    code: string,
+    guild: Guild,
+    channel: VoiceChannel,
+    inviter: User,
+    target_type: number,
+    target_user: User,
+    target_application: any,
+    approximate_presence_count: number,
+    approximate_member_count: number,
+    expires_at: string
 }
 
 export interface ActivityChannelInviteAPI {

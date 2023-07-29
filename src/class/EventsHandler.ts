@@ -1,6 +1,6 @@
 import { EventEmitter } from 'node:events';
 import { EventsHandlerConstructorOptions } from '../types';
-import { loadEvents } from '../func/private/load';
+import { loadEvents } from '../func/private';
 import { Client, ClientEvents } from 'discord.js';
 
 /**

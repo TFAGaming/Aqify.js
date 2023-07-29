@@ -102,10 +102,8 @@ export interface DropdownPaginatorStructureOptionsBuilder {
 };
 
 export interface DropdownPaginatorConstructorOptions {
-    placeHolder?: string;
     filter?: CollectorFilter<[StringSelectMenuInteraction]>;
     time?: number | undefined;
-    customId?: string;
 };
 
 // Buttons Paginator Builder

@@ -1,8 +1,8 @@
 import { EventEmitter } from 'node:events';
 import { Client, Collection, REST, Routes } from 'discord.js';
 import { CommandBuilder } from './CommandBuilder';
-import { CommandBuilderStructure, CommandsHandlerStructureDeployOptions, CommandsHandlerConstructorOptions } from '../types';
-import { loadCommands } from '../func/private/load';
+import { CommandBuilderStructure, CommandsHandlerStructureDeployOptions, CommandsHandlerConstructorOptions, CommandHandlerEvents } from '../types';
+import { loadCommands } from '../func/private';
 
 /**
  * Create a commands handler.

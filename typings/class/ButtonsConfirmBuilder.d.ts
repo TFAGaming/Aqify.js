@@ -4,9 +4,7 @@ import { ButtonsConfirmConstructorOptions, ButtonsConfirmStructureSendOptions, S
 export declare class ButtonsConfirmBuilder {
     readonly interaction: CommandInteraction;
     readonly collector: InteractionCollector<ButtonInteraction> | undefined;
-    readonly options: ButtonsConfirmConstructorOptions;
-
-    constructor(interaction: CommandInteraction, options: ButtonsConfirmConstructorOptions);
-
-    public send(method: SendMethod, options?: ButtonsConfirmStructureSendOptions): Promise<this | string>;
+    readonly options: ButtonsConfirmConstructorOptions | undefined;
+    constructor(interaction: CommandInteraction, options?: ButtonsConfirmConstructorOptions);
+    send(method: SendMethod, options?: ButtonsConfirmStructureSendOptions): Promise<CommandInteraction | unknown>;
 }

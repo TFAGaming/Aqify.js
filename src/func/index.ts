@@ -234,3 +234,16 @@ export const formatBytes = (bytes: number) => {
 export const messageMentionURL = (message: Message): `https://discord.com/channels/${string}/${string}/${string}` => {
     return `https://discord.com/channels/${message.guildId}/${message.channelId}/${message.id}`;
 };
+
+/**
+ * Convert a hexadecimal color code to an RGB (Red Green Blue).
+ * @param hex 
+ * @returns 
+ */
+export const rgb = (hex: `#${string}`) => {
+	return [
+        parseInt(hex.slice(1, 3), 16),
+        parseInt(hex.slice(3, 5), 16),
+        parseInt(hex.slice(5, 7), 16)
+    ];
+};
