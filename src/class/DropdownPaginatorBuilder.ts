@@ -147,7 +147,7 @@ export class DropdownPaginatorBuilder {
                         return;
                     };
 
-                    if (options?.replyWithEphemeralMessageOnCollect) {
+                    if (options?.replyWithEphemeralMessage) {
                         await i.reply({
                             content: this.options_data[value].message.content || '** **',
                             embeds: this.options_data[value].message.embeds?.map((e) => e) || [],

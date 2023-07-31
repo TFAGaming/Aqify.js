@@ -179,6 +179,11 @@ export const playMedia = (attachment: Attachment, voiceChannel: VoiceChannel) =>
     player.on(AudioPlayerStatus.Idle, () => {
         connection.destroy();
     });
+
+    return {
+        player: player,
+        connection: connection
+    };
 };
 
 /**
@@ -246,4 +251,13 @@ export const rgb = (hex: `#${string}`) => {
         parseInt(hex.slice(3, 5), 16),
         parseInt(hex.slice(5, 7), 16)
     ];
+};
+
+/**
+ * Custom regex by string array.
+ * @param array 
+ * @returns 
+ */
+export const customRegex = (array: string[]) => {
+    return new RegExp(`\\b(${array.join('|')})\\b`, 'gi');
 };

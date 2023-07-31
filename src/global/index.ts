@@ -7,3 +7,11 @@ export const ipRegex = (/((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]
 export const discordInviteRegex = (/discord(?:\.com|app\.com|\.gg)[\/invite\/]?(?:[a-zA-Z0-9\-]{2,32})/g);
 
 export const linkRegex = (/(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm);
+
+export const userMentionRegex = /<@!?(\d+)>/
+
+export const channelMentionRegex = /<#(\d+)>/;
+
+export const roleMentionRegex = /<@&(\d+)>/;
+
+export const usernameRegex = /^[a-zA-Z0-9_]{2,32}$/;

@@ -1,12 +1,12 @@
 import { APISelectMenuOption, ActionRowBuilder, ChannelType, Client, GuildMember, StringSelectMenuBuilder } from "discord.js";
-import { DropdownRolesBuilderConstructorOptions, DropdownRolesBuilderRolesDataStruc } from "../types";
+import { DropdownRolesBuilderConstructorOptions, DropdownRolesBuilderCreateOptions, DropdownRolesBuilderRolesDataStruc } from "../types";
 
 export class DropdownRolesBuilder {
     public readonly client: Client;
     public data: DropdownRolesBuilderRolesDataStruc[];
     public options?: DropdownRolesBuilderConstructorOptions | undefined;
 
-    constructor(client: Client, data: DropdownRolesBuilderRolesDataStruc[], options?: DropdownRolesBuilderConstructorOptions) {
+    constructor(client: Client, data: DropdownRolesBuilderRolesDataStruc[], options: DropdownRolesBuilderConstructorOptions) {
         this.client = client;
         this.data = data;
         this.options = options;
@@ -17,16 +17,16 @@ export class DropdownRolesBuilder {
      * @param channelId The channel ID to send.
      * @param dropdownmenu The menu.
      */
-    public async create(channelId: string, dropdownmenu: StringSelectMenuBuilder) {
+    public async create(channelId: string, dropdownmenu: StringSelectMenuBuilder, options?: DropdownRolesBuilderCreateOptions) {
         const channel = this.client.channels.cache.get(channelId);
 
         if (!channel) throw new Error('Invalid channel ID provided.');
         if (channel.type !== ChannelType.GuildText) throw new Error('Channel is not a Text channel based.');
 
-        const options: APISelectMenuOption[] = [];
+        const componentoptions: APISelectMenuOption[] = [];
 
         for (const data of this.data) {
-            options.push({
+            componentoptions.push({
                 label: data.component.label,
                 description: data.component.description,
                 value: data.roleId,
@@ -35,15 +35,15 @@ export class DropdownRolesBuilder {
         };
 
         await channel.send({
-            content: this.options?.message?.content,
-            embeds: this.options?.message?.embeds,
-            files: this.options?.message?.files,
+            content: options?.message?.content,
+            embeds: options?.message?.embeds,
+            files: options?.message?.files,
             components: [
                 new ActionRowBuilder<StringSelectMenuBuilder>()
                     .addComponents(
                         dropdownmenu
                             .setMaxValues(1)
-                            .setOptions(options)
+                            .setOptions(componentoptions)
                     )
             ]
         });
@@ -60,9 +60,9 @@ export class DropdownRolesBuilder {
 
             if (!role) {
                 await interaction.followUp({
-                    content: this.options?.onInvalidRole?.content ? this.options?.onInvalidRole?.content(role) : undefined,
-                    embeds: this.options?.onInvalidRole?.embeds ? this.options?.onInvalidRole?.embeds(role) : [],
-                    files: this.options?.onInvalidRole?.files ? this.options?.onInvalidRole?.files(role) : []
+                    content: this.options?.on?.invalidRole?.content ? this.options?.on?.invalidRole?.content(value) : undefined,
+                    embeds: this.options?.on?.invalidRole?.embeds ? this.options?.on?.invalidRole?.embeds(value) : [],
+                    files: this.options?.on?.invalidRole?.files ? this.options?.on?.invalidRole?.files(value) : []
                 }).catch(null);
 
                 return;
@@ -72,17 +72,17 @@ export class DropdownRolesBuilder {
                 await member.roles.add(role.id);
 
                 await interaction.followUp({
-                    content: this.options?.onRoleAdded?.content ? this.options?.onRoleAdded?.content(role) : undefined,
-                    embeds: this.options?.onRoleAdded?.embeds ? this.options?.onRoleAdded?.embeds(role) : undefined,
-                    files: this.options?.onRoleAdded?.files ? this.options?.onRoleAdded?.files(role) : undefined,
+                    content: this.options?.on?.roleAdded?.content ? this.options?.on?.roleAdded?.content(role) : undefined,
+                    embeds: this.options?.on?.roleAdded?.embeds ? this.options?.on?.roleAdded?.embeds(role) : undefined,
+                    files: this.options?.on?.roleAdded?.files ? this.options?.on?.roleAdded?.files(role) : undefined,
                 }).catch(null);
             } else {
                 await member.roles.remove(role.id);
 
                 await interaction.followUp({
-                    content: this.options?.onRoleRemoved?.content ? this.options?.onRoleRemoved?.content(role) : undefined,
-                    embeds: this.options?.onRoleRemoved?.embeds ? this.options?.onRoleRemoved?.embeds(role) : undefined,
-                    files: this.options?.onRoleRemoved?.files ? this.options?.onRoleRemoved?.files(role) : undefined,
+                    content: this.options?.on?.roleRemoved?.content ? this.options?.on?.roleRemoved?.content(role) : undefined,
+                    embeds: this.options?.on?.roleRemoved?.embeds ? this.options?.on?.roleRemoved?.embeds(role) : undefined,
+                    files: this.options?.on?.roleRemoved?.files ? this.options?.on?.roleRemoved?.files(role) : undefined,
                 }).catch(null);
             };
         });

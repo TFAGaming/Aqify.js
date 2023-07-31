@@ -28,7 +28,7 @@
 - Simple to use & Beginner friendly.
 - Open-source & free to use.
 - No credits required while using it!
-- All possible bugs eliminated from the code.
+- All possible bugs are eliminated from the source-code.
 - Promise based.
 
 ## Table of Contents
@@ -236,11 +236,12 @@ await paginator.send(SendMethod.Reply,
             ephemeral: true
         });
     },
-    replyWithEphemeralMessageOnCollect: true
+    replyWithEphemeralMessage: true
 });
 ```
-
+<!--
 <img src="https://media.discordapp.net/attachments/1111644651036876822/1121221808251744256/2023-06-22_00_26_48-Window-modified.png">
+-->
 
 [↑ Table of Contents](#table-of-contents)
 
@@ -254,21 +255,9 @@ const paginator = new ButtonsPaginatorBuilder(interaction, {
 });
 
 paginator.addButtons(
-    {
-        label: 'Previous',
-        id: ButtonPaginatorID.Previous,
-        type: ButtonStyle.Secondary
-    },
-    {
-        label: 'Next',
-        id: ButtonPaginatorID.Next,
-        type: ButtonStyle.Secondary
-    },
-    {
-        label: 'Delete',
-        id: ButtonPaginatorID.Delete,
-        type: ButtonStyle.Danger
-    }
+    { label: 'Previous',id: ButtonPaginatorID.Previous, type: ButtonStyle.Secondary },
+    { label: 'Next', id: ButtonPaginatorID.Next, type: ButtonStyle.Secondary },
+    { label: 'Delete', id: ButtonPaginatorID.Delete, type: ButtonStyle.Danger }
 );
 
 paginator.addPages(
@@ -290,9 +279,11 @@ await paginator.send(SendMethod.Reply, {
 });
 ```
 
+<!--
 <img src="https://media.discordapp.net/attachments/1111644651036876822/1121221808826368201/2023-06-22_00_25_39-Window-modified.png">
 
 <img src="https://media.discordapp.net/attachments/1111644651036876822/1121221808553730118/2023-06-22_00_25_54-Window-modified.png">
+-->
 
 [↑ Table of Contents](#table-of-contents)
 
@@ -302,12 +293,22 @@ import { ButtonBuilder, ButtonStyle } from 'discord.js';
 import { ButtonsConfirmBuilder, ButtonConfirmID, SendMethod } from 'aqify.js';
 
 const confirm = new ButtonsConfirmBuilder(interaction, {
+    buttons: [
+        new ButtonBuilder()
+            .setCustomId(ButtonConfirmID.Yes)
+            .setLabel('Yes')
+            .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+            .setCustomId(ButtonConfirmID.No)
+            .setLabel('No')
+            .setStyle(ButtonStyle.Danger)
+    ],
     on: {
         yes: async (i) => {
-            await i.reply({ content: 'Accepted!' });
+            await i.reply({ content: 'Yes button blocked!' });
         },
         no: async (i) => {
-            await i.reply({ content: 'Denied!' });
+            await i.reply({ content: 'No button clicked!' });
         }
     },
     time: 30000
@@ -327,7 +328,9 @@ await confirm.send(SendMethod.Reply, {
 });
 ```
 
+<!--
 <img src="https://media.discordapp.net/attachments/1111644651036876822/1121221807991701634/2023-06-22_00_23_06-Window-modified.png">
+-->
 
 [↑ Table of Contents](#table-of-contents)
 
@@ -339,36 +342,38 @@ import { StringSelectMenuBuilder } from 'discord.js';
 const menu = new DropdownRolesBuilder(client, [
     {
         roleId: '123456789012345',
-        component: {
-            label: 'Role 1'
-        }
+        component: { label: 'Role 1' }
     },
     {
         roleId: '123456789012345',
-        component: {
-            label: 'Role 2'
-        }
+        component: { label: 'Role 2' }
     }
 ], {
-    onRoleAdded: {
-        content: (role) => `You have got the role **${role.name}**!`
-    },
-    onRoleRemoved: {
-        content: (role) => `I have removed the role **${role.name}** from you!`
-    },
-    message: {
-        content: 'Select a role here by clicking on the menu below!'
+    on: {
+        roleAdded: {
+            content: (role) => `You have got the role **${role.name}**!`
+        },
+        roleRemoved: {
+            content: (role) => `I have removed the role **${role.name}** from you!`
+        }
     }
 });
 
 await menu.create(interaction.channelId,
     new StringSelectMenuBuilder()
         .setCustomId('your_epic_custom_id')
-        .setPlaceholder('Select a role')
+        .setPlaceholder('Select a role'),
+    {
+        message: {
+            content: 'Select a role here by clicking on the menu below!'
+        }
+    }
 );     
 ```
 
+<!--
 <img src="https://cdn.discordapp.com/attachments/1111644651036876822/1133720042396205056/2023-07-26_12_17_16-Window-modified.png">
+-->
 
 [↑ Table of Contents](#table-of-contents)
 

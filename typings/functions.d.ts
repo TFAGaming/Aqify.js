@@ -1,3 +1,4 @@
+import { AudioPlayer, VoiceConnection } from "@discordjs/voice";
 import { Attachment, AttachmentBuilder, AttachmentData, Message, TimestampStylesString, VoiceChannel } from "discord.js";
 
 /**
@@ -81,7 +82,10 @@ export declare const getCodeBlock: (content: string) => {
 /**
  * Play a video/audio from an attachment in a voice channel.
  */
-export const playMedia: (attachment: Attachment, voiceChannel: VoiceChannel) => void;
+export const playMedia: (attachment: Attachment, voiceChannel: VoiceChannel) => {
+    player: AudioPlayer;
+    connection: VoiceConnection;
+};
 
 /**
  * Generate a UUID (v4).
@@ -91,7 +95,7 @@ export const playMedia: (attachment: Attachment, voiceChannel: VoiceChannel) => 
 export const UUIDv4: () => `${string}-${string}-${string}-${string}-${string}`
 
 /**
- * Format a number to a formatted balance number. Examples: `100000` => `100k`, `16516551` => `16M`
+ * Format a number to a formatted balance number. Examples: `100000` => `100.0k`, `16516551` => `16.6M`.
  * @param {number} num
  * @param {number} precision
  */
@@ -108,3 +112,10 @@ export const formatBytes: (bytes: number) => string;
  * @param {Message} message
  */
 export const messageMentionURL: (message: Message) => `https://discord.com/channels/${string}/${string}/${string}`;
+
+/**
+ * Custom regex by string array.
+ * @param array 
+ * @returns 
+ */
+export const customRegex: (array: string[]) => RegExp;

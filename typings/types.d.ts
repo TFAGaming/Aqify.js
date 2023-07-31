@@ -82,7 +82,7 @@ export interface DropdownPaginatorStructureSendOptions {
     ephemeral?: boolean;
     mentionRepliedUser?: boolean;
     deleteMessageAfterTimeout?: boolean;
-    replyWithEphemeralMessageOnCollect?: boolean;
+    replyWithEphemeralMessage?: boolean;
 }
 
 export interface DropdownPaginatorStructureOptionsBuilder {
@@ -184,25 +184,22 @@ export interface CalculatorStructureSendOptions {
 }
 
 export interface DropdownRolesBuilderConstructorOptions {
-    message?: {
-        content?: string,
-        embeds?: EmbedBuilder[],
-        files?: AttachmentBuilder[]
-    },
-    onRoleAdded?: {
-        content?: (role: Role) => string,
-        embeds?: (role: Role) => EmbedBuilder[],
-        files?: (role: Role) => AttachmentBuilder[]
-    },
-    onRoleRemoved?: {
-        content?: (role: Role) => string,
-        embeds?: (role: Role) => EmbedBuilder[],
-        files?: (role: Role) => AttachmentBuilder[]
-    },
-    onInvalidRole?: {
-        content?: (role: Role | undefined) => string,
-        embeds?: (role: Role | undefined) => EmbedBuilder[],
-        files?: (role: Role | undefined) => AttachmentBuilder[]
+    on: {
+        roleAdded: {
+            content?: (role: Role) => string,
+            embeds?: (role: Role) => EmbedBuilder[],
+            files?: (role: Role) => AttachmentBuilder[]
+        },
+        roleRemoved: {
+            content?: (role: Role) => string,
+            embeds?: (role: Role) => EmbedBuilder[],
+            files?: (role: Role) => AttachmentBuilder[]
+        },
+        invalidRole?: {
+            content?: (role: string) => string,
+            embeds?: (role: string) => EmbedBuilder[],
+            files?: (role: string) => AttachmentBuilder[]
+        }
     }
 }
 
@@ -212,6 +209,14 @@ export interface DropdownRolesBuilderRolesDataStruc {
         label: string,
         description?: string,
         emoji?: APIMessageComponentEmoji
+    }
+}
+
+export interface DropdownRolesBuilderCreateOptions {
+    message?: {
+        content?: string,
+        embeds?: EmbedBuilder[],
+        files?: AttachmentBuilder[]
     }
 }
 
