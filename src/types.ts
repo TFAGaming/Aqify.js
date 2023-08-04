@@ -6,9 +6,6 @@ import {
     ButtonInteraction,
     ButtonStyle,
     CacheType,
-    ChatInputCommandInteraction,
-    Client,
-    ClientEvents,
     CollectorFilter,
     ComponentEmojiResolvable,
     ContextMenuCommandBuilder,
@@ -17,57 +14,13 @@ import {
     Guild,
     GuildMember,
     Message,
-    MessageContextMenuCommandInteraction,
-    RESTOptions,
     Role,
     SlashCommandBuilder,
     SlashCommandSubcommandsOnlyBuilder,
     StringSelectMenuInteraction,
     User,
-    UserContextMenuCommandInteraction,
     VoiceChannel
 } from "discord.js";
-
-// Commands Handler
-export interface CommandBuilderStructureChatInputCommand<C extends Client, T = {}> {
-    type: 1,
-    structure: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
-    options?: T;
-    run: (client: C, interaction: ChatInputCommandInteraction) => void;
-};
-
-export interface CommandBuilderStructureUserContextCommand<C extends Client, T = {}> {
-    type: 2,
-    structure: ContextMenuCommandBuilder;
-    options?: T;
-    run: (client: C, interaction: UserContextMenuCommandInteraction) => void;
-};
-
-export interface CommandBuilderStructureMessageContextCommand<C extends Client, T = {}> {
-    type: 3,
-    structure: ContextMenuCommandBuilder;
-    options?: T;
-    run: (client: C, interaction: MessageContextMenuCommandInteraction) => void;
-};
-
-export type CommandBuilderStructure<C extends Client, T = {}> =
-    CommandBuilderStructureChatInputCommand<C, T> |
-    CommandBuilderStructureUserContextCommand<C, T> |
-    CommandBuilderStructureMessageContextCommand<C, T>;
-
-export interface CommandsHandlerConstructorOptions {
-    includesDir?: boolean;
-};
-
-export interface CommandsHandlerStructureDeployOptions {
-    REST?: RESTOptions;
-    guildId?: string;
-};
-
-// Events handler
-export interface EventsHandlerConstructorOptions {
-    includesDir?: boolean;
-};
 
 // Dropdown Paginator Builder
 export interface DropdownPaginatorStructureSendOptions {

@@ -1,6 +1,6 @@
 {
-  "name": "aqify.js",
-  "version": "2.4.3",
+  "name": "aqify",
+  "version": "2.5.0",
   "description": "The Utility & Fun package that takes you to a whole new level.",
   "main": "dist/index.js",
   "typings": "typings/index.d.ts",
@@ -54,7 +54,7 @@
   "homepage": "https://tfagaming.github.io/Aqify.js/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TFAGaming/Aqify.js.git"
+    "url": "git+https://github.com/TFAGaming/Aqify.js.git"
   },
   "dependencies": {
     "@discordjs/voice": "^0.16.0",
@@ -64,5 +64,11 @@
   "devDependencies": {
     "@mxssfd/typedoc-theme": "^1.1.2",
     "typedoc": "^0.24.8"
+  },
+  "bugs": {
+    "url": "https://github.com/TFAGaming/Aqify.js/issues"
+  },
+  "directories": {
+    "doc": "docs"
   }
 }

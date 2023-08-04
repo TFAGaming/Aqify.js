@@ -1,5 +1,19 @@
-import { Attachment, AttachmentBuilder, AttachmentData, Message, TimestampStylesString, VoiceChannel } from "discord.js";
-import { VoiceConnection, joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType, AudioPlayerStatus } from '@discordjs/voice';
+import {
+    Attachment,
+    AttachmentBuilder,
+    AttachmentData,
+    Message,
+    TimestampStylesString,
+    VoiceChannel
+} from "discord.js";
+import {
+    VoiceConnection,
+    joinVoiceChannel,
+    createAudioPlayer,
+    createAudioResource,
+    StreamType,
+    AudioPlayerStatus
+} from '@discordjs/voice';
 
 /**
  * Create a new file for Discord.

@@ -38,7 +38,7 @@
 - [Table of contents](#table-of-contents)
 - [Install](#install)
 - [Import](#import)
-- [Quick start](#quick-start)
+- [Docs](#docs)
 - [Examples](#examples)
     - [Dropdown paginator](#dropdown-paginator)
     - [Buttons paginator](#buttons-paginator)
@@ -59,13 +59,14 @@ If you meet the requirements above, you can install the package safely with no p
 ```sh-session
 npm install aqify.js
 yarn add aqify.js
-pnpm install aqify.js
+pnpm add aqify.js
 ```
 
 ### Other packages:
 - `@tfagaming/discord.js-docs`: Easy method to fetch discord.js docs.
-- `@tfagaming/wandbox-api`: Compile codes using Wandbox API.
 - `@tfagaming/jsondb`: Create a simple JSON database.
+- `horizon-handler`: A powerful commands & events handler for Discord bots.
+- `wandbox-api.js`: An unofficial wrapper for Wandbox API (API Compiler).
 
 ## Import
 Typescript:
@@ -80,114 +81,8 @@ const { } = require('aqify.js');
 
 [↑ Table of Contents](#table-of-contents)
 
-## Quick start
-
-The project overview:
-```
-Example bot
-├─── dist
-├─── src
-│     ├─── commands
-│     │       └─── ping.ts
-│     └─── index.ts
-├─── package.json
-└─── tsconfig.json
-```
-
-Example of `tsconfig.json` file:
-```json
-{
-    "compilerOptions": {
-        "target": "ES2020",
-        "module": "CommonJS",
-        "outDir": "dist",
-    },
-    "include": [
-        "src"
-    ],
-    "exclude": [
-        "dist",
-        "node_modules"
-    ]
-}
-```
-
-`index.ts` file:
-```ts
-import { Client } from 'discord.js';
-import { CommandsHandler } from 'aqify.js';
-
-const config = {
-    token: 'Your bot token',
-    id: 'Your bot ID'
-};
-
-const client = new Client({
-    intents: ['Guilds']
-});
-
-export const handler = new CommandsHandler<Client>('./dist/commands/');
-
-client.on('ready', () => console.log('Logged in as: ' + client.user?.username));
-handler.on('load', (command) => console.log('Loaded new command: ' + command.name));
-
-const collection = handler.load();
-handler.deploy();
-
-client.on('interactionCreate', (interaction) => {
-    if (!interaction.isChatInputCommand()) return;
-
-    const command = collection.get(interaction.commandName);
-
-    if (!command || command.type !== 1) return;
-
-    try {
-        command.run(client, interaction);
-    } catch (e) {
-        console.error(e);
-    };
-});
-
-client.login(config.token);
-```
-
-`ping.ts` file:
-```ts
-import { SlashCommandBuilder } from 'discord.js';
-import { handler } from '../index';
-
-export default new handler.command({
-    type: 1, // => Chat Input command type
-    structure: new SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Replies with pong!'),
-    run: async (client, interaction) => {
-        await interaction.reply({
-            content: 'Pong!'
-        });
-    }
-});
-```
-
-If you want to define custom options for the commands, create one using the `interface` keyword and use it as the second type parameter of the class `CommandsHandler`, as the example below:
-```ts
-interface Options {
-    option1?: string,
-    option2?: number,
-    option3?: boolean,
-    option4?: any[],
-    option5?: (string | number)[],
-    option6?: () => void,
-};
-
-new CommandsHandler<Client, Options>(...);
-```
-
-<!--
-<img src="https://media.discordapp.net/attachments/1111644651036876822/1121467632252620901/2023-06-22_16_45_40-ping.ts_-_npm_packages_tester_-_Visual_Studio_Code-modified.png">
--->
-
-[↑ Table of Contents](#table-of-contents)
+## Docs
+Visit the documentation website: [Click here!](https://tfagaming.github.io/Aqify.js)
 
 ## Examples
 ### Dropdown paginator
