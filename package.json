@@ -1,5 +1,5 @@
 {
-  "name": "aqify",
+  "name": "aqify.js",
   "version": "2.5.0",
   "description": "The Utility & Fun package that takes you to a whole new level.",
   "main": "dist/index.js",
